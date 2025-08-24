@@ -1,103 +1,139 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
+import React, { useState, useEffect } from 'react';
+import { 
+  ChevronRight, 
+  Code, 
+  Database, 
+  Smartphone, 
+  Globe, 
+  TrendingUp, 
+  Clock, 
+  DollarSign,
+  Users,
+  CheckCircle,
+  ArrowRight,
+  Calendar,
+  Star,
+  Play,
+  Zap,
+  Target,
+  BarChart3,
+  Settings,
+  MessageSquare
+} from 'lucide-react';
+import Header from '@/components/layout/Header';
+import Footer from '@/components/layout/Footer';
+import HeroSection from '@/components/sections/HeroSection';
+import ConsultationCTA from '@/components/sections/ConsultationSection';
+//import ChallengeAssessment from '@/components/features/ChallengeAssessment';
+//import ROICalculator from '@/components/features/ROICalculator';
+import ServicesSection from '@/components/sections/ServicesSection';
+import ProjectShowcase from '@/components/sections/ProjectShowcase';
+import PartnersBanner from '@/components/sections/Partner';
+import PromoVideo from '@/components/sections/Promo';
+
+const Portfolio = () => {
+  const [activeProject, setActiveProject] = useState(0);
+  const [assessment, setAssessment] = useState<Record<string, boolean>>({});
+  const [specs, setSpecs] = useState({ features: [] });
+  const [roiInputs, setRoiInputs] = useState({ hoursPerWeek: '', hourlyRate: '', teamSize: '' });
+
+  // Projects data
+  const projects = [
+    {
+      id: 1,
+      title: "Club Management System",
+      description: "Complete member management with automated billing and communication",
+      impact: "Reduced admin work by 80%, increased member engagement by 60%",
+      tech: ["React", "Node.js", "MongoDB", "Stripe"],
+      metrics: { timeReduction: "80%", costSavings: "$2,400/month", satisfaction: "95%" },
+      image: "🏢",
+      liveUrl: "#",
+      status: "completed"
+    },
+    {
+      id: 2,
+      title: "Church Communication Platform",
+      description: "Streamlined member communications and event management",
+      impact: "Streamlined communications for 500+ members",
+      tech: ["Next.js", "PostgreSQL", "AWS", "SendGrid"],
+      metrics: { timeReduction: "70%", costSavings: "$1,800/month", satisfaction: "92%" },
+      image: "⛪",
+      liveUrl: "#",
+      status: "completed"
+    },
+    {
+      id: 3,
+      title: "AI-Powered Analytics Dashboard",
+      description: "Real-time business intelligence with predictive insights",
+      impact: "Currently in development - 65% complete",
+      tech: ["React", "Python", "FastAPI", "OpenAI"],
+      metrics: { completion: 65 },
+      image: "📊",
+      status: "ongoing"
+    }
+  ];
+
+  const services = [
+    { icon: Globe, title: "Web Applications", desc: "Custom web solutions that scale with your business" },
+    { icon: Smartphone, title: "Mobile Development", desc: "Cross-platform apps for iOS and Android" },
+    { icon: Database, title: "System Integration", desc: "Connect your tools and automate workflows" },
+    { icon: BarChart3, title: "Business Intelligence", desc: "Data-driven insights and reporting dashboards" }
+  ];
+
+  const challenges = [
+    { id: 'manual', label: 'Manual processes taking too much time', solutions: ['automation', 'custom-software'] },
+    { id: 'communication', label: 'Poor customer/member communication', solutions: ['web-portal', 'mobile-app'] },
+    { id: 'data', label: 'Inefficient data management', solutions: ['database-optimization', 'dashboard'] },
+    { id: 'online', label: 'Lack of online presence', solutions: ['website', 'e-commerce'] }
+  ];
+
+  const calculateROI = () => {
+    const hours = parseFloat(roiInputs.hoursPerWeek) || 0;
+    const rate = parseFloat(roiInputs.hourlyRate) || 0;
+    const team = parseFloat(roiInputs.teamSize) || 1;
+    
+    const annualCost = hours * 52 * rate * team;
+    const potentialSavings = annualCost * 0.7;
+    const projectCost = 25000; // Example project cost
+    
+    return {
+      annualCost: annualCost.toLocaleString(),
+      savings: potentialSavings.toLocaleString(),
+      breakEven: projectCost > 0 ? Math.ceil(projectCost / (potentialSavings / 12)) : 0
+    };
+  };
+
+  const roi = calculateROI();
+
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
+      {/* Navigation */}
+    <Header />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      {/* Hero Section */}
+     <HeroSection />
+     <PromoVideo />
+    <PartnersBanner />
+
+      {/* Interactive Project Showcase */}
+      <ProjectShowcase />
+    
+
+      {/* Services Section */}
+       <ServicesSection />
+
+    
+
+
+      {/* Consultation CTA */}
+       <ConsultationCTA />
+
+      {/* Footer */}
+     <Footer />
     </div>
   );
-}
+};
+
+export default Portfolio;
