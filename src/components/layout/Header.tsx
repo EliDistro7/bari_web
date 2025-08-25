@@ -224,7 +224,11 @@ const Header = () => {
 
             {/* CTA Button & Mobile Menu Toggle */}
             <div className="flex items-center space-x-4">
-            
+              <button className="cta-button hidden md:block text-white px-6 py-3 rounded-xl font-semibold text-sm overflow-hidden">
+                <span className="flex items-center">
+                  Get Started
+                </span>
+              </button>
 
               {/* Mobile Menu Button */}
               <button
