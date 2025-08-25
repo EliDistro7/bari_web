@@ -31,7 +31,7 @@ import ConsultationCTA from '@/components/sections/ConsultationSection';
 import ServicesSection from '@/components/sections/ServicesSection';
 import ProjectShowcase from '@/components/sections/ProjectShowcase';
 import PartnersBanner from '@/components/sections/Partner';
-import PromoVideo from '@/components/sections/Promo';
+import PromoVideo from '@/components/sections/Promo2';
 
 const Portfolio = () => {
   const [activeProject, setActiveProject] = useState(0);

@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { RotateCcw, Globe, Smartphone, Database, BarChart3, FileText, TrendingUp, DollarSign, Users, Target, Award, Zap, Crown } from 'lucide-react';
+import { Globe, Smartphone, Database, BarChart3, FileText, TrendingUp, DollarSign, Users, Target, Award, Zap, Crown, RotateCcw } from 'lucide-react';
 
 interface Service {
   icon: React.ElementType;
@@ -23,69 +23,69 @@ const PromoVideo: React.FC = () => {
   
   const services: Service[] = [
     {
-      icon: Crown,
-      titleEn: "Market Leadership Solutions",
-      titleSw: "Suluhisho za Uongozi wa Soko",
-      descEn: "Strategic positioning for market dominance",
-      descSw: "Mkakati wa kupata nafasi ya utawala wa soko",
-      color: "#E31E24", // BBC Red
-      features: ["Market Analysis", "Competitive Strategy", "Growth Planning", "Revenue Optimization"],
-      businessValue: "Proven 300% Growth Track Record",
-      businessValueSw: "Rekodi ya Ukuaji wa 300% Iliyothibitika",
-      guaranteeEn: "Results-Driven Approach",
-      guaranteeSw: "Mbinu ya Kulenga Matokeo"
+      icon: Globe,
+      titleEn: "WEB APPLICATIONS",
+      titleSw: "PROGRAMU ZA WAVUTI",
+      descEn: "Transform your business with powerful web solutions",
+      descSw: "Badilisha biashara yako kwa mifumo ya mtandao",
+      color: "#00D4FF", // Cyan
+      features: ["REAL-TIME PROCESSING", "AUTOMATED WORKFLOWS", "CUSTOMER PORTALS", "BUSINESS INTELLIGENCE"],
+      businessValue: "300% EFFICIENCY BOOST",
+      businessValueSw: "ONGEZA UFANISI 300%",
+      guaranteeEn: "ROI IN 6 MONTHS OR MONEY BACK!",
+      guaranteeSw: "FAIDA KWA MIEZI 6 AU PESA ZIRUDI!"
     },
     {
-      icon: TrendingUp,
-      titleEn: "Business Growth Acceleration", 
-      titleSw: "Kuharakisha Ukuaji wa Biashara",
-      descEn: "Systematic scaling for sustainable expansion",
-      descSw: "Upanuzi wa kimfumo kwa ukuaji endelevu",
-      color: "#E31E24",
-      features: ["Digital Transformation", "Process Optimization", "Team Development", "Market Expansion"],
-      businessValue: "Double Revenue in 12 Months",
-      businessValueSw: "Maradufu ya Mapato katika Miezi 12",
-      guaranteeEn: "Data-Driven Results",
-      guaranteeSw: "Matokeo ya Kimtaalamu"
+      icon: FileText,
+      titleEn: "PROFESSIONAL WEBSITES", 
+      titleSw: "TOVUTI ZA KITAALAMU",
+      descEn: "Lightning-fast websites that convert visitors to customers",
+      descSw: "Tovuti za haraka zinazobadilisha wageni kuwa wateja",
+      color: "#00FF41", // Electric green
+      features: ["LIGHTNING SPEED", "SEO OPTIMIZED", "MOBILE RESPONSIVE", "EASY MAINTENANCE"],
+      businessValue: "50% MORE CUSTOMERS FROM GOOGLE",
+      businessValueSw: "WATEJA 50% ZAIDI KUTOKA GOOGLE",
+      guaranteeEn: "TOP GOOGLE RANKINGS GUARANTEED!",
+      guaranteeSw: "NAFASI YA JUU GOOGLE IMEDHAMINIWA!"
     },
     {
-      icon: Users,
-      titleEn: "Customer Excellence Program",
-      titleSw: "Mpango wa Ubora wa Wateja",
-      descEn: "Building lasting customer relationships",
-      descSw: "Kujenga mahusiano endelevu ya wateja",
-      color: "#E31E24",
-      features: ["Customer Analytics", "Loyalty Programs", "Service Excellence", "Retention Strategy"],
-      businessValue: "85% Customer Retention Rate",
-      businessValueSw: "Kiwango cha 85% cha Uhifadhi Wateja",
-      guaranteeEn: "Measurable Satisfaction Gains",
-      guaranteeSw: "Ongezeko la Kuridhisha Linalopimiwa"
+      icon: Smartphone,
+      titleEn: "MOBILE APPLICATIONS",
+      titleSw: "PROGRAMU ZA SIMU",
+      descEn: "Reach customers everywhere with powerful mobile apps",
+      descSw: "Wafikia wateja kila mahali kwa programu za simu",
+      color: "#FF6B35", // Orange
+      features: ["PUSH NOTIFICATIONS", "OFFLINE CAPABILITY", "NATIVE PERFORMANCE", "APP STORE READY"],
+      businessValue: "200% CUSTOMER ENGAGEMENT",
+      businessValueSw: "USHIRIKI WA WATEJA 200%",
+      guaranteeEn: "VIRAL APP SUCCESS OR REFUND!",
+      guaranteeSw: "MAFANIKIO YA APP AU MALIPO!"
     },
     {
-      icon: Target,
-      titleEn: "Strategic Market Positioning",
-      titleSw: "Kuweka Mkakati wa Soko",
-      descEn: "Intelligent market capture strategies",
-      descSw: "Mikakati ya akili ya kuteka soko",
-      color: "#E31E24",
-      features: ["Brand Development", "Market Research", "Competitor Analysis", "Positioning Strategy"],
-      businessValue: "Capture 40% Market Share",
-      businessValueSw: "Chukua 40% ya Hisa ya Soko",
-      guaranteeEn: "Strategic Excellence",
-      guaranteeSw: "Ubora wa Kimkakati"
+      icon: Database,
+      titleEn: "SYSTEM INTEGRATION",
+      titleSw: "MUUNGANISHO WA MIFUMO",
+      descEn: "Connect all your systems for seamless operations",
+      descSw: "Unganisha mifumo yako yote kwa uendeshaji mzuri",
+      color: "#8B5CF6", // Purple
+      features: ["AUTOMATED DATA FLOW", "ELIMINATE MANUAL WORK", "REAL-TIME SYNC", "ERROR REDUCTION"],
+      businessValue: "80% LESS MANUAL WORK",
+      businessValueSw: "PUNGUZA KAZI YA MKONO 80%",
+      guaranteeEn: "SEAMLESS INTEGRATION GUARANTEED!",
+      guaranteeSw: "MUUNGANISHO MZURI UMEDHAMINIWA!"
     },
     {
       icon: BarChart3,
-      titleEn: "Revenue Optimization Systems",
-      titleSw: "Mifumo ya Kuboresha Mapato", 
-      descEn: "Advanced financial growth methodologies",
-      descSw: "Mbinu za hali ya juu za ukuaji wa kifedha",
-      color: "#E31E24",
-      features: ["Financial Planning", "Revenue Streams", "Cost Optimization", "Profit Maximization"],
-      businessValue: "Sustainable Profit Growth",
-      businessValueSw: "Ukuaji Endelevu wa Faida",
-      guaranteeEn: "Professional Financial Results",
-      guaranteeSw: "Matokeo ya Kifedha ya Kitaalamu"
+      titleEn: "BUSINESS INTELLIGENCE",
+      titleSw: "AKILI YA BIASHARA", 
+      descEn: "Transform data into powerful business insights",
+      descSw: "Badilisha data kuwa maarifa ya biashara",
+      color: "#10B981", // Emerald
+      features: ["REAL-TIME DASHBOARDS", "PREDICTIVE ANALYTICS", "DATA VISUALIZATION", "SMART REPORTS"],
+      businessValue: "MAKE DECISIONS 10X FASTER",
+      businessValueSw: "FANYA MAAMUZI HARAKA MARA 10",
+      guaranteeEn: "CRYSTAL CLEAR INSIGHTS OR FREE!",
+      guaranteeSw: "MAARIFA WAZI AU BURE!"
     }
   ];
 
@@ -97,7 +97,7 @@ const PromoVideo: React.FC = () => {
       
       const containerWidth = container.clientWidth - 32;
       const maxWidth = Math.min(containerWidth, 1200);
-      const aspectRatio = 16 / 9; // Broadcast standard
+      const aspectRatio = 16 / 9;
       const height = maxWidth / aspectRatio;
       
       setDimensions({
@@ -123,7 +123,7 @@ const PromoVideo: React.FC = () => {
 
     let animationFrame: number;
     let startTime = Date.now();
-    const sceneDuration = 5000; // 5 seconds per scene
+    const sceneDuration = 4000;
     const totalScenes = services.length + 2;
 
     const animate = () => {
@@ -133,23 +133,19 @@ const PromoVideo: React.FC = () => {
       
       setCurrentScene(sceneIndex);
       
-      // Clear canvas
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
-      // BBC-style background
-      drawBBCBackground(ctx, canvas, elapsed);
-      
+      drawPowerfulBackground(ctx, canvas, elapsed);
+      drawSuccessEnergy(ctx, canvas, elapsed);
+
       if (sceneIndex === 0) {
-        drawBBCIntroScene(ctx, canvas, progress, elapsed);
+        drawBoldIntroScene(ctx, canvas, progress, elapsed);
       } else if (sceneIndex === totalScenes - 1) {
-        drawBBCOutroScene(ctx, canvas, progress, elapsed);
+        drawPowerfulOutroScene(ctx, canvas, progress, elapsed);
       } else {
         const serviceIndex = sceneIndex - 1;
-        drawBBCServiceScene(ctx, canvas, services[serviceIndex], progress, elapsed);
+        drawBoldServiceScene(ctx, canvas, services[serviceIndex], progress, elapsed);
       }
-
-      // Draw BBC-style lower third
-      drawBBCLowerThird(ctx, canvas, elapsed, sceneIndex);
 
       animationFrame = requestAnimationFrame(animate);
     };
@@ -163,100 +159,72 @@ const PromoVideo: React.FC = () => {
     };
   }, [language, dimensions]);
 
-  const drawBBCBackground = (ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement, elapsed: number) => {
-    // Clean BBC-style gradient
-    const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-    gradient.addColorStop(0, '#1a1a1a'); // Dark charcoal
-    gradient.addColorStop(0.3, '#2a2a2a');
-    gradient.addColorStop(0.7, '#1e1e1e');
-    gradient.addColorStop(1, '#0f0f0f'); // Deep black
+  const drawPowerfulBackground = (ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement, elapsed: number) => {
+    const gradient = ctx.createRadialGradient(
+      canvas.width / 2, canvas.height / 2, 0,
+      canvas.width / 2, canvas.height / 2, Math.max(canvas.width, canvas.height) / 2
+    );
+    
+    const hue = (elapsed * 0.02) % 360;
+    gradient.addColorStop(0, '#001122');
+    gradient.addColorStop(0.3, `hsl(${hue}, 70%, 5%)`);
+    gradient.addColorStop(0.7, `hsl(${(hue + 120) % 360}, 60%, 8%)`);
+    gradient.addColorStop(1, '#0A0A0A');
     
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Subtle geometric pattern
+    // Tech grid effect
     ctx.save();
-    ctx.strokeStyle = '#333333';
+    ctx.strokeStyle = '#00D4FF';
     ctx.globalAlpha = 0.1;
     ctx.lineWidth = 1;
-    
-    // Grid pattern
     const gridSize = 60;
-    for (let x = 0; x < canvas.width; x += gridSize) {
+    const offset = (elapsed * 0.03) % gridSize;
+    
+    for (let x = -offset; x < canvas.width + gridSize; x += gridSize) {
       ctx.beginPath();
       ctx.moveTo(x, 0);
       ctx.lineTo(x, canvas.height);
       ctx.stroke();
     }
     
-    for (let y = 0; y < canvas.height; y += gridSize) {
+    for (let y = -offset; y < canvas.height + gridSize; y += gridSize) {
       ctx.beginPath();
       ctx.moveTo(0, y);
       ctx.lineTo(canvas.width, y);
       ctx.stroke();
     }
     ctx.restore();
-
-    // BBC-style animated accent lines
-    ctx.save();
-    ctx.strokeStyle = '#E31E24';
-    ctx.globalAlpha = 0.3;
-    ctx.lineWidth = 2;
-    
-    const lineOffset = (elapsed * 0.02) % canvas.width;
-    ctx.beginPath();
-    ctx.moveTo(-lineOffset, canvas.height * 0.2);
-    ctx.lineTo(canvas.width - lineOffset, canvas.height * 0.2);
-    ctx.stroke();
-    
-    ctx.beginPath();
-    ctx.moveTo(lineOffset, canvas.height * 0.8);
-    ctx.lineTo(canvas.width + lineOffset, canvas.height * 0.8);
-    ctx.stroke();
-    ctx.restore();
   };
 
-  const drawBBCLowerThird = (ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement, elapsed: number, sceneIndex: number) => {
-    // BBC-style lower third bar
-    const barHeight = 80;
-    const barY = canvas.height - barHeight;
+  const drawSuccessEnergy = (ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement, elapsed: number) => {
+    const particleCount = Math.floor(canvas.width / 15);
     
-    // Main red bar
-    ctx.fillStyle = '#E31E24';
-    ctx.fillRect(0, barY, canvas.width, barHeight);
-    
-    // Subtle gradient overlay
-    const barGradient = ctx.createLinearGradient(0, barY, 0, canvas.height);
-    barGradient.addColorStop(0, 'rgba(227, 30, 36, 0.9)');
-    barGradient.addColorStop(1, 'rgba(180, 20, 25, 0.95)');
-    ctx.fillStyle = barGradient;
-    ctx.fillRect(0, barY, canvas.width, barHeight);
-    
-    // White accent stripe
-    ctx.fillStyle = '#FFFFFF';
-    ctx.fillRect(0, barY, canvas.width, 3);
-    
-    // BBC-style typography
-    ctx.save();
-    ctx.fillStyle = '#FFFFFF';
-    ctx.font = `600 ${getResponsiveFontSize(18)}px 'Arial', sans-serif`;
-    ctx.textAlign = 'left';
-    
-    // Company branding
-    ctx.fillText('BARIKI KANENO', 30, barY + 30);
-    
-    // Business report style subtitle
-    ctx.font = `400 ${getResponsiveFontSize(14)}px 'Arial', sans-serif`;
-    const subtitle = language === 'sw' ? 'Ripoti ya Biashara' : 'Business Report';
-    ctx.fillText(subtitle, 30, barY + 50);
-    
-    // Time/scene indicator (BBC style)
-    ctx.textAlign = 'right';
-    ctx.font = `500 ${getResponsiveFontSize(16)}px 'Arial', sans-serif`;
-    const timestamp = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-    ctx.fillText(timestamp, canvas.width - 30, barY + 40);
-    
-    ctx.restore();
+    for (let i = 0; i < particleCount; i++) {
+      const angle = (elapsed * 0.001 + i) % (Math.PI * 2);
+      const radius = 80 + Math.sin(elapsed * 0.002 + i) * 120;
+      const x = canvas.width / 2 + Math.cos(angle) * radius;
+      const y = canvas.height / 2 + Math.sin(angle) * radius * 0.7;
+      
+      const size = Math.abs(Math.sin(elapsed * 0.003 + i)) * 2 + 1;
+      
+      ctx.save();
+      
+      const colors = ['#00D4FF', '#00FF41', '#FF6B35', '#8B5CF6', '#10B981'];
+      const colorIndex = Math.floor((elapsed * 0.01 + i) % colors.length);
+      
+      ctx.shadowColor = colors[colorIndex];
+      ctx.shadowBlur = 15;
+      ctx.globalAlpha = 0.7;
+      
+      ctx.fillStyle = colors[colorIndex];
+      ctx.beginPath();
+      ctx.arc(x, y, size, 0, Math.PI * 2);
+      ctx.fill();
+      
+      ctx.restore();
+    }
   };
 
   const getResponsiveFontSize = (baseSize: number): number => {
@@ -264,70 +232,83 @@ const PromoVideo: React.FC = () => {
     return Math.max(12, baseSize * scaleFactor);
   };
 
-  const drawBBCIntroScene = (ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement, progress: number, elapsed: number) => {
+  const drawBoldIntroScene = (ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement, progress: number, elapsed: number) => {
     const centerX = canvas.width / 2;
-    const centerY = canvas.height / 2 - 40; // Adjust for lower third
+    const centerY = canvas.height / 2;
 
     ctx.save();
     ctx.textAlign = 'center';
     
-    // BBC-style main headline
-    const titleSize = getResponsiveFontSize(48);
-    ctx.font = `700 ${titleSize}px 'Arial', sans-serif`;
-    ctx.fillStyle = '#FFFFFF';
-    ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
-    ctx.shadowOffsetX = 2;
-    ctx.shadowOffsetY = 2;
-    ctx.shadowBlur = 4;
+    // Company name with tech feel
+    const titleSize = getResponsiveFontSize(56);
+    ctx.font = `900 ${titleSize}px Arial, sans-serif`;
     
-    const mainHeadline = language === 'sw' 
-      ? 'SULUHISHO ZA BIASHARA'
-      : 'BUSINESS SOLUTIONS';
-    ctx.fillText(mainHeadline, centerX, centerY - 60);
-
-    // Subtitle with BBC styling
-    if (progress > 0.3) {
-      const subtitleAlpha = Math.min(1, (progress - 0.3) / 0.4);
+    // Tech shadows
+    for (let i = 4; i > 0; i--) {
       ctx.save();
-      ctx.globalAlpha = subtitleAlpha;
-      ctx.font = `400 ${getResponsiveFontSize(24)}px 'Arial', sans-serif`;
-      ctx.fillStyle = '#CCCCCC';
+      ctx.translate(i * 2, i * 2);
+      ctx.globalAlpha = 0.4;
+      ctx.fillStyle = '#000000';
+      ctx.fillText('BARIKI KANENO', centerX, centerY - 60);
+      ctx.restore();
+    }
+    
+    const titleGradient = ctx.createLinearGradient(centerX - 300, centerY - 80, centerX + 300, centerY - 40);
+    titleGradient.addColorStop(0, '#00D4FF');
+    titleGradient.addColorStop(0.5, '#FFFFFF');
+    titleGradient.addColorStop(1, '#00FF41');
+    
+    ctx.fillStyle = titleGradient;
+    ctx.shadowColor = '#00D4FF';
+    ctx.shadowBlur = 25;
+    ctx.fillText('BARIKI KANENO', centerX, centerY - 60);
+
+    // Professional tagline
+    if (progress > 0.2) {
+      const taglineAlpha = Math.min(1, (progress - 0.2) / 0.3);
+      ctx.save();
+      ctx.globalAlpha = taglineAlpha;
+      ctx.font = `800 ${getResponsiveFontSize(28)}px Arial, sans-serif`;
+      ctx.fillStyle = '#10B981';
+      ctx.shadowColor = '#10B981';
+      ctx.shadowBlur = 20;
       
-      const subtitle = language === 'sw'
-        ? 'Ufuatiliaji wa Kina wa Mafanikio ya Biashara'
-        : 'In-Depth Analysis of Business Success';
-      ctx.fillText(subtitle, centerX, centerY - 20);
+      const tagline = language === 'sw' 
+        ? 'SULUHISHO ZA TEKNOLOJIA ZA KISASA'
+        : 'CUTTING-EDGE TECHNOLOGY SOLUTIONS';
+      ctx.fillText(tagline, centerX, centerY - 15);
       ctx.restore();
     }
 
-    // Key value proposition (BBC news style)
-    if (progress > 0.6) {
-      const valueAlpha = Math.min(1, (progress - 0.6) / 0.3);
+    // Value proposition
+    if (progress > 0.5) {
+      const valueAlpha = Math.min(1, (progress - 0.5) / 0.4);
       ctx.save();
       ctx.globalAlpha = valueAlpha;
-      
-      // Red highlight box
-      const boxWidth = 400;
-      const boxHeight = 60;
-      const boxX = centerX - boxWidth / 2;
-      const boxY = centerY + 20;
-      
-      ctx.fillStyle = '#E31E24';
-      ctx.fillRect(boxX, boxY, boxWidth, boxHeight);
-      
-      // White border
-      ctx.strokeStyle = '#FFFFFF';
-      ctx.lineWidth = 2;
-      ctx.strokeRect(boxX, boxY, boxWidth, boxHeight);
-      
-      ctx.font = `600 ${getResponsiveFontSize(20)}px 'Arial', sans-serif`;
-      ctx.fillStyle = '#FFFFFF';
-      ctx.textAlign = 'center';
+      ctx.font = `700 ${getResponsiveFontSize(22)}px Arial, sans-serif`;
+      ctx.fillStyle = '#FF6B35';
+      ctx.shadowColor = '#FF6B35';
+      ctx.shadowBlur = 15;
       
       const valueText = language === 'sw'
-        ? 'Ukuaji wa 300% Uliohakikiwa'
-        : '300% Verified Growth';
-      ctx.fillText(valueText, centerX, boxY + 38);
+        ? 'KUZA BIASHARA YAKO MTANDAONI - HAKIKISHA MAFANIKIO'
+        : 'TRANSFORM YOUR BUSINESS - GUARANTEE SUCCESS';
+      ctx.fillText(valueText, centerX, centerY + 25);
+      
+      // Call to action
+      const pulseScale = 1 + Math.sin(elapsed * 0.006) * 0.08;
+      ctx.save();
+      ctx.translate(centerX, centerY + 65);
+      ctx.scale(pulseScale, pulseScale);
+      ctx.font = `800 ${getResponsiveFontSize(18)}px Arial, sans-serif`;
+      ctx.fillStyle = '#00D4FF';
+      ctx.shadowBlur = 25;
+      
+      const cta = language === 'sw'
+        ? '⚡ ANZA SAFARI YAKO YA MAFANIKIO ⚡'
+        : '⚡ START YOUR SUCCESS JOURNEY ⚡';
+      ctx.fillText(cta, 0, 0);
+      ctx.restore();
       
       ctx.restore();
     }
@@ -335,7 +316,7 @@ const PromoVideo: React.FC = () => {
     ctx.restore();
   };
 
-  const drawBBCServiceScene = (
+  const drawBoldServiceScene = (
     ctx: CanvasRenderingContext2D, 
     canvas: HTMLCanvasElement, 
     service: Service, 
@@ -343,168 +324,151 @@ const PromoVideo: React.FC = () => {
     elapsed: number
   ) => {
     const centerX = canvas.width / 2;
-    const centerY = canvas.height / 2 - 40;
+    const centerY = canvas.height / 2;
 
-    // BBC-style service headline
+    // Service title
     ctx.save();
-    ctx.textAlign = 'left';
-    ctx.font = `700 ${getResponsiveFontSize(32)}px 'Arial', sans-serif`;
-    ctx.fillStyle = '#FFFFFF';
-    ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
-    ctx.shadowOffsetX = 1;
-    ctx.shadowOffsetY = 1;
-    ctx.shadowBlur = 3;
+    ctx.textAlign = 'center';
+    ctx.font = `900 ${getResponsiveFontSize(38)}px Arial, sans-serif`;
     
-    const title = language === 'sw' ? service.titleSw : service.titleEn;
-    const titleLines = wrapText(ctx, title, canvas.width - 100);
-    
-    titleLines.forEach((line, index) => {
-      ctx.fillText(line, 50, centerY - 80 + (index * 40));
-    });
-
-    // Red accent underline
-    ctx.fillStyle = '#E31E24';
-    ctx.fillRect(50, centerY - 35, 200, 3);
-
-    // BBC-style description
-    ctx.font = `400 ${getResponsiveFontSize(18)}px 'Arial', sans-serif`;
-    ctx.fillStyle = '#CCCCCC';
-    const desc = language === 'sw' ? service.descSw : service.descEn;
-    const descLines = wrapText(ctx, desc, canvas.width - 100);
-    
-    descLines.forEach((line, index) => {
-      ctx.fillText(line, 50, centerY - 10 + (index * 25));
-    });
-
-    // Business metrics (BBC data style)
-    if (progress > 0.4) {
-      const metricsAlpha = Math.min(1, (progress - 0.4) / 0.4);
+    // Professional shadow
+    for (let i = 3; i > 0; i--) {
       ctx.save();
-      ctx.globalAlpha = metricsAlpha;
-      
-      // Metrics box
-      const metricsY = centerY + 40;
-      ctx.fillStyle = 'rgba(227, 30, 36, 0.1)';
-      ctx.fillRect(50, metricsY, canvas.width - 100, 80);
-      
-      ctx.strokeStyle = '#E31E24';
-      ctx.lineWidth = 1;
-      ctx.strokeRect(50, metricsY, canvas.width - 100, 80);
-      
-      ctx.font = `600 ${getResponsiveFontSize(16)}px 'Arial', sans-serif`;
-      ctx.fillStyle = '#E31E24';
-      ctx.textAlign = 'left';
-      
-      const businessValue = language === 'sw' ? service.businessValueSw : service.businessValue;
-      ctx.fillText(businessValue, 70, metricsY + 30);
-      
-      ctx.font = `400 ${getResponsiveFontSize(14)}px 'Arial', sans-serif`;
-      ctx.fillStyle = '#FFFFFF';
-      const guarantee = language === 'sw' ? service.guaranteeSw : service.guaranteeEn;
-      ctx.fillText(guarantee, 70, metricsY + 55);
-      
+      ctx.translate(i * 1.5, i * 1.5);
+      ctx.globalAlpha = 0.5;
+      ctx.fillStyle = '#000000';
+      const title = language === 'sw' ? service.titleSw : service.titleEn;
+      ctx.fillText(title, centerX, centerY - 100);
       ctx.restore();
     }
+    
+    const titleGradient = ctx.createLinearGradient(centerX - 250, centerY - 120, centerX + 250, centerY - 80);
+    titleGradient.addColorStop(0, service.color);
+    titleGradient.addColorStop(0.5, '#FFFFFF');
+    titleGradient.addColorStop(1, service.color);
+    
+    ctx.fillStyle = titleGradient;
+    ctx.shadowColor = service.color;
+    ctx.shadowBlur = 30;
+    const title = language === 'sw' ? service.titleSw : service.titleEn;
+    ctx.fillText(title, centerX, centerY - 100);
 
-    // Feature list (BBC bullet style)
-    if (progress > 0.7) {
-      const featuresAlpha = Math.min(1, (progress - 0.7) / 0.3);
-      ctx.save();
-      ctx.globalAlpha = featuresAlpha;
-      
-      const featuresStartY = centerY + 140;
-      ctx.font = `400 ${getResponsiveFontSize(15)}px 'Arial', sans-serif`;
-      ctx.fillStyle = '#CCCCCC';
-      ctx.textAlign = 'left';
-      
-      service.features.slice(0, 2).forEach((feature, index) => {
-        const featureY = featuresStartY + (index * 25);
-        ctx.fillStyle = '#E31E24';
-        ctx.fillText('■', 50, featureY);
-        ctx.fillStyle = '#CCCCCC';
-        ctx.fillText(feature, 75, featureY);
+    // Business value
+    ctx.font = `800 ${getResponsiveFontSize(24)}px Arial, sans-serif`;
+    ctx.fillStyle = '#00FF41';
+    ctx.shadowColor = '#00FF41';
+    ctx.shadowBlur = 20;
+    const businessValue = language === 'sw' ? service.businessValueSw : service.businessValue;
+    ctx.fillText(businessValue, centerX, centerY - 65);
+
+    // Guarantee
+    ctx.font = `700 ${getResponsiveFontSize(18)}px Arial, sans-serif`;
+    ctx.fillStyle = '#FF6B35';
+    const guarantee = language === 'sw' ? service.guaranteeSw : service.guaranteeEn;
+    ctx.fillText(guarantee, centerX, centerY - 40);
+
+    // Description
+    ctx.font = `600 ${getResponsiveFontSize(20)}px Arial, sans-serif`;
+    ctx.fillStyle = '#FFFFFF';
+    ctx.shadowColor = '#FFFFFF';
+    ctx.shadowBlur = 10;
+    const desc = language === 'sw' ? service.descSw : service.descEn;
+    ctx.fillText(desc, centerX, centerY - 10);
+
+    // Features
+    if (progress > 0.3) {
+      const featuresStartY = centerY + 25;
+      service.features.forEach((feature, index) => {
+        const featureProgress = Math.max(0, (progress - 0.4 - index * 0.06) / 0.2);
+        if (featureProgress > 0) {
+          const featureY = featuresStartY + index * (getResponsiveFontSize(18) + 8);
+          const featureAlpha = Math.min(1, featureProgress * 2);
+          
+          ctx.save();
+          ctx.globalAlpha = featureAlpha;
+          ctx.textAlign = 'center';
+          ctx.font = `700 ${getResponsiveFontSize(16)}px Arial, sans-serif`;
+          ctx.fillStyle = service.color;
+          ctx.shadowColor = service.color;
+          ctx.shadowBlur = 15;
+          
+          ctx.fillText(`✓ ${feature}`, centerX, featureY);
+          ctx.restore();
+        }
       });
-      
-      ctx.restore();
     }
 
     ctx.restore();
   };
 
-  const drawBBCOutroScene = (ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement, progress: number, elapsed: number) => {
+  const drawPowerfulOutroScene = (ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement, progress: number, elapsed: number) => {
     const centerX = canvas.width / 2;
-    const centerY = canvas.height / 2 - 40;
+    const centerY = canvas.height / 2;
 
     ctx.save();
     ctx.textAlign = 'center';
     
-    // BBC-style closing headline
-    ctx.font = `700 ${getResponsiveFontSize(36)}px 'Arial', sans-serif`;
-    ctx.fillStyle = '#FFFFFF';
-    ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
-    ctx.shadowOffsetX = 2;
-    ctx.shadowOffsetY = 2;
-    ctx.shadowBlur = 4;
+    // Call to action
+    ctx.font = `900 ${getResponsiveFontSize(42)}px Arial, sans-serif`;
     
-    const closingText = language === 'sw' 
-      ? 'ANZA SAFARI YAKO YA MAFANIKIO'
-      : 'BEGIN YOUR SUCCESS JOURNEY';
-    ctx.fillText(closingText, centerX, centerY - 60);
-
-    // Contact information (BBC style)
-    if (progress > 0.4) {
-      const contactAlpha = Math.min(1, (progress - 0.4) / 0.4);
+    // Powerful shadows
+    for (let i = 5; i > 0; i--) {
       ctx.save();
-      ctx.globalAlpha = contactAlpha;
+      ctx.translate(i * 2, i * 2);
+      ctx.globalAlpha = 0.3;
+      ctx.fillStyle = '#000000';
+      const ctaText = language === 'sw' ? 'TWENDE PAMOJA!' : 'LET\'S BUILD TOGETHER!';
+      ctx.fillText(ctaText, centerX, centerY - 80);
+      ctx.restore();
+    }
+    
+    const ctaGradient = ctx.createLinearGradient(centerX - 300, centerY - 100, centerX + 300, centerY - 60);
+    const hue = (elapsed * 0.2) % 360;
+    ctaGradient.addColorStop(0, `hsl(${hue}, 100%, 50%)`);
+    ctaGradient.addColorStop(0.5, '#FFFFFF');
+    ctaGradient.addColorStop(1, `hsl(${(hue + 180) % 360}, 100%, 50%)`);
+    
+    ctx.fillStyle = ctaGradient;
+    ctx.shadowColor = '#00D4FF';
+    ctx.shadowBlur = 40;
+    const ctaText = language === 'sw' ? 'TWENDE PAMOJA!' : 'LET\'S BUILD TOGETHER!';
+    ctx.fillText(ctaText, centerX, centerY - 80);
+
+    // Professional guarantee
+    if (progress > 0.3) {
+      const guaranteeAlpha = Math.min(1, (progress - 0.3) / 0.4);
+      ctx.save();
+      ctx.globalAlpha = guaranteeAlpha;
       
-      // Contact box
-      const boxWidth = 500;
-      const boxHeight = 100;
-      const boxX = centerX - boxWidth / 2;
-      const boxY = centerY;
+      ctx.font = `800 ${getResponsiveFontSize(26)}px Arial, sans-serif`;
+      ctx.fillStyle = '#10B981';
+      ctx.shadowColor = '#10B981';
+      ctx.shadowBlur = 25;
       
-      ctx.fillStyle = 'rgba(227, 30, 36, 0.9)';
-      ctx.fillRect(boxX, boxY, boxWidth, boxHeight);
+      const guaranteeText = language === 'sw'
+        ? 'MAFANIKIO YAKO NI DHAMANA YANGU'
+        : 'YOUR SUCCESS IS MY GUARANTEE';
+      ctx.fillText(guaranteeText, centerX, centerY - 35);
       
-      ctx.strokeStyle = '#FFFFFF';
-      ctx.lineWidth = 2;
-      ctx.strokeRect(boxX, boxY, boxWidth, boxHeight);
+      // Contact info
+      ctx.font = `700 ${getResponsiveFontSize(20)}px Arial, sans-serif`;
+      ctx.fillStyle = '#00D4FF';
+      ctx.shadowColor = '#00D4FF';
+      ctx.shadowBlur = 20;
+      ctx.fillText('📧 +255 765 762 688', centerX, centerY + 10);
       
-      ctx.font = `600 ${getResponsiveFontSize(18)}px 'Arial', sans-serif`;
-      ctx.fillStyle = '#FFFFFF';
-      ctx.textAlign = 'center';
-      
+      ctx.font = `800 ${getResponsiveFontSize(18)}px Arial, sans-serif`;
+      ctx.fillStyle = '#FF6B35';
+      ctx.shadowBlur = 25;
       const consultText = language === 'sw'
-        ? 'Mazungumzo ya Bure ya Kitaalamu'
-        : 'Professional Consultation Available';
-      ctx.fillText(consultText, centerX, boxY + 35);
-      
-      ctx.font = `500 ${getResponsiveFontSize(16)}px 'Arial', sans-serif`;
-      ctx.fillText('📧 bariki@kaneno.dev', centerX, boxY + 65);
+        ? '🚀 USHAURI WA BURE - PIGA SIMU LEO!'
+        : '🚀 FREE CONSULTATION - CALL TODAY!';
+      ctx.fillText(consultText, centerX, centerY + 50);
       
       ctx.restore();
     }
 
     ctx.restore();
-  };
-
-  const wrapText = (ctx: CanvasRenderingContext2D, text: string, maxWidth: number): string[] => {
-    const words = text.split(' ');
-    const lines: string[] = [];
-    let currentLine = words[0];
-
-    for (let i = 1; i < words.length; i++) {
-      const word = words[i];
-      const width = ctx.measureText(currentLine + ' ' + word).width;
-      if (width < maxWidth) {
-        currentLine += ' ' + word;
-      } else {
-        lines.push(currentLine);
-        currentLine = word;
-      }
-    }
-    lines.push(currentLine);
-    return lines;
   };
 
   const reset = () => {
@@ -516,54 +480,47 @@ const PromoVideo: React.FC = () => {
   };
 
   return (
-    <div className="w-full min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black p-4 sm:p-6 lg:p-8">
-      {/* BBC-style header */}
-      <div className="max-w-7xl mx-auto mb-6">
-        <div className="flex items-center justify-between bg-red-600 text-white px-6 py-3 rounded-t-lg">
-          <div className="flex items-center space-x-4">
-            <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
-              <span className="text-red-600 font-bold text-sm">BK</span>
-            </div>
-            <span className="font-semibold">BARIKI KANENO BUSINESS</span>
-          </div>
-          <button
-            onClick={toggleLanguage}
-            className="px-3 py-1 bg-white/20 rounded text-sm hover:bg-white/30 transition-colors"
-          >
-            {language === 'en' ? 'Kiswahili' : 'English'}
-          </button>
-        </div>
+    <div className="w-full min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 p-4 sm:p-6 lg:p-8 relative overflow-hidden">
+      {/* Tech background effects */}
+      <div className="absolute inset-0 opacity-20">
+        <div className="absolute top-20 left-10 w-32 h-32 bg-cyan-400/30 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-10 w-40 h-40 bg-emerald-400/30 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/3 w-24 h-24 bg-orange-400/30 rounded-full blur-2xl animate-pulse delay-500"></div>
       </div>
 
-      {/* Main video container */}
-      <div className="max-w-7xl mx-auto relative">
-        <div className="relative bg-black rounded-b-lg overflow-hidden shadow-2xl border-l-4 border-r-4 border-b-4 border-red-600">
+      {/* Video container */}
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="relative bg-black/80 backdrop-blur-sm rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border-2 border-cyan-400/30 hover:border-cyan-400/60 transition-all duration-500">
+          <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-emerald-500/10 to-orange-500/10 rounded-2xl sm:rounded-3xl"></div>
+          
           <canvas
             ref={canvasRef}
             width={dimensions.width}
             height={dimensions.height}
-            className="block w-full h-auto"
+            className="relative z-10 block w-full h-auto rounded-2xl sm:rounded-3xl"
           />
           
-          {/* Controls */}
-          <div className="absolute top-4 right-4 flex space-x-2">
+          {/* Professional controls */}
+          <div className="absolute bottom-4 left-4 right-4 flex justify-between items-center z-20">
             <button
-              onClick={reset}
-              className="p-2 bg-black/70 text-white rounded-full hover:bg-black/90 transition-colors"
-              title="Reset"
+              onClick={toggleLanguage}
+              className="px-4 py-2 bg-cyan-600/80 hover:bg-cyan-600 text-white rounded-lg font-semibold transition-all duration-200 backdrop-blur-sm border border-cyan-400/30"
             >
-              <RotateCcw className="w-4 h-4" />
+              {language === 'en' ? 'Swahili' : 'English'}
             </button>
-          </div>
-        </div>
-      </div>
-
-      {/* BBC-style footer */}
-      <div className="max-w-7xl mx-auto mt-4">
-        <div className="bg-gray-800 text-gray-300 px-6 py-3 rounded-b-lg text-sm">
-          <div className="flex justify-between items-center">
-            <span>© 2024 Bariki Kaneno Business Solutions</span>
-            <span className="text-red-400">LIVE</span>
+            
+            <div className="flex items-center space-x-4 bg-black/60 backdrop-blur-sm rounded-lg px-4 py-2 border border-white/20">
+              <div className="text-white/70 text-sm font-medium">
+                {language === 'sw' ? `Kipengee ${currentScene + 1}/${services.length + 2}` : `Scene ${currentScene + 1}/${services.length + 2}`}
+              </div>
+              <button
+                onClick={reset}
+                className="p-1.5 bg-emerald-600/80 hover:bg-emerald-600 text-white rounded transition-all duration-200"
+                title={language === 'sw' ? 'Anza upya' : 'Reset'}
+              >
+                <RotateCcw size={16} />
+              </button>
+            </div>
           </div>
         </div>
       </div>
