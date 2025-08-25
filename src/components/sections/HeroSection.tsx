@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Zap, ArrowRight, Play, CheckCircle, Sparkles, Code2, Rocket, Globe, Smartphone, Monitor, Server } from 'lucide-react';
 import { Inter, JetBrains_Mono } from 'next/font/google';
+import { useLanguage } from '@/context/language';
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -16,59 +17,131 @@ const jetBrainsMono = JetBrains_Mono({
 
 const HeroSection = () => {
   const [currentServiceIndex, setCurrentServiceIndex] = useState(0);
-  
-  const services = [
-    {
-      title: "stunning web applications",
-      subtitle: "Full-stack web solutions that scale",
-      icon: <Globe className="w-5 h-5" />,
-      gradient: "from-cyan-400 to-blue-500",
-      textGradient: "from-cyan-400 via-blue-400 to-purple-400",
-      description: "React, Next.js, Node.js & more",
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop&crop=center&auto=format",
-      imageAlt: "Modern web application dashboard"
-    },
-    {
-      title: "powerful mobile apps", 
-      subtitle: "Cross-platform mobile experiences",
-      icon: <Smartphone className="w-5 h-5" />,
-      gradient: "from-purple-400 to-pink-500",
-      textGradient: "from-purple-400 via-pink-400 to-red-400",
-      description: "React Native, Flutter & Native",
-      image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=600&fit=crop&crop=center&auto=format",
-      imageAlt: "Mobile app interface design"
-    },
-    {
-      title: "beautiful static websites",
-      subtitle: "Fast, SEO-optimized landing pages", 
-      icon: <Monitor className="w-5 h-5" />,
-      gradient: "from-emerald-400 to-cyan-500",
-      textGradient: "from-emerald-400 via-cyan-400 to-blue-400",
-      description: "JAMstack, Performance-focused",
-      image: "https://images.unsplash.com/photo-1547658719-da2b51169166?w=800&h=600&fit=crop&crop=center&auto=format",
-      imageAlt: "Beautiful website landing page"
-    },
-    {
-      title: "integrated systems",
-      subtitle: "Custom enterprise solutions",
-      icon: <Server className="w-5 h-5" />,
-      gradient: "from-orange-400 to-red-500", 
-      textGradient: "from-orange-400 via-red-400 to-pink-400",
-      description: "APIs, Databases, Cloud Infrastructure",
-      image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=600&fit=crop&crop=center&auto=format",
-      imageAlt: "Server room with data infrastructure"
-    }
-  ];
+  const { language } = useLanguage();
 
+  // Translation object
+  const translations = {
+    en: {
+      role: "Full-Stack Developer",
+      build: "I BUILD",
+      transform: "that transform businesses",
+      driveResults: "drive real results",
+      concept: "From concept to deployment, crafted with precision.",
+      buildEpic: "Let's Build Something Epic",
+      viewWork: "View My Work",
+      projects: "Projects",
+      years: "Years", 
+      clients: "Happy Clients",
+      services: [
+        {
+          title: "stunning web applications",
+          subtitle: "Full-stack web solutions that scale",
+          icon: <Globe className="w-5 h-5" />,
+          gradient: "from-cyan-400 to-blue-500",
+          textGradient: "from-cyan-400 via-blue-400 to-purple-400",
+          description: "React, Next.js, Node.js & more",
+          image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop&crop=center&auto=format",
+          imageAlt: "Modern web application dashboard"
+        },
+        {
+          title: "powerful mobile apps", 
+          subtitle: "Cross-platform mobile experiences",
+          icon: <Smartphone className="w-5 h-5" />,
+          gradient: "from-purple-400 to-pink-500",
+          textGradient: "from-purple-400 via-pink-400 to-red-400",
+          description: "React Native, Flutter & Native",
+          image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=600&fit=crop&crop=center&auto=format",
+          imageAlt: "Mobile app interface design"
+        },
+        {
+          title: "beautiful static websites",
+          subtitle: "Fast, SEO-optimized landing pages", 
+          icon: <Monitor className="w-5 h-5" />,
+          gradient: "from-emerald-400 to-cyan-500",
+          textGradient: "from-emerald-400 via-cyan-400 to-blue-400",
+          description: "JAMstack, Performance-focused",
+          image: "https://images.unsplash.com/photo-1547658719-da2b51169166?w=800&h=600&fit=crop&crop=center&auto=format",
+          imageAlt: "Beautiful website landing page"
+        },
+        {
+          title: "integrated systems",
+          subtitle: "Custom enterprise solutions",
+          icon: <Server className="w-5 h-5" />,
+          gradient: "from-orange-400 to-red-500", 
+          textGradient: "from-orange-400 via-red-400 to-pink-400",
+          description: "APIs, Databases, Cloud Infrastructure",
+          image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=600&fit=crop&crop=center&auto=format",
+          imageAlt: "Server room with data infrastructure"
+        }
+      ]
+    },
+    sw: {
+      role: "Software Developer",
+      build: "NINATENGENEZA",
+      transform: "zinazo badilisha biashara",
+      driveResults: "kuleta matokeo halisi",
+      concept: "Kutoka wazo hadi utekelezaji, kimetengenezwa kwa usahihi.",
+      buildEpic: "Tuunde Kitu Cha Ajabu",
+      viewWork: "Ona Kazi Zangu",
+      projects: "Miradi",
+      years: "Miaka",
+      clients: "Wateja Wenye Furaha",
+      services: [
+        {
+          title: "programu za mtandao za kupendeza",
+          subtitle: "Suluhisho kamili za mtandao zinazokua",
+          icon: <Globe className="w-5 h-5" />,
+          gradient: "from-cyan-400 to-blue-500",
+          textGradient: "from-cyan-400 via-blue-400 to-purple-400",
+          description: "React, Next.js, Node.js na mengineyo",
+          image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop&crop=center&auto=format",
+          imageAlt: "Dashibodi ya programu ya kisasa ya mtandao"
+        },
+        {
+          title: "programu za simu zenye nguvu", 
+          subtitle: "Uzoefu wa programu za simu za kila aina",
+          icon: <Smartphone className="w-5 h-5" />,
+          gradient: "from-purple-400 to-pink-500",
+          textGradient: "from-purple-400 via-pink-400 to-red-400",
+          description: "React Native, Flutter na Native",
+          image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=600&fit=crop&crop=center&auto=format",
+          imageAlt: "Muundo wa kiolesura cha programu ya simu"
+        },
+        {
+          title: "tovuti nzuri za kithamani",
+          subtitle: "Kurasa za kutua za haraka, zilizoboreshwa kwa SEO", 
+          icon: <Monitor className="w-5 h-5" />,
+          gradient: "from-emerald-400 to-cyan-500",
+          textGradient: "from-emerald-400 via-cyan-400 to-blue-400",
+          description: "JAMstack, Zilizolenga Utendaji",
+          image: "https://images.unsplash.com/photo-1547658719-da2b51169166?w=800&h=600&fit=crop&crop=center&auto=format",
+          imageAlt: "Ukurasa mzuri wa kufikia tovuti"
+        },
+        {
+          title: "mifumo ya muunganiko",
+          subtitle: "Suluhisho maalum za makampuni",
+          icon: <Server className="w-5 h-5" />,
+          gradient: "from-orange-400 to-red-500", 
+          textGradient: "from-orange-400 via-red-400 to-pink-400",
+          description: "API, Hifadhidata, Miundombinu ya Wingu",
+          image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=600&fit=crop&crop=center&auto=format",
+          imageAlt: "Chumba cha seva na miundombinu ya data"
+        }
+      ]
+    }
+  };
+
+  const t = translations[language as keyof typeof translations] || translations.sw;
+  
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentServiceIndex((prev) => (prev + 1) % services.length);
+      setCurrentServiceIndex((prev) => (prev + 1) % t.services.length);
     }, 3500);
     
     return () => clearInterval(interval);
-  }, [services.length]);
+  }, [t.services.length]);
 
-  const currentService = services[currentServiceIndex];
+  const currentService = t.services[currentServiceIndex];
 
   return (
     <>
@@ -180,6 +253,45 @@ const HeroSection = () => {
             rgba(15, 23, 42, 0.9) 100%
           );
         }
+
+        .service-title-container {
+          min-height: 3rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        @media (min-width: 768px) {
+          .service-title-container {
+            min-height: 4rem;
+          }
+        }
+
+        @media (min-width: 1024px) {
+          .service-title-container {
+            min-height: 5rem;
+            justify-content: flex-start;
+          }
+        }
+
+        @media (min-width: 1280px) {
+          .service-title-container {
+            min-height: 6rem;
+          }
+        }
+
+        .service-title {
+          line-height: 1.1;
+          word-wrap: break-word;
+          hyphens: auto;
+          text-align: center;
+        }
+
+        @media (min-width: 1024px) {
+          .service-title {
+            text-align: left;
+          }
+        }
       `}</style>
       
       <section className={`${inter.className} relative min-h-screen flex items-center justify-center px-6 overflow-hidden`}>
@@ -223,7 +335,7 @@ const HeroSection = () => {
                       {currentService.icon}
                     </div>
                     <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent font-semibold">
-                      Full-Stack Developer
+                      {t.role}
                     </span>
                     <Code2 className="w-4 h-4 ml-2 text-purple-400" />
                   </span>
@@ -231,20 +343,20 @@ const HeroSection = () => {
               </div>
 
               {/* Main Heading with Animated Service */}
-              <h1 className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-black mb-8 leading-tight tracking-tight">
+              <h1 className="text-2xl md:text-6xl lg:text-7xl xl:text-8xl font-black mb-8 leading-tight tracking-tight">
                 <span className="block text-white mb-4">
-                  I BUILD
+                  {t.build}
                 </span>
-                <div className="block h-12 md:h-16 lg:h-20 xl:h-24 relative overflow-hidden mb-4">
+                <div className="service-title-container mb-4">
                   <span 
                     key={currentServiceIndex}
-                    className={`absolute inset-0 bg-gradient-to-r ${currentService.textGradient} bg-clip-text text-transparent fade-slide-up service-transition capitalize`}
+                    className={`service-title bg-gradient-to-r ${currentService.textGradient} bg-clip-text text-transparent fade-slide-up service-transition capitalize`}
                   >
-                    {currentService.title.toUpperCase()}
+                    {currentService.title}
                   </span>
                 </div>
                 <span className="block text-white text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-light">
-                  that transform businesses
+                  {t.transform}
                 </span>
               </h1>
 
@@ -254,22 +366,22 @@ const HeroSection = () => {
                   key={`subtitle-${currentServiceIndex}`}
                   className="text-lg md:text-xl lg:text-2xl text-gray-300 leading-relaxed font-light fade-slide-up mb-4"
                 >
-                  {currentService.subtitle} that don't just look amazing—they 
+                  {currentService.subtitle} {language === 'sw' ? 'ambazo' : 'that'} don't just look amazing—they 
                   <span className={`text-transparent bg-gradient-to-r ${currentService.textGradient} bg-clip-text font-semibold`}>
-                    {' '}drive real results
+                    {' '}{t.driveResults}
                   </span>.
                 </p>
                 <p 
                   key={`description-${currentServiceIndex}`}
                   className="text-base lg:text-lg text-gray-400 font-light fade-slide-up"
                 >
-                  {currentService.description} • From concept to deployment, crafted with precision.
+                  {currentService.description} • {t.concept}
                 </p>
               </div>
 
               {/* Service Indicators */}
               <div className="mb-8 lg:mb-12 flex justify-center lg:justify-start items-center space-x-4">
-                {services.map((service, index) => (
+                {t.services.map((service, index) => (
                   <button
                     key={index}
                     onClick={() => setCurrentServiceIndex(index)}
@@ -287,7 +399,7 @@ const HeroSection = () => {
               <div className="flex flex-col sm:flex-row gap-4 lg:gap-6 justify-center lg:justify-start items-center mb-12 lg:mb-16">
                 <button className="group relative bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-8 lg:px-10 py-4 lg:py-5 rounded-2xl font-semibold text-base lg:text-lg overflow-hidden transition-all duration-300 hover:scale-105 neon-glow">
                   <span className="relative z-10 flex items-center">
-                    Let's Build Something Epic
+                    {t.buildEpic}
                     <Rocket className="w-4 lg:w-5 h-4 lg:h-5 ml-3 group-hover:translate-x-1 transition-transform" />
                   </span>
                   <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -296,7 +408,7 @@ const HeroSection = () => {
                 <button className="group glass-effect text-white px-8 lg:px-10 py-4 lg:py-5 rounded-2xl font-semibold text-base lg:text-lg transition-all duration-300 hover:scale-105 border border-gray-600 hover:border-cyan-400">
                   <span className="flex items-center">
                     <Play className="w-4 lg:w-5 h-4 lg:h-5 mr-3" />
-                    View My Work
+                    {t.viewWork}
                   </span>
                 </button>
               </div>
@@ -305,17 +417,17 @@ const HeroSection = () => {
               <div className="hidden lg:flex flex-wrap justify-start items-center gap-8 text-gray-300">
                 <div className="text-center lg:text-left">
                   <div className="text-3xl font-bold text-cyan-400 mb-1">100+</div>
-                  <div className="text-sm uppercase tracking-wider">Projects</div>
+                  <div className="text-sm uppercase tracking-wider">{t.projects}</div>
                 </div>
                 <div className="w-px h-12 bg-gray-600"></div>
                 <div className="text-center lg:text-left">
                   <div className="text-3xl font-bold text-purple-400 mb-1">5+</div>
-                  <div className="text-sm uppercase tracking-wider">Years</div>
+                  <div className="text-sm uppercase tracking-wider">{t.years}</div>
                 </div>
                 <div className="w-px h-12 bg-gray-600"></div>
                 <div className="text-center lg:text-left">
                   <div className="text-3xl font-bold text-pink-400 mb-1">50+</div>
-                  <div className="text-sm uppercase tracking-wider">Happy Clients</div>
+                  <div className="text-sm uppercase tracking-wider">{t.clients}</div>
                 </div>
               </div>
             </div>
@@ -360,17 +472,17 @@ const HeroSection = () => {
           <div className="lg:hidden flex flex-wrap justify-center items-center gap-6 text-gray-300 mt-12">
             <div className="text-center">
               <div className="text-2xl font-bold text-cyan-400 mb-1">100+</div>
-              <div className="text-xs uppercase tracking-wider">Projects</div>
+              <div className="text-xs uppercase tracking-wider">{t.projects}</div>
             </div>
             <div className="w-px h-8 bg-gray-600"></div>
             <div className="text-center">
               <div className="text-2xl font-bold text-purple-400 mb-1">5+</div>
-              <div className="text-xs uppercase tracking-wider">Years</div>
+              <div className="text-xs uppercase tracking-wider">{t.years}</div>
             </div>
             <div className="w-px h-8 bg-gray-600"></div>
             <div className="text-center">
               <div className="text-2xl font-bold text-pink-400 mb-1">50+</div>
-              <div className="text-xs uppercase tracking-wider">Happy Clients</div>
+              <div className="text-xs uppercase tracking-wider">{t.clients}</div>
             </div>
           </div>
         </div>
