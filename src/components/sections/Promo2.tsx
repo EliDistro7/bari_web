@@ -19,7 +19,7 @@ const PromoVideo: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [currentScene, setCurrentScene] = useState(0);
   const [language, setLanguage] = useState<'en' | 'sw'>('sw');
-  const [dimensions, setDimensions] = useState({ width: 800, height: 600 });
+  const [dimensions, setDimensions] = useState({ width: 800, height: 800 });
   
   const services: Service[] = [
     {
