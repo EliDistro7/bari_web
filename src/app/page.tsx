@@ -114,7 +114,7 @@ const Portfolio = () => {
 
       {/* Hero Section */}
      <HeroSection />
-     <PromoVideo />
+ 
     <PartnersBanner />
 
       {/* Interactive Project Showcase */}

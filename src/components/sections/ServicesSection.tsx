@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { Globe, Smartphone, Database, BarChart3, Zap, Shield, Clock, TrendingUp, X, ExternalLink, MessageCircle, FileText } from 'lucide-react';
+import { Globe, Smartphone, Database, BarChart3, Zap, Shield, Clock, TrendingUp, X, ExternalLink, MessageCircle, FileText, Play } from 'lucide-react';
 import { services } from './services';
 import PromoVideo from './Promo2';
-
 
 type Service = typeof services[number];
 
@@ -13,17 +12,17 @@ const benefits = [
   { icon: TrendingUp, title: "Scalable Solutions", desc: "Growth-ready architecture" }
 ];
 
-
 const ServicesSection = () => {
+  const [selectedService, setSelectedService] = useState<Service | null>(null);
+  const [showPromoVideo, setShowPromoVideo] = useState(false);
 
   const openWhatsApp = () => {
     const message = "Hi! I'm interested in learning more about your development services. Could you please provide more information?";
     const url = `https://wa.me/255765762688?text=${encodeURIComponent(message)}`;
     window.open(url, '_blank');
   };
-  const closeModal = () => setSelectedService(null);
 
-  const [selectedService, setSelectedService] = useState<Service | null>(null);
+  const closeModal = () => setSelectedService(null);
 
   return (
     <>
@@ -159,6 +158,28 @@ const ServicesSection = () => {
           50% { transform: scale(1.05); }
           100% { transform: scale(1); }
         }
+
+        .promo-showcase {
+          background: rgba(255, 255, 255, 0.05);
+          backdrop-filter: blur(20px);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          transition: all 0.3s ease;
+        }
+        
+        .promo-showcase:hover {
+          background: rgba(255, 255, 255, 0.08);
+          transform: translateY(-5px);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .video-play-button {
+          transition: all 0.3s ease;
+        }
+
+        .video-play-button:hover {
+          transform: scale(1.1);
+          box-shadow: 0 0 30px rgba(102, 126, 234, 0.5);
+        }
       `}</style>
 
       <section id="services" className="relative py-24 overflow-hidden">
@@ -227,6 +248,9 @@ const ServicesSection = () => {
               <span className="text-transparent bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text font-semibold"> end-to-end development services</span> that transform your business
             </p>
           </div>
+
+          {/* Promo Video Showcase */}
+     
 
           {/* Services Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 mb-20">
@@ -322,6 +346,13 @@ const ServicesSection = () => {
             <MessageCircle className="w-6 h-6" />
           </button>
         </div>
+
+        {/* Promo Video Modal */}
+
+                <PromoVideo />
+            
+   
+  
 
         {/* Service Detail Modal */}
         {selectedService && (
