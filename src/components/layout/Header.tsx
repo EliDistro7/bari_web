@@ -1,8 +1,39 @@
 import React, { useState } from 'react';
-import { Menu, X, Code2, Sparkles, Rocket } from 'lucide-react';
+import { Menu, X, Code2, Sparkles, Rocket, Globe } from 'lucide-react';
+import { useLanguage } from '@/context/language';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { language, setLanguage } = useLanguage();
+
+  // Translation object
+  const translations = {
+    en: {
+      role: "Full-Stack Developer",
+      projects: "Projects",
+      services: "Services",
+      assessment: "Assessment",
+      calculator: "ROI Calculator",
+      getStarted: "Get Started",
+      language: "Language"
+    },
+    sw: {
+      role: "Msanidi Programu Kamili",
+      projects: "Miradi",
+      services: "Huduma",
+      assessment: "Tathmini",
+      calculator: "Kikokotoo cha Mapato",
+      getStarted: "Anza Sasa",
+      language: "Lugha"
+    }
+  };
+
+  const t = translations[language as keyof typeof translations] || translations.sw;
+
+  const toggleLanguage = () => {
+    const newLang = language === 'en' ? 'sw' : 'en';
+    setLanguage(newLang);
+  };
 
   return (
     <>
@@ -111,6 +142,37 @@ const Header = () => {
           z-index: 1;
         }
         
+        .language-switcher {
+          position: relative;
+          background: rgba(30, 41, 59, 0.8);
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(102, 126, 234, 0.3);
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .language-switcher:hover {
+          background: rgba(30, 41, 59, 0.9);
+          border-color: rgba(102, 126, 234, 0.5);
+          transform: translateY(-1px);
+        }
+        
+        .language-flag {
+          width: 20px;
+          height: 14px;
+          border-radius: 2px;
+          display: inline-block;
+          margin-right: 6px;
+        }
+        
+        .flag-en {
+          background: linear-gradient(to bottom, #012169 33%, white 33%, white 66%, #C8102E 66%);
+          position: relative;
+        }
+        
+        .flag-sw {
+          background: linear-gradient(to bottom, #00A859 33%, #000000 33%, #000000 66%, #FFD100 66%);
+        }
+        
         .floating-icon {
           animation: floatIcon 4s ease-in-out infinite;
         }
@@ -192,13 +254,12 @@ const Header = () => {
 
               {/* Brand Name and Icon */}
               <div className="flex items-center space-x-3">
-             
                 <div className="flex flex-col">
                   <div className="text-xl sm:text-2xl font-black brand-name logo-glow">
                     Bariki Kaneno
                   </div>
                   <div className="text-xs text-gray-400 font-medium -mt-1">
-                    Full-Stack Developer
+                    {t.role}
                   </div>
                 </div>
               </div>
@@ -209,24 +270,34 @@ const Header = () => {
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
               <a href="#projects" className="nav-link text-gray-300 hover:text-white font-medium">
-                Projects
+                {t.projects}
               </a>
               <a href="#services" className="nav-link text-gray-300 hover:text-white font-medium">
-                Services
+                {t.services}
               </a>
               <a href="#assessment" className="nav-link text-gray-300 hover:text-white font-medium">
-                Assessment
+                {t.assessment}
               </a>
               <a href="#calculator" className="nav-link text-gray-300 hover:text-white font-medium">
-                ROI Calculator
+                {t.calculator}
               </a>
             </div>
 
-            {/* CTA Button & Mobile Menu Toggle */}
-            <div className="flex items-center space-x-4">
+            {/* Language Switcher, CTA Button & Mobile Menu Toggle */}
+            <div className="flex items-center space-x-3">
+              {/* Language Switcher - Always Visible */}
+              <button
+                onClick={toggleLanguage}
+                className="language-switcher flex items-center px-3 py-2 rounded-lg text-sm font-medium text-gray-300 hover:text-white"
+                title={t.language}
+              >
+
+                <span className="text-xs font-semibold uppercase ml-1">{language}</span>
+              </button>
+
               <button className="cta-button hidden md:block text-white px-6 py-3 rounded-xl font-semibold text-sm overflow-hidden">
                 <span className="flex items-center">
-                  Get Started
+                  {t.getStarted}
                 </span>
               </button>
 
@@ -259,7 +330,7 @@ const Header = () => {
                     </div>
                     <div>
                       <div className="text-lg font-bold brand-name">Bariki Kaneno</div>
-                      <div className="text-xs text-gray-400">Full-Stack Developer</div>
+                      <div className="text-xs text-gray-400">{t.role}</div>
                     </div>
                   </div>
                 </div>
@@ -271,7 +342,7 @@ const Header = () => {
                 >
                   <div className="flex items-center">
                     <Code2 className="w-5 h-5 mr-3 text-cyan-400" />
-                    Projects
+                    {t.projects}
                   </div>
                 </a>
                 <a 
@@ -281,7 +352,7 @@ const Header = () => {
                 >
                   <div className="flex items-center">
                     <Sparkles className="w-5 h-5 mr-3 text-purple-400" />
-                    Services
+                    {t.services}
                   </div>
                 </a>
                 <a 
@@ -291,7 +362,7 @@ const Header = () => {
                 >
                   <div className="flex items-center">
                     <Rocket className="w-5 h-5 mr-3 text-pink-400" />
-                    Assessment
+                    {t.assessment}
                   </div>
                 </a>
                 <a 
@@ -301,9 +372,18 @@ const Header = () => {
                 >
                   <div className="flex items-center">
                     <div className="w-5 h-5 mr-3 bg-gradient-to-r from-cyan-400 to-purple-400 rounded"></div>
-                    ROI Calculator
+                    {t.calculator}
                   </div>
                 </a>
+                
+                {/* Mobile Get Started Button */}
+                <div className="px-6 py-3 border-t border-gray-700/50 mt-2">
+                  <button className="cta-button w-full text-white px-6 py-3 rounded-xl font-semibold text-sm overflow-hidden">
+                    <span className="flex items-center justify-center">
+                      {t.getStarted}
+                    </span>
+                  </button>
+                </div>
               </div>
             </div>
           )}
