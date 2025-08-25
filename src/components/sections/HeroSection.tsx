@@ -248,9 +248,9 @@ const HeroSection = () => {
         
         .mobile-bg-overlay {
           background: linear-gradient(135deg, 
-            rgba(15, 23, 42, 0.9) 0%, 
-            rgba(30, 27, 75, 0.85) 50%, 
-            rgba(15, 23, 42, 0.9) 100%
+            rgba(15, 23, 42, 0.7) 0%, 
+            rgba(30, 27, 75, 0.75) 50%, 
+            rgba(15, 23, 42, 0.7) 100%
           );
         }
 
