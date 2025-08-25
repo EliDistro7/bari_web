@@ -19,7 +19,7 @@ const PromoVideo: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [currentScene, setCurrentScene] = useState(0);
   const [language, setLanguage] = useState<'en' | 'sw'>('sw');
-  const [dimensions, setDimensions] = useState({ width: 800, height: 800 });
+  const [dimensions, setDimensions] = useState({ width: 800, height: 1200 });
   
   const services: Service[] = [
     {
@@ -500,28 +500,8 @@ const PromoVideo: React.FC = () => {
             className="relative z-10 block w-full h-auto rounded-2xl sm:rounded-3xl"
           />
           
-          {/* Professional controls */}
-          <div className="absolute bottom-4 left-4 right-4 flex justify-between items-center z-20">
-            <button
-              onClick={toggleLanguage}
-              className="px-4 py-2 bg-cyan-600/80 hover:bg-cyan-600 text-white rounded-lg font-semibold transition-all duration-200 backdrop-blur-sm border border-cyan-400/30"
-            >
-              {language === 'en' ? 'Swahili' : 'English'}
-            </button>
-            
-            <div className="flex items-center space-x-4 bg-black/60 backdrop-blur-sm rounded-lg px-4 py-2 border border-white/20">
-              <div className="text-white/70 text-sm font-medium">
-                {language === 'sw' ? `Kipengee ${currentScene + 1}/${services.length + 2}` : `Scene ${currentScene + 1}/${services.length + 2}`}
-              </div>
-              <button
-                onClick={reset}
-                className="p-1.5 bg-emerald-600/80 hover:bg-emerald-600 text-white rounded transition-all duration-200"
-                title={language === 'sw' ? 'Anza upya' : 'Reset'}
-              >
-                <RotateCcw size={16} />
-              </button>
-            </div>
-          </div>
+         
+       
         </div>
       </div>
     </div>
