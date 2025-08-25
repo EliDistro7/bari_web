@@ -1,27 +1,10 @@
 import React from 'react';
-import { useLanguage } from '@/context/language';
 
 const PartnersBanner = () => {
-  const { language } = useLanguage();
+  // Simplified language handling - defaulting to English for demo
+  const language = 'en';
 
-  // Define supported language types
-  type SupportedLanguage = 'en' | 'sw';
-
-  // Translation object
-  const translations: Record<SupportedLanguage, {
-    trustedPartners: string;
-    powering: string;
-    innovation: string;
-    subtitle: string;
-    transform: string;
-    activeClients: string;
-    industries: string;
-    retention: string;
-    support: string;
-    readyToJoin: string;
-    innovativeCompanies: string;
-    startPartnership: string;
-  }> = {
+  const translations = {
     en: {
       trustedPartners: "Trusted Partners",
       powering: "POWERING",
@@ -35,24 +18,10 @@ const PartnersBanner = () => {
       readyToJoin: "Ready to join these",
       innovativeCompanies: "innovative companies",
       startPartnership: "Start Your Partnership"
-    },
-    sw: {
-      trustedPartners: "Washirika Wetu wa Kuaminiwa",
-      powering: "TUNAONGOZA",
-      innovation: "UBUNIFU",
-      subtitle: "Kushirikiana na makampuni yenye maono ya mbele ili",
-      transform: "kubadilisha uwepo wao wa kidijitali",
-      activeClients: "Wateja Hai",
-      industries: "Sekta",
-      retention: "Uhifadhi",
-      support: "Msaada",
-      readyToJoin: "Je, uko tayari kujiunga na",
-      innovativeCompanies: "makampuni haya ya ubunifu",
-      startPartnership: "Anza Ushirikiano"
     }
   };
 
-  const t = translations[(language as SupportedLanguage)] || translations.sw;
+  const t = translations.en;
 
   // Real partners data
   const partners = [
@@ -60,50 +29,50 @@ const PartnersBanner = () => {
       id: 1, 
       name: "Amka Kijana Foundation", 
       logo: "AK", 
-      industry: language === 'en' ? "Healthcare" : "Afya",
-      description: language === 'en' ? "Reproductive health and mental health education for youth" : "Elimu ya afya ya uzazi na akili kwa vijana"
+      industry: "Healthcare",
+      description: "Reproductive health and mental health education for youth"
     },
     { 
       id: 2, 
       name: "KKKT Church Yombo", 
       logo: "KY", 
-      industry: language === 'en' ? "Religious" : "Kidini",
-      description: language === 'en' ? "Lutheran Church in Dar es Salaam" : "Kanisa la Kilutheri Dar es Salaam"
+      industry: "Religious",
+      description: "Lutheran Church in Dar es Salaam"
     },
     { 
       id: 3, 
       name: "Ubuntu O House", 
       logo: "UO", 
-      industry: language === 'en' ? "Technology" : "Teknolojia",
-      description: language === 'en' ? "Technology company in Dar es Salaam" : "Kampuni ya teknolojia Dar es Salaam"
+      industry: "Technology",
+      description: "Technology company in Dar es Salaam"
     },
     { 
       id: 4, 
       name: "LubeJunction", 
       logo: "LJ", 
-      industry: language === 'en' ? "Automotive" : "Magari",
-      description: language === 'en' ? "Lubricants for machines and automobiles" : "Mafuta ya mitambo na magari"
+      industry: "Automotive",
+      description: "Lubricants for machines and automobiles"
     },
     { 
       id: 5, 
       name: "Raha Energise", 
       logo: "RE", 
-      industry: language === 'en' ? "Industrial" : "Viwandani",
-      description: language === 'en' ? "Lubricants for machines" : "Mafuta ya mitambo"
+      industry: "Industrial",
+      description: "Lubricants for machines"
     },
     { 
       id: 6, 
       name: "Future Holders Company", 
       logo: "FH", 
-      industry: language === 'en' ? "Marketing" : "Masoko",
-      description: language === 'en' ? "Marketing company in Dar es Salaam" : "Kampuni ya uuzaji Dar es Salaam"
+      industry: "Marketing",
+      description: "Marketing company in Dar es Salaam"
     },
     { 
       id: 7, 
       name: "Fourfreyn Company", 
       logo: "FF", 
-      industry: language === 'en' ? "Agriculture" : "Kilimo",
-      description: language === 'en' ? "Agriculture implements in Dar es Salaam" : "Vifaa vya kilimo Dar es Salaam"
+      industry: "Agriculture",
+      description: "Agriculture implements in Dar es Salaam"
     },
   ];
 
@@ -111,11 +80,11 @@ const PartnersBanner = () => {
     <>
       <style jsx>{`
         .marquee-row {
-          animation: marqueeLeft 30s linear infinite;
+          animation: marqueeLeft 12s linear infinite;
         }
         
         .marquee-row-reverse {
-          animation: marqueeRight 35s linear infinite;
+          animation: marqueeRight 14s linear infinite;
         }
         
         .marquee-row:hover,
@@ -135,11 +104,11 @@ const PartnersBanner = () => {
         
         @media (max-width: 768px) {
           .marquee-row {
-            animation: marqueeLeft 40s linear infinite;
+            animation: marqueeLeft 16s linear infinite;
           }
           
           .marquee-row-reverse {
-            animation: marqueeRight 45s linear infinite;
+            animation: marqueeRight 18s linear infinite;
           }
         }
         
@@ -183,13 +152,6 @@ const PartnersBanner = () => {
             inset 0 1px 0 rgba(255, 255, 255, 0.25),
             inset 0 -1px 0 rgba(0, 0, 0, 0.1);
           backdrop-filter: blur(10px);
-        }
-        
-        .bg-mesh-dark {
-          background-image: 
-            radial-gradient(circle at 25% 25%, #667eea 0%, transparent 50%),
-            radial-gradient(circle at 75% 75%, #764ba2 0%, transparent 50%),
-            radial-gradient(circle at 50% 50%, #f093fb 0%, transparent 50%);
         }
         
         .floating-3d {
@@ -410,10 +372,10 @@ const PartnersBanner = () => {
             {/* First row - left to right */}
             <div className="scrolling-container">
               <div className="flex space-x-4 md:space-x-6 marquee-row">
-                {[...partners, ...partners].map((partner, index) => (
+                {[...partners, ...partners, ...partners].map((partner, index) => (
                   <div
                     key={`row1-${partner.id}-${index}`}
-                    className="partner-card-3d rounded-2xl p-3 sm:p-4 md:p-6 w-[220px] sm:w-[250px] md:w-[300px] shadow-2xl"
+                    className="partner-card-3d rounded-2xl p-3 sm:p-4 md:p-6 w-[180px] sm:w-[220px] md:w-[300px] shadow-2xl"
                   >
                     <div className="flex items-start space-x-4">
                       {/* 3D Logo */}
@@ -441,7 +403,7 @@ const PartnersBanner = () => {
                     <div className="flex items-center justify-center mt-3 sm:mt-4 pt-2 sm:pt-3 border-t border-gray-700">
                       <div className="w-2 h-2 sm:w-3 sm:h-3 bg-gradient-to-r from-emerald-400 to-cyan-400 rounded-full mr-2 pulse-glow"></div>
                       <span className="text-xs text-gray-500 font-medium uppercase tracking-wider">
-                        {language === 'en' ? 'Active Partner' : 'Mshirika Hai'}
+                        Active Partner
                       </span>
                     </div>
                   </div>
@@ -452,10 +414,10 @@ const PartnersBanner = () => {
             {/* Second row - right to left */}
             <div className="scrolling-container">
               <div className="flex space-x-4 md:space-x-6 marquee-row-reverse">
-                {[...partners, ...partners].reverse().map((partner, index) => (
+                {[...partners, ...partners, ...partners].reverse().map((partner, index) => (
                   <div
                     key={`row2-${partner.id}-${index}`}
-                    className="partner-card-3d rounded-2xl p-3 sm:p-4 md:p-6 w-[220px] sm:w-[250px] md:w-[300px] shadow-2xl"
+                    className="partner-card-3d rounded-2xl p-3 sm:p-4 md:p-6 w-[180px] sm:w-[220px] md:w-[300px] shadow-2xl"
                   >
                     <div className="flex items-start space-x-4">
                       {/* 3D Logo */}
@@ -483,7 +445,7 @@ const PartnersBanner = () => {
                     <div className="flex items-center justify-center mt-3 sm:mt-4 pt-2 sm:pt-3 border-t border-gray-700">
                       <div className="w-2 h-2 sm:w-3 sm:h-3 bg-gradient-to-r from-emerald-400 to-cyan-400 rounded-full mr-2 pulse-glow"></div>
                       <span className="text-xs text-gray-500 font-medium uppercase tracking-wider">
-                        {language === 'en' ? 'Active Partner' : 'Mshirika Hai'}
+                        Active Partner
                       </span>
                     </div>
                   </div>
@@ -518,7 +480,7 @@ const PartnersBanner = () => {
               {t.readyToJoin}
               <span className="text-transparent bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text font-semibold"> {t.innovativeCompanies}</span>?
             </p>
-            <button className="group relative bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-10 py-5 rounded-2xl font-semibold text-lg overflow-hidden transition-all duration-300 hover:scale-105 neon-glow">
+            <button className="group relative bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-10 py-5 rounded-2xl font-semibold text-lg overflow-hidden transition-all duration-300 hover:scale-105">
               <span className="relative z-10">
                 {t.startPartnership}
               </span>
