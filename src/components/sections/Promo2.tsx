@@ -480,7 +480,7 @@ const PromoVideo: React.FC = () => {
   };
 
   return (
-    <div className="w-full min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 p-4 sm:p-6 lg:p-8 relative overflow-hidden">
+    <div className="w-full min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 p-4 px-0 lg:p-8 relative overflow-hidden">
       {/* Tech background effects */}
       <div className="absolute inset-0 opacity-20">
         <div className="absolute top-20 left-10 w-32 h-32 bg-cyan-400/30 rounded-full blur-3xl animate-pulse"></div>
@@ -489,15 +489,15 @@ const PromoVideo: React.FC = () => {
       </div>
 
       {/* Video container */}
-      <div className="max-w-7xl mx-auto relative z-10">
-        <div className="relative bg-black/80 backdrop-blur-sm rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border-2 border-cyan-400/30 hover:border-cyan-400/60 transition-all duration-500">
+      <div className="max-w-7xl mx-0 relative z-10">
+        <div className="relative bg-black/80 backdrop-blur-sm  overflow-hidden shadow-2xl  hover:border-cyan-400/60 transition-all duration-500">
           <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-emerald-500/10 to-orange-500/10 rounded-2xl sm:rounded-3xl"></div>
           
           <canvas
             ref={canvasRef}
             width={dimensions.width}
             height={dimensions.height}
-            className="relative z-10 block w-full min-h-screen mx-0"
+            className="relative z-10 block w-full h-96 mx-0"
           />
           
          
