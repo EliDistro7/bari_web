@@ -64,7 +64,7 @@ const HeroSection = () => {
           imageAlt: "Beautiful website landing page"
         },
         {
-          title: "integrated systems",
+          title: "integrated Web Systems",
           subtitle: "Custom enterprise solutions",
           icon: <Server className="w-5 h-5" />,
           gradient: "from-orange-400 to-red-500", 
@@ -88,18 +88,18 @@ const HeroSection = () => {
       clients: "Wateja Wenye Furaha",
       services: [
         {
-          title: "programu za mtandao za kupendeza",
-          subtitle: "Suluhisho kamili za mtandao zinazokua",
+          title: "Static Websites",
+          subtitle: "Suluhisho kamili la biashara na watu binafsi ",
           icon: <Globe className="w-5 h-5" />,
           gradient: "from-cyan-400 to-blue-500",
           textGradient: "from-cyan-400 via-blue-400 to-purple-400",
-          description: "React, Next.js, Node.js na mengineyo",
+          description: "React, Next.js, Node.js nk",
           image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop&crop=center&auto=format",
           imageAlt: "Dashibodi ya programu ya kisasa ya mtandao"
         },
         {
-          title: "programu za simu zenye nguvu", 
-          subtitle: "Uzoefu wa programu za simu za kila aina",
+          title: "Mobile Applications za kisasa", 
+          subtitle: "Uzoefu wa Mobile Applications za kisasa za kila aina",
           icon: <Smartphone className="w-5 h-5" />,
           gradient: "from-purple-400 to-pink-500",
           textGradient: "from-purple-400 via-pink-400 to-red-400",
@@ -108,8 +108,8 @@ const HeroSection = () => {
           imageAlt: "Muundo wa kiolesura cha programu ya simu"
         },
         {
-          title: "tovuti nzuri za kithamani",
-          subtitle: "Kurasa za kutua za haraka, zilizoboreshwa kwa SEO", 
+          title: "Web Applications",
+          subtitle: "Web applications za kisasa kwa ajili ya biashara na taasisi, zilizoboreshwa kwa SEO", 
           icon: <Monitor className="w-5 h-5" />,
           gradient: "from-emerald-400 to-cyan-500",
           textGradient: "from-emerald-400 via-cyan-400 to-blue-400",
@@ -118,8 +118,8 @@ const HeroSection = () => {
           imageAlt: "Ukurasa mzuri wa kufikia tovuti"
         },
         {
-          title: "mifumo ya muunganiko",
-          subtitle: "Suluhisho maalum za makampuni",
+          title: "Web Systems",
+          subtitle: "Suluhisho maalum za makampuni, taasisi, vikundi na biashara",
           icon: <Server className="w-5 h-5" />,
           gradient: "from-orange-400 to-red-500", 
           textGradient: "from-orange-400 via-red-400 to-pink-400",
@@ -343,7 +343,7 @@ const HeroSection = () => {
               </div>
 
               {/* Main Heading with Animated Service */}
-              <h1 className="text-2xl md:text-6xl lg:text-7xl xl:text-8xl font-black mb-8 leading-tight tracking-tight">
+              <h1 className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-black mb-8 leading-tight tracking-tight">
                 <span className="block text-white mb-4">
                   {t.build}
                 </span>
@@ -352,7 +352,7 @@ const HeroSection = () => {
                     key={currentServiceIndex}
                     className={`service-title bg-gradient-to-r ${currentService.textGradient} bg-clip-text text-transparent fade-slide-up service-transition capitalize`}
                   >
-                    {currentService.title}
+                    {currentService.title.toUpperCase()}
                   </span>
                 </div>
                 <span className="block text-white text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-light">
@@ -366,7 +366,7 @@ const HeroSection = () => {
                   key={`subtitle-${currentServiceIndex}`}
                   className="text-lg md:text-xl lg:text-2xl text-gray-300 leading-relaxed font-light fade-slide-up mb-4"
                 >
-                  {currentService.subtitle} {language === 'sw' ? 'ambazo' : 'that'} don't just look amazing—they 
+                  {currentService.subtitle} {language === 'sw' ? 'ambazo' : 'that'} {language== 'en' ? "don't just look amazing—they" : "sio tu kwamba zina muonekano mzuri— bali pia zenye"} 
                   <span className={`text-transparent bg-gradient-to-r ${currentService.textGradient} bg-clip-text font-semibold`}>
                     {' '}{t.driveResults}
                   </span>.
