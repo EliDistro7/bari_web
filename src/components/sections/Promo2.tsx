@@ -497,7 +497,7 @@ const PromoVideo: React.FC = () => {
             ref={canvasRef}
             width={dimensions.width}
             height={dimensions.height}
-            className="relative z-10 block w-full h-auto rounded-2xl sm:rounded-3xl"
+            className="relative z-10 block w-full min-h-screen mx-0"
           />
           
          
