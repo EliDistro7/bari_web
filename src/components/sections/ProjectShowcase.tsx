@@ -1,85 +1,172 @@
 import React, { useState } from 'react';
-import { ExternalLink, Github, Play, Clock, CheckCircle, Sparkles, Code2, Smartphone, Globe, Database, Rocket } from 'lucide-react';
+import { ExternalLink, Github, Play, Clock, CheckCircle, Sparkles, Code2, Smartphone, Globe, Database, Rocket, Heart, TrendingUp, Leaf, Wrench, Home, Calculator } from 'lucide-react';
+import { useLanguage } from '@/context/language';
 
 const ProjectsShowcase = () => {
+  const { language } = useLanguage();
   const [activeCategory, setActiveCategory] = useState('all');
 
-  // Template project data - replace with your actual projects
+  const translations = {
+    en: {
+      portfolioShowcase: "Portfolio Showcase",
+      digitalMasterpieces: "DIGITAL MASTERPIECES",
+      digitalText: "DIGITAL",
+      masterpiecesText: "MASTERPIECES",
+      exploreText: "Explore my collection of",
+      innovativeSolutions: "innovative solutions",
+      fromProduction: "- from production applications to experimental showcases",
+      allProjects: "All Projects",
+      completed: "Completed",
+      inProgress: "In Progress",
+      showcases: "Showcases",
+      live: "Live",
+      wip: "WIP",
+      demo: "Demo",
+      progress: "Progress",
+      visitLive: "Visit Live",
+      viewDemo: "View Demo",
+      haveProject: "Have a project in mind? Let's",
+      buildSomething: "build something amazing",
+      together: "together.",
+      startProject: "Start Your Project",
+      // Project descriptions
+      churchSystemDesc: "Complete church management system with member tracking, event scheduling, donation management, and multi-language support for Swahili congregations.",
+      mentalHealthDesc: "Static website promoting mental health and reproductive health awareness with educational blogs and resources for young people in Tanzania.",
+      marketingCompanyDesc: "Professional marketing company website showcasing digital marketing services, branding solutions, and client success stories.",
+      lubricantsDesc: "E-commerce platform for automotive lubricants with product catalog, online ordering, and dealer network management.",
+      farmImplementsDesc: "Agricultural equipment marketplace connecting farmers with quality farm implements and machinery suppliers.",
+      ubuntuAppDesc: "Modern marketing application for Ubuntu O House with client management, campaign tracking, and analytics dashboard.",
+      accountingAppDesc: "Comprehensive accounting application for Masatu service providers with invoicing, expense tracking, and financial reporting."
+    },
+    sw: {
+      portfolioShowcase: "Mfumo wa Kazi",
+      digitalMasterpieces: "KAZI ZA KIDIJITALI",
+      digitalText: "KAZI ZA",
+      masterpiecesText: "KIDIJITALI",
+      exploreText: "Chunguza mkusanyiko wangu wa",
+      innovativeSolutions: "suluhisho za ubunifu",
+      fromProduction: "- kutoka programu za uzalishaji hadi maonyesho ya majaribio",
+      allProjects: "Miradi Yote",
+      completed: "Imekamilika",
+      inProgress: "Inaendelea",
+      showcases: "Maonyesho",
+      live: "Hai",
+      wip: "Inaendelea",
+      demo: "Onyesho",
+      progress: "Maendeleo",
+      visitLive: "Tembelea Tovuti",
+      viewDemo: "Ona Onyesho",
+      haveProject: "Una mradi mzuri? Hebu",
+      buildSomething: "tuunde kitu cha ajabu",
+      together: "pamoja.",
+      startProject: "Anza Mradi Wako",
+      // Project descriptions
+      churchSystemDesc: "Mfumo kamili wa usimamizi wa kanisa wenye ufuatiliaji wa waumini, ratiba za matukio, usimamizi wa michango, na lugha za Kiswahili.",
+      mentalHealthDesc: "Tovuti tuli inayohamasisha uongozi wa afya ya akili na uzazi kwa vijana wa Tanzania kupitia blogu za elimu na rasilimali.",
+      marketingCompanyDesc: "Tovuti ya mtaalamu ya kampuni ya uuzaji inayoonyesha huduma za uuzaji wa kidijitali, suluhisho za chapa, na hadithi za mafanikio ya wateja.",
+      lubricantsDesc: "Jukwaa la biashara mtandaoni la mafuta ya magari lenye katalogi ya bidhaa, uagizaji mtandaoni, na usimamizi wa mtandao wa wasambazaji.",
+      farmImplementsDesc: "Soko la vifaa vya kilimo linalowaunganisha wakulima na wasambazaji wa vifaa na mashine za kilimo zenye ubora.",
+      ubuntuAppDesc: "Programu ya kisasa ya uuzaji ya Ubuntu O House yenye usimamizi wa wateja, ufuatiliaji wa kampeni, na dashibodi ya takwimu.",
+      accountingAppDesc: "Programu kamili ya uhasibu kwa watoa huduma wa Masatu yenye bili, ufuatiliaji wa matumizi, na ripoti za kifedha."
+    }
+  };
+
+  const t = translations[language as keyof typeof translations];
+
+  // Real project data with your actual projects
   const projects = [
     {
       id: 1,
-      title: "ChurchConnect Pro",
-      description: "Complete church management system with member tracking, event scheduling, and donation management.",
+      title: "KKK Tyombo Church System",
+      description: t.churchSystemDesc,
       category: "completed",
       type: "web",
-      tech: ["React", "Node.js", "MongoDB", "Stripe"],
-      image: "https://images.unsplash.com/photo-1438032005730-c779502df39b?w=400&h=250&fit=crop&auto=format",
-      liveUrl: "https://churchconnect.vercel.app",
-      githubUrl: "https://github.com/yourusername/churchconnect",
-      status: "Live with 500+ active users"
+      tech: ["React", "Node.js", "MongoDB", "Stripe", "i18n"],
+      image: "/images/projects/yombo.jpg",
+      liveUrl: "https://kkktyombo.org",
+      githubUrl: "#",
+      status: language === 'en' ? "Serving 1000+ church members" : "Inahudumia waumini 1000+",
+      icon: Heart
     },
     {
       id: 2,
-      title: "EcoTrack Mobile",
-      description: "Environmental impact tracking app with carbon footprint calculator and sustainability goals.",
-      category: "progress",
-      type: "app",
-      tech: ["React Native", "Firebase", "Charts.js"],
-      image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=250&fit=crop&auto=format",
-      progress: 75,
-      status: "Beta testing phase"
+      title: "Amkakijana Mental Health Platform",
+      description: t.mentalHealthDesc,
+      category: "completed",
+      type: "web",
+      tech: ["React", "Next.js", "Tailwind", "Markdown"],
+      image: "/images/projects/amka.jpg",
+      liveUrl: "https://amkakijana.org",
+      status: language === 'en' ? "Educational resource for 5000+ monthly visitors" : "Rasilimali ya elimu kwa wageni 5000+ kwa mwezi",
+      icon: Heart
     },
     {
       id: 3,
-      title: "InvestPro Dashboard",
-      description: "Real-time investment portfolio management with advanced analytics and risk assessment.",
-      category: "draft",
+      title: "Future Holders Marketing Pro",
+      description: t.marketingCompanyDesc,
+      category: "completed",
       type: "web",
-      tech: ["Next.js", "Python", "PostgreSQL", "D3.js"],
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=250&fit=crop&auto=format",
-      demoUrl: "https://investpro-demo.vercel.app",
-      status: "Showcase demo available"
+      tech: ["React", "Next.js", "Framer Motion", "CMS"],
+      image: "/images/projects/fh.jpg",
+      liveUrl: "https://futureholders.pro",
+      status: language === 'en' ? "Growing digital marketing agency" : "Wakala wa uuzaji wa kidijitali unaoongezeka",
+      icon: TrendingUp
     },
     {
       id: 4,
-      title: "HealthSync System",
-      description: "Hospital management system with patient records, appointment scheduling, and billing.",
+      title: "Lube Junction E-Commerce",
+      description: t.lubricantsDesc,
       category: "completed",
-      type: "system",
-      tech: ["Vue.js", "Laravel", "MySQL", "Docker"],
-      image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=400&h=250&fit=crop&auto=format",
-      liveUrl: "https://healthsync.com",
-      status: "Serving 3 hospitals"
+      type: "web",
+      tech: ["React", "WooCommerce", "PHP", "Stripe", "Inventory"],
+      image: "/images/projects/lube.jpg",
+      liveUrl: "https://lubejunction.com",
+      status: language === 'en' ? "Automotive lubricants marketplace" : "Soko la mafuta ya magari",
+      icon: Wrench
     },
     {
       id: 5,
-      title: "AI Content Generator",
-      description: "Smart content creation tool with AI-powered writing assistance and SEO optimization.",
-      category: "progress",
+      title: "Four Frey Farm Implements",
+      description: t.farmImplementsDesc,
+      category: "completed",
       type: "web",
-      tech: ["React", "OpenAI API", "Express", "Redis"],
-      image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=250&fit=crop&auto=format",
-      progress: 60,
-      status: "MVP in development"
+      tech: ["WordPress", "WooCommerce", "Custom PHP", "Payment Gateway"],
+      image: "/images/projects/fourfreyn.jpg",
+      liveUrl: "https://fourfreyn.com",
+      status: language === 'en' ? "Agricultural equipment supplier" : "Msambazaji wa vifaa vya kilimo",
+      icon: Leaf
     },
     {
       id: 6,
-      title: "CryptoWallet Pro",
-      description: "Secure cryptocurrency wallet with multi-chain support and DeFi integration.",
-      category: "draft",
+      title: "Ubuntu O House Marketing App",
+      description: t.ubuntuAppDesc,
+      category: "progress",
       type: "app",
-      tech: ["Flutter", "Web3", "Solidity", "AWS"],
-      image: "https://images.unsplash.com/photo-1518546305927-5a555bb7020d?w=400&h=250&fit=crop&auto=format",
-      demoUrl: "https://cryptowallet-demo.vercel.app",
-      status: "Concept demonstration"
+      tech: ["React Native", "Firebase", "Analytics", "Push Notifications"],
+      image: "https://images.unsplash.com/photo-1553028826-f4804a6dba3b?w=400&h=250&fit=crop&auto=format",
+      progress: 85,
+      status: language === 'en' ? "Marketing automation platform" : "Jukwaa la uuzaji la kiotomatiki",
+      icon: Home
+    },
+    {
+      id: 7,
+      title: "Masatu Service Provider Accounting",
+      description: t.accountingAppDesc,
+      category: "progress",
+      type: "system",
+      tech: ["Vue.js", "Laravel", "MySQL", "PDF Reports", "Multi-currency"],
+      image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&h=250&fit=crop&auto=format",
+      progress: 70,
+      status: language === 'en' ? "Comprehensive accounting solution" : "Suluhisho kamili la uhasibu",
+      icon: Calculator
     }
   ];
 
   const categories = [
-    { id: 'all', label: 'All Projects', icon: Rocket, count: projects.length },
-    { id: 'completed', label: 'Completed', icon: CheckCircle, count: projects.filter(p => p.category === 'completed').length },
-    { id: 'progress', label: 'In Progress', icon: Clock, count: projects.filter(p => p.category === 'progress').length },
-    { id: 'draft', label: 'Showcases', icon: Sparkles, count: projects.filter(p => p.category === 'draft').length }
+    { id: 'all', label: t.allProjects, icon: Rocket, count: projects.length },
+    { id: 'completed', label: t.completed, icon: CheckCircle, count: projects.filter(p => p.category === 'completed').length },
+    { id: 'progress', label: t.inProgress, icon: Clock, count: projects.filter(p => p.category === 'progress').length },
+    { id: 'draft', label: t.showcases, icon: Sparkles, count: projects.filter(p => p.category === 'draft').length }
   ];
 
   const getTypeIcon = (type:string) => {
@@ -121,168 +208,199 @@ const ProjectsShowcase = () => {
         .project-card-3d {
           transform-style: preserve-3d;
           transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-          background: rgba(255, 255, 255, 0.05);
+          background: rgba(255, 255, 255, 0.08);
           backdrop-filter: blur(25px);
-          border: 1px solid rgba(255, 255, 255, 0.1);
+          border: 2px solid rgba(255, 255, 255, 0.15);
         }
         
         .project-card-3d:hover {
-          transform: translateY(-20px) rotateY(10deg) rotateX(8deg) scale(1.02);
+          transform: translateY(-25px) rotateY(12deg) rotateX(10deg) scale(1.03);
           box-shadow: 
-            0 30px 60px rgba(0, 0, 0, 0.4),
-            0 0 40px rgba(102, 126, 234, 0.3),
-            0 0 80px rgba(118, 75, 162, 0.2);
-          border-color: rgba(102, 126, 234, 0.4);
+            0 35px 80px rgba(0, 0, 0, 0.5),
+            0 0 50px rgba(102, 126, 234, 0.4),
+            0 0 100px rgba(118, 75, 162, 0.3);
+          border-color: rgba(102, 126, 234, 0.5);
+          background: rgba(255, 255, 255, 0.12);
         }
         
         .category-btn {
-          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-          background: rgba(255, 255, 255, 0.08);
-          backdrop-filter: blur(10px);
-          border: 1px solid rgba(255, 255, 255, 0.1);
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+          background: rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(15px);
+          border: 2px solid rgba(255, 255, 255, 0.15);
         }
         
         .category-btn.active {
-          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-          transform: translateY(-2px);
-          box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+          transform: translateY(-3px) scale(1.02);
+          box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+          border-color: rgba(255, 255, 255, 0.3);
         }
         
         .category-btn:hover:not(.active) {
-          background: rgba(255, 255, 255, 0.12);
-          transform: translateY(-2px);
+          background: rgba(255, 255, 255, 0.15);
+          transform: translateY(-2px) scale(1.01);
+          border-color: rgba(102, 126, 234, 0.3);
         }
         
         .tech-badge {
-          background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
-          border: 1px solid rgba(102, 126, 234, 0.3);
+          background: linear-gradient(135deg, rgba(102, 126, 234, 0.3) 0%, rgba(118, 75, 162, 0.3) 100%);
+          border: 1px solid rgba(102, 126, 234, 0.4);
+          backdrop-filter: blur(10px);
         }
         
         .progress-bar {
-          background: linear-gradient(90deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+          background: linear-gradient(90deg, #667eea 0%, #764ba2 30%, #f093fb 60%, #4facfe 100%);
+          animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+          0% { background-position: -200% 0; }
+          100% { background-position: 200% 0; }
         }
         
         .project-image {
-          transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-          background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+          transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+          background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%);
         }
         
         .project-card-3d:hover .project-image {
-          transform: scale(1.05);
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+          transform: scale(1.08) rotateZ(2deg);
+          box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
         }
         
         .image-overlay {
-          background: linear-gradient(135deg, rgba(102, 126, 234, 0.8) 0%, rgba(118, 75, 162, 0.8) 100%);
+          background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 50%, rgba(240, 147, 251, 0.8) 100%);
           opacity: 0;
-          transition: all 0.3s ease;
+          transition: all 0.4s ease;
         }
         
         .project-card-3d:hover .image-overlay {
           opacity: 1;
         }
         
-        @keyframes pulseGlowSoft {
+        @keyframes pulseGlowBold {
           0%, 100% { 
-            box-shadow: 0 0 20px rgba(102, 126, 234, 0.2);
+            box-shadow: 0 0 30px rgba(102, 126, 234, 0.3), 0 0 60px rgba(118, 75, 162, 0.2);
             opacity: 1;
           }
           50% { 
-            box-shadow: 0 0 40px rgba(118, 75, 162, 0.4);
+            box-shadow: 0 0 50px rgba(118, 75, 162, 0.5), 0 0 80px rgba(240, 147, 251, 0.3);
             opacity: 0.9;
           }
         }
         
-        .neon-text-soft {
-          text-shadow: 0 0 8px rgba(102, 126, 234, 0.3);
+        .pulse-glow-bold {
+          animation: pulseGlowBold 3s infinite;
+        }
+        
+        .neon-text-bold {
+          text-shadow: 0 0 15px rgba(102, 126, 234, 0.5), 0 0 30px rgba(118, 75, 162, 0.3);
+        }
+        
+        .credibility-boost {
+          font-weight: 900;
+          font-size: 1.1em;
+          background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          text-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+        }
+        
+        .project-icon {
+          background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(102, 126, 234, 0.3);
         }
       `}</style>
 
-      <section id='projects' className="relative py-24 overflow-hidden">
-        {/* 3D Background Elements */}
+      <section id='projects' className="relative py-28 overflow-hidden">
+        {/* Enhanced 3D Background */}
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900"></div>
         
-        {/* 3D Grid Background */}
-        <div className="absolute inset-0 opacity-15">
+        {/* Enhanced Grid Background */}
+        <div className="absolute inset-0 opacity-20">
           <svg width="100%" height="100%" className="absolute inset-0">
             <defs>
-              <pattern id="projectGrid" width="80" height="80" patternUnits="userSpaceOnUse">
-                <path d="M 80 0 L 0 0 0 80" fill="none" stroke="url(#projectGridGradient)" strokeWidth="0.5" opacity="0.4"/>
+              <pattern id="projectGrid" width="60" height="60" patternUnits="userSpaceOnUse">
+                <path d="M 60 0 L 0 0 0 60" fill="none" stroke="url(#projectGridGradient)" strokeWidth="1" opacity="0.6"/>
               </pattern>
               <linearGradient id="projectGridGradient" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" style={{stopColor: '#667eea', stopOpacity: 1}} />
-                <stop offset="50%" style={{stopColor: '#764ba2', stopOpacity: 0.8}} />
-                <stop offset="100%" style={{stopColor: '#f093fb', stopOpacity: 0.6}} />
+                <stop offset="30%" style={{stopColor: '#764ba2', stopOpacity: 0.9}} />
+                <stop offset="70%" style={{stopColor: '#f093fb', stopOpacity: 0.8}} />
+                <stop offset="100%" style={{stopColor: '#4facfe', stopOpacity: 0.7}} />
               </linearGradient>
             </defs>
             <rect width="100%" height="100%" fill="url(#projectGrid)" />
           </svg>
         </div>
         
-        {/* Floating 3D Geometric Elements */}
+        {/* Enhanced Floating Elements */}
         <div className="absolute inset-0">
-          <div className="absolute top-16 left-16 w-28 h-28 opacity-8 floating-3d-slow">
-            <div className="w-full h-full bg-gradient-to-br from-cyan-400 to-blue-500 transform rounded-lg shadow-2xl" 
+          <div className="absolute top-20 left-20 w-32 h-32 opacity-15 floating-3d-slow">
+            <div className="w-full h-full bg-gradient-to-br from-cyan-400 to-blue-500 transform rounded-xl shadow-2xl pulse-glow-bold" 
                  style={{transform: 'rotateX(35deg) rotateY(45deg) rotateZ(10deg)'}}></div>
           </div>
           
-          <div className="absolute top-1/4 right-24 w-20 h-20 opacity-12 floating-3d-slow" style={{animationDelay: '3s'}}>
-            <div className="w-full h-full bg-gradient-to-br from-purple-400 to-pink-400 transform rounded-xl shadow-2xl" 
+          <div className="absolute top-1/4 right-28 w-24 h-24 opacity-20 floating-3d-slow" style={{animationDelay: '2s'}}>
+            <div className="w-full h-full bg-gradient-to-br from-purple-400 to-pink-400 transform rounded-2xl shadow-2xl pulse-glow-bold" 
                  style={{transform: 'rotateX(45deg) rotateY(-30deg) rotateZ(25deg)'}}></div>
           </div>
           
-          <div className="absolute bottom-24 left-1/3 w-24 h-24 opacity-10 floating-3d-slow" style={{animationDelay: '6s'}}>
-            <div className="w-full h-full bg-gradient-to-br from-emerald-400 to-cyan-400 transform rounded-lg shadow-2xl" 
+          <div className="absolute bottom-28 left-1/3 w-28 h-28 opacity-18 floating-3d-slow" style={{animationDelay: '4s'}}>
+            <div className="w-full h-full bg-gradient-to-br from-emerald-400 to-cyan-400 transform rounded-xl shadow-2xl pulse-glow-bold" 
                  style={{transform: 'rotateX(-20deg) rotateY(60deg) rotateZ(-15deg)'}}></div>
           </div>
           
-          {/* Code symbols */}
-          <div className="absolute top-1/3 left-12 text-cyan-400 opacity-20 text-4xl floating-3d-slow pulse-glow-soft">{'<>'}</div>
-          <div className="absolute top-2/3 right-16 text-purple-400 opacity-20 text-3xl floating-3d-slow pulse-glow-soft" style={{animationDelay: '2s'}}>{ '{}' }</div>
-          <div className="absolute bottom-1/3 right-1/3 text-pink-400 opacity-20 text-2xl floating-3d-slow pulse-glow-soft" style={{animationDelay: '4s'}}>( )</div>
+          {/* Enhanced Code Symbols */}
+          <div className="absolute top-1/3 left-16 text-cyan-400 opacity-30 text-5xl floating-3d-slow pulse-glow-bold font-black">{'<>'}</div>
+          <div className="absolute top-2/3 right-20 text-purple-400 opacity-30 text-4xl floating-3d-slow pulse-glow-bold font-black" style={{animationDelay: '1.5s'}}>{ '{}' }</div>
+          <div className="absolute bottom-1/3 right-1/3 text-pink-400 opacity-30 text-3xl floating-3d-slow pulse-glow-bold font-black" style={{animationDelay: '3s'}}>( )</div>
         </div>
 
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          {/* Header */}
-          <div className="text-center mb-20">
-            <div className="inline-block mb-6">
-              <div className="category-btn px-6 py-3 rounded-full">
-                <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent font-semibold text-sm uppercase tracking-wider">
-                  Portfolio Showcase
+          {/* Enhanced Header */}
+          <div className="text-center mb-24">
+            <div className="inline-block mb-8">
+              <div className="category-btn px-8 py-4 rounded-full">
+                <span className="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent font-black text-base uppercase tracking-widest">
+                  {t.portfolioShowcase}
                 </span>
               </div>
             </div>
             
-            <h2 className="text-5xl md:text-6xl font-black text-white mb-6 neon-text-soft">
-              DIGITAL
+            <h2 className="text-6xl md:text-7xl font-black text-white mb-8 neon-text-bold leading-tight">
+              {t.digitalText}
               <span className="block bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-                MASTERPIECES
+                {t.masterpiecesText}
               </span>
             </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto font-light">
-              Explore my collection of 
-              <span className="text-transparent bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text font-semibold"> innovative solutions</span> - 
-              from production applications to experimental showcases
+            <p className="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto font-medium leading-relaxed">
+              {t.exploreText}
+              <span className="text-transparent bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text font-black"> {t.innovativeSolutions}</span>
+              {t.fromProduction}
             </p>
           </div>
 
-          {/* Category Filters */}
-          <div className="flex flex-wrap justify-center gap-4 mb-16">
+          {/* Enhanced Category Filters */}
+          <div className="flex flex-wrap justify-center gap-6 mb-20">
             {categories.map((category) => {
               const IconComponent = category.icon;
               return (
                 <button
                   key={category.id}
                   onClick={() => setActiveCategory(category.id)}
-                  className={`category-btn px-6 py-4 rounded-2xl font-semibold text-sm transition-all duration-300 ${
+                  className={`category-btn px-8 py-5 rounded-2xl font-bold text-base transition-all duration-300 ${
                     activeCategory === category.id ? 'active text-white' : 'text-gray-300 hover:text-white'
                   }`}
                 >
-                  <div className="flex items-center space-x-3">
-                    <IconComponent className="w-5 h-5" />
+                  <div className="flex items-center space-x-4">
+                    <IconComponent className="w-6 h-6" />
                     <span>{category.label}</span>
-                    <span className={`px-2 py-1 rounded-full text-xs ${
-                      activeCategory === category.id ? 'bg-white/20' : 'bg-white/10'
+                    <span className={`px-3 py-1 rounded-full text-sm font-black ${
+                      activeCategory === category.id ? 'bg-white/25' : 'bg-white/15'
                     }`}>
                       {category.count}
                     </span>
@@ -292,115 +410,119 @@ const ProjectsShowcase = () => {
             })}
           </div>
 
-          {/* Projects Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* Enhanced Projects Grid */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
             {filteredProjects.map((project, index) => {
               const TypeIcon = getTypeIcon(project.type);
+              const ProjectIcon = project.icon;
               return (
                 <div
                   key={project.id}
                   className="project-card-3d rounded-3xl p-8 shadow-2xl"
-                  style={{animationDelay: `${index * 0.1}s`}}
+                  style={{animationDelay: `${index * 0.15}s`}}
                 >
-                  {/* Project Image */}
-                  <div className="relative mb-6 rounded-xl overflow-hidden project-image">
+                  {/* Enhanced Project Image */}
+                  <div className="relative mb-8 rounded-2xl overflow-hidden project-image">
                     <img 
                       src={project.image} 
                       alt={project.title}
-                      className="w-full h-48 object-cover"
+                      className="w-full h-52 object-cover"
                       loading="lazy"
                     />
                     <div className="absolute inset-0 image-overlay flex items-center justify-center">
-                      <div className="flex items-center space-x-2">
-                        <TypeIcon className="w-6 h-6 text-white" />
-                        <span className="text-white font-semibold">{project.type.toUpperCase()}</span>
+                      <div className="flex items-center space-x-3">
+                        <TypeIcon className="w-8 h-8 text-white" />
+                        <span className="text-white font-black text-lg tracking-wider">{project.type.toUpperCase()}</span>
                       </div>
                     </div>
                     <div className="absolute top-4 right-4">
-                      <span className={`px-3 py-1 rounded-full text-xs font-semibold backdrop-blur-sm ${
-                        project.category === 'completed' ? 'bg-green-500/80 text-white' :
-                        project.category === 'progress' ? 'bg-yellow-500/80 text-white' :
-                        'bg-blue-500/80 text-white'
+                      <span className={`px-4 py-2 rounded-full text-sm font-black backdrop-blur-lg ${
+                        project.category === 'completed' ? 'bg-green-500/90 text-white shadow-lg shadow-green-500/50' :
+                        project.category === 'progress' ? 'bg-yellow-500/90 text-white shadow-lg shadow-yellow-500/50' :
+                        'bg-blue-500/90 text-white shadow-lg shadow-blue-500/50'
                       }`}>
-                        {project.category === 'completed' ? 'Live' : 
-                         project.category === 'progress' ? 'WIP' : 'Demo'}
+                        {project.category === 'completed' ? t.live : 
+                         project.category === 'progress' ? t.wip : t.demo}
                       </span>
+                    </div>
+                    <div className="absolute top-4 left-4 project-icon p-3 rounded-xl">
+                      <ProjectIcon className="w-6 h-6 text-white" />
                     </div>
                   </div>
 
-                  {/* Project Title & Description */}
-                  <h3 className="text-2xl font-bold text-white mb-3 neon-text-soft">
+                  {/* Enhanced Project Title & Description */}
+                  <h3 className="text-2xl md:text-3xl font-black text-white mb-4 neon-text-bold leading-tight">
                     {project.title}
                   </h3>
-                  <p className="text-gray-400 mb-6 leading-relaxed">
+                  <p className="text-gray-300 mb-8 leading-relaxed text-base font-medium">
                     {project.description}
                   </p>
 
-                  {/* Progress Bar (for WIP projects) */}
+                  {/* Enhanced Progress Bar */}
                   {project.progress && (
-                    <div className="mb-6">
-                      <div className="flex justify-between items-center mb-2">
-                        <span className="text-sm text-gray-400">Progress</span>
-                        <span className="text-sm font-semibold text-white">{project.progress}%</span>
+                    <div className="mb-8">
+                      <div className="flex justify-between items-center mb-3">
+                        <span className="text-base text-gray-300 font-semibold">{t.progress}</span>
+                        <span className="text-base font-black text-white bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">{project.progress}%</span>
                       </div>
-                      <div className="w-full bg-gray-700 rounded-full h-2">
+                      <div className="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
                         <div 
-                          className="progress-bar h-2 rounded-full transition-all duration-500"
-                          style={{width: `${project.progress}%`}}
+                          className="progress-bar h-3 rounded-full transition-all duration-1000 shadow-lg"
+                          style={{width: `${project.progress}%`, backgroundSize: '200% 100%'}}
                         ></div>
                       </div>
                     </div>
                   )}
 
-                  {/* Tech Stack */}
-                  <div className="flex flex-wrap gap-2 mb-6">
+                  {/* Enhanced Tech Stack */}
+                  <div className="flex flex-wrap gap-3 mb-8">
                     {project.tech.map((tech, techIndex) => (
                       <span 
                         key={techIndex} 
-                        className="tech-badge px-3 py-1 rounded-lg text-xs font-medium text-white"
+                        className="tech-badge px-4 py-2 rounded-xl text-sm font-bold text-white shadow-lg"
                       >
                         {tech}
                       </span>
                     ))}
                   </div>
 
-                  {/* Status */}
-                  <p className="text-sm text-gray-500 mb-6">{project.status}</p>
+                  {/* Enhanced Status */}
+                  <p className="text-base credibility-boost mb-8 font-black tracking-wide">{project.status}</p>
 
-                  {/* Action Buttons */}
-                  <div className="flex space-x-3">
+                  {/* Enhanced Action Buttons */}
+                  <div className="flex space-x-4">
                     {project.liveUrl && (
                       <a 
                         href={project.liveUrl} 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="flex-1 bg-gradient-to-r from-green-500 to-emerald-600 text-white px-4 py-3 rounded-xl font-semibold text-sm transition-all duration-300 hover:scale-105 flex items-center justify-center"
+                        className="flex-1 bg-gradient-to-r from-green-500 to-emerald-600 text-white px-5 py-4 rounded-xl font-black text-sm transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-2xl flex items-center justify-center"
                       >
-                        <ExternalLink className="w-4 h-4 mr-2" />
-                        Visit Live
+                        <ExternalLink className="w-5 h-5 mr-2" />
+                        {t.visitLive}
                       </a>
                     )}
                     
-                    {project.demoUrl && (
+                    {project.liveUrl && (
                       <a 
-                        href={project.demoUrl} 
+                        href={project.liveUrl} 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="flex-1 bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-4 py-3 rounded-xl font-semibold text-sm transition-all duration-300 hover:scale-105 flex items-center justify-center"
+                        className="flex-1 bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-5 py-4 rounded-xl font-black text-sm transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-2xl flex items-center justify-center"
                       >
-                        <Play className="w-4 h-4 mr-2" />
-                        View Demo
+                        <Play className="w-5 h-5 mr-2" />
+                        {t.viewDemo}
                       </a>
                     )}
                     
-                    {project.githubUrl && (
+                    {project.githubUrl && project.githubUrl !== "#" && (
                       <a 
                         href={project.githubUrl} 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="px-4 py-3 bg-gray-700 hover:bg-gray-600 text-white rounded-xl transition-all duration-300 hover:scale-105"
+                        className="px-5 py-4 bg-gray-700 hover:bg-gray-600 text-white rounded-xl transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-2xl"
                       >
-                        <Github className="w-4 h-4" />
+                        <Github className="w-5 h-5" />
                       </a>
                     )}
                   </div>
@@ -409,18 +531,18 @@ const ProjectsShowcase = () => {
             })}
           </div>
 
-          {/* Bottom CTA */}
-          <div className="text-center mt-20">
-            <p className="text-gray-300 mb-8 text-lg font-light">
-              Have a project in mind? Let's 
-              <span className="text-transparent bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text font-semibold"> build something amazing</span> together.
+          {/* Enhanced Bottom CTA */}
+          <div className="text-center mt-24">
+            <p className="text-gray-300 mb-10 text-xl md:text-2xl font-medium leading-relaxed">
+              {t.haveProject}
+              <span className="text-transparent bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text font-black"> {t.buildSomething}</span> {t.together}
             </p>
-            <button className="group relative bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-10 py-5 rounded-2xl font-semibold text-lg overflow-hidden transition-all duration-300 hover:scale-105 pulse-glow-soft">
+            <button className="group relative bg-gradient-to-r from-cyan-500 via-purple-600 to-pink-600 text-white px-12 py-6 rounded-2xl font-black text-xl overflow-hidden transition-all duration-300 hover:scale-105 pulse-glow-bold shadow-2xl">
               <span className="relative z-10 flex items-center">
-                Start Your Project
-                <Rocket className="w-5 h-5 ml-3 group-hover:translate-x-1 transition-transform" />
+                {t.startProject}
+                <Rocket className="w-6 h-6 ml-4 group-hover:translate-x-2 group-hover:rotate-12 transition-transform duration-300" />
               </span>
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </button>
           </div>
         </div>
