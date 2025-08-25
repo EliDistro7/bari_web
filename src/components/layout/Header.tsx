@@ -9,7 +9,7 @@ const Header = () => {
   // Translation object
   const translations = {
     en: {
-      role: "Full-Stack Developer",
+      role: "Software Developer",
       projects: "Projects",
       services: "Services",
       assessment: "Assessment",
@@ -18,7 +18,7 @@ const Header = () => {
       language: "Language"
     },
     sw: {
-      role: "Msanidi Programu Kamili",
+      role: "Software Developer",
       projects: "Miradi",
       services: "Huduma",
       assessment: "Tathmini",
