@@ -1,8 +1,9 @@
 import React from 'react';
+import { useLanguage } from '@/context/language';
 
 const PartnersBanner = () => {
   // Simplified language handling - defaulting to English for demo
-  const language = 'en';
+  const {language} = useLanguage();
 
   const translations = {
     en: {

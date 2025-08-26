@@ -438,6 +438,8 @@ const ServicesSection = () => {
                         <h4 key={index} className="text-xl font-bold text-white mt-6 mb-3">
                           {paragraph.replace(/\*\*/g, '')}
                         </h4>
+
+                        
                       );
                     }
                     
