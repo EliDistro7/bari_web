@@ -2,10 +2,26 @@ import React from 'react';
 import { useLanguage } from '@/context/language';
 
 const PartnersBanner = () => {
-  // Simplified language handling - defaulting to English for demo
+ 
   const {language} = useLanguage();
 
-  const translations = {
+  type Language = 'en' | 'sw';
+  type Translation = {
+    trustedPartners: string;
+    powering: string;
+    innovation: string;
+    subtitle: string;
+    transform: string;
+    activeClients: string;
+    industries: string;
+    retention: string;
+    support: string;
+    readyToJoin: string;
+    innovativeCompanies: string;
+    startPartnership: string;
+    activePartner: string;
+  };
+  const translations: Record<Language, Translation> = {
     en: {
       trustedPartners: "Trusted Partners",
       powering: "POWERING",
@@ -18,64 +34,136 @@ const PartnersBanner = () => {
       support: "Support",
       readyToJoin: "Ready to join these",
       innovativeCompanies: "innovative companies",
-      startPartnership: "Start Your Partnership"
+      startPartnership: "Start Your Partnership",
+      activePartner: "Active Partner"
+    },
+    sw: {
+      trustedPartners: "Washirika wa Kuaminika",
+      powering: "KUENDESHA",
+      innovation: "UVUMBUZI",
+      subtitle: "Kushirikiana na makampuni yanayotazama mbele ili",
+      transform: "kubadilisha uwepo wao wa kidijitali",
+      activeClients: "Wateja hai",
+      industries: "Viwanda",
+      retention: "Kuhifadhi",
+      support: "Msaada",
+      readyToJoin: "Tayari kujiunga na hawa",
+      innovativeCompanies: "makampuni ya uvumbuzi",
+      startPartnership: "Anza Ushirikiano Wako",
+      activePartner: "Mshirika hai"
     }
   };
 
-  const t = translations.en;
+  // Use dynamic translation based on current language
+  const t = translations[language as Language] || translations.en;
 
-  // Real partners data
-  const partners = [
-    { 
-      id: 1, 
-      name: "Amka Kijana Foundation", 
-      logo: "AK", 
-      industry: "Healthcare",
-      description: "Reproductive health and mental health education for youth"
-    },
-    { 
-      id: 2, 
-      name: "KKKT Church Yombo", 
-      logo: "KY", 
-      industry: "Religious",
-      description: "Lutheran Church in Dar es Salaam"
-    },
-    { 
-      id: 3, 
-      name: "Ubuntu O House", 
-      logo: "UO", 
-      industry: "Technology",
-      description: "Technology company in Dar es Salaam"
-    },
-    { 
-      id: 4, 
-      name: "LubeJunction", 
-      logo: "LJ", 
-      industry: "Automotive",
-      description: "Lubricants for machines and automobiles"
-    },
-    { 
-      id: 5, 
-      name: "Raha Energise", 
-      logo: "RE", 
-      industry: "Industrial",
-      description: "Lubricants for machines"
-    },
-    { 
-      id: 6, 
-      name: "Future Holders Company", 
-      logo: "FH", 
-      industry: "Marketing",
-      description: "Marketing company in Dar es Salaam"
-    },
-    { 
-      id: 7, 
-      name: "Fourfreyn Company", 
-      logo: "FF", 
-      industry: "Agriculture",
-      description: "Agriculture implements in Dar es Salaam"
-    },
-  ];
+  // Real partners data with translations
+  const partnersData = {
+    en: [
+      { 
+        id: 1, 
+        name: "Amka Kijana Foundation", 
+        logo: "AK", 
+        industry: "Healthcare",
+        description: "Reproductive health and mental health education for youth"
+      },
+      { 
+        id: 2, 
+        name: "KKKT Church Yombo", 
+        logo: "KY", 
+        industry: "Religious",
+        description: "Lutheran Church in Dar es Salaam"
+      },
+      { 
+        id: 3, 
+        name: "Ubuntu O House", 
+        logo: "UO", 
+        industry: "Technology",
+        description: "Technology company in Dar es Salaam"
+      },
+      { 
+        id: 4, 
+        name: "LubeJunction", 
+        logo: "LJ", 
+        industry: "Automotive",
+        description: "Lubricants for machines and automobiles"
+      },
+      { 
+        id: 5, 
+        name: "Raha Energise", 
+        logo: "RE", 
+        industry: "Industrial",
+        description: "Lubricants for machines"
+      },
+      { 
+        id: 6, 
+        name: "Future Holders Company", 
+        logo: "FH", 
+        industry: "Marketing",
+        description: "Marketing company in Dar es Salaam"
+      },
+      { 
+        id: 7, 
+        name: "Fourfreyn Company", 
+        logo: "FF", 
+        industry: "Agriculture",
+        description: "Agriculture implements in Dar es Salaam"
+      },
+    ],
+    sw: [
+      { 
+        id: 1, 
+        name: "Amka Kijana Foundation", 
+        logo: "AK", 
+        industry: "Afya",
+        description: "Elimu ya afya ya uzazi na afya ya akili kwa vijana"
+      },
+      { 
+        id: 2, 
+        name: "KKKT Church Yombo", 
+        logo: "KY", 
+        industry: "Kidini",
+        description: "Kanisa la Kilutheri huko Dar es Salaam"
+      },
+      { 
+        id: 3, 
+        name: "Ubuntu O House", 
+        logo: "UO", 
+        industry: "Teknolojia",
+        description: "Kampuni ya teknolojia huko Dar es Salaam"
+      },
+      { 
+        id: 4, 
+        name: "LubeJunction", 
+        logo: "LJ", 
+        industry: "Magari",
+        description: "Mafuta ya mashine na magari"
+      },
+      { 
+        id: 5, 
+        name: "Raha Energise", 
+        logo: "RE", 
+        industry: "Viwanda",
+        description: "Mafuta ya mashine"
+      },
+      { 
+        id: 6, 
+        name: "Future Holders Company", 
+        logo: "FH", 
+        industry: "Uuzaji",
+        description: "Kampuni ya uuzaji huko Dar es Salaam"
+      },
+      { 
+        id: 7, 
+        name: "Fourfreyn Company", 
+        logo: "FF", 
+        industry: "Kilimo",
+        description: "Vifaa vya kilimo huko Dar es Salaam"
+      },
+    ]
+  };
+
+  const partners = partnersData[language as 'en' | 'sw'] || partnersData.en;
 
   return (
     <>
@@ -404,7 +492,7 @@ const PartnersBanner = () => {
                     <div className="flex items-center justify-center mt-3 sm:mt-4 pt-2 sm:pt-3 border-t border-gray-700">
                       <div className="w-2 h-2 sm:w-3 sm:h-3 bg-gradient-to-r from-emerald-400 to-cyan-400 rounded-full mr-2 pulse-glow"></div>
                       <span className="text-xs text-gray-500 font-medium uppercase tracking-wider">
-                        Active Partner
+                        {t.activePartner}
                       </span>
                     </div>
                   </div>
@@ -446,7 +534,7 @@ const PartnersBanner = () => {
                     <div className="flex items-center justify-center mt-3 sm:mt-4 pt-2 sm:pt-3 border-t border-gray-700">
                       <div className="w-2 h-2 sm:w-3 sm:h-3 bg-gradient-to-r from-emerald-400 to-cyan-400 rounded-full mr-2 pulse-glow"></div>
                       <span className="text-xs text-gray-500 font-medium uppercase tracking-wider">
-                        Active Partner
+                        {t.activePartner}
                       </span>
                     </div>
                   </div>
