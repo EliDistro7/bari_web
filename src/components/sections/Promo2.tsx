@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Globe, Smartphone, Database, BarChart3, FileText, TrendingUp, DollarSign, Users, Target, Award, Zap, Crown, RotateCcw } from 'lucide-react';
+import { useLanguage } from '@/context/language';
 
 interface Service {
   icon: React.ElementType;
@@ -18,7 +19,7 @@ interface Service {
 const PromoVideo: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [currentScene, setCurrentScene] = useState(0);
-  const [language, setLanguage] = useState<'en' | 'sw'>('sw');
+  const {language}= useLanguage();
   const [dimensions, setDimensions] = useState({ width: 800, height: 1200 });
   
   const services: Service[] = [
@@ -475,9 +476,7 @@ const PromoVideo: React.FC = () => {
     setCurrentScene(0);
   };
 
-  const toggleLanguage = () => {
-    setLanguage(language === 'en' ? 'sw' : 'en');
-  };
+ 
 
   return (
     <div className="w-full min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 p-4 px-0 lg:p-8 relative overflow-hidden">
