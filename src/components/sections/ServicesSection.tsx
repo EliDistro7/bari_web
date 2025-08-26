@@ -1,20 +1,18 @@
 import React, { useState } from 'react';
 import { Globe, Smartphone, Database, BarChart3, Zap, Shield, Clock, TrendingUp, X, ExternalLink, MessageCircle, FileText, Play } from 'lucide-react';
-import { services } from './services';
+import { servicesTranslations } from './services';
+import { useLanguage } from '@/context/language';
 import PromoVideo from './Promo2';
 
-type Service = typeof services[number];
-
-const benefits = [
-  { icon: Zap, title: "Fast Delivery", desc: "MVP in 4-6 weeks" },
-  { icon: Shield, title: "Secure & Reliable", desc: "Enterprise-grade security" },
-  { icon: Clock, title: "24/7 Support", desc: "Ongoing maintenance" },
-  { icon: TrendingUp, title: "Scalable Solutions", desc: "Growth-ready architecture" }
-];
-
 const ServicesSection = () => {
-  const [selectedService, setSelectedService] = useState<Service | null>(null);
+  const { language } = useLanguage();
+  const [selectedService, setSelectedService] = useState<any>(null);
   const [showPromoVideo, setShowPromoVideo] = useState(false);
+
+  // Get translations based on current language
+  const t = servicesTranslations[language as keyof typeof servicesTranslations];
+  const services = t.services;
+  const benefits = t.benefits;
 
   const openWhatsApp = () => {
     const message = "Hi! I'm interested in learning more about your development services. Could you please provide more information?";
@@ -232,25 +230,22 @@ const ServicesSection = () => {
             <div className="inline-block mb-6">
               <div className="benefit-card px-6 py-3 rounded-full">
                 <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent font-semibold text-sm uppercase tracking-wider">
-                  Premium Services
+                  {t.premiumServices}
                 </span>
               </div>
             </div>
             
             <h2 className="text-5xl md:text-6xl font-black text-white mb-6 neon-text-service">
-              SOLUTIONS THAT
+              {t.sectionTitle}
               <span className="block bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-                SCALE WITH YOU
+                {t.sectionSubtitle}
               </span>
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto font-light">
-              From concept to deployment, I provide 
-              <span className="text-transparent bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text font-semibold"> end-to-end development services</span> that transform your business
+              {t.sectionDescription}
+              <span className="text-transparent bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text font-semibold"> {t.sectionDescriptionHighlight}</span> {t.sectionDescriptionEnd}
             </p>
           </div>
-
-          {/* Promo Video Showcase */}
-     
 
           {/* Services Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 mb-20">
@@ -295,7 +290,7 @@ const ServicesSection = () => {
 
                 {/* Learn More Button */}
                 <button className="w-full bg-gradient-to-r from-cyan-500/20 to-purple-600/20 text-cyan-400 px-4 py-2 rounded-lg font-medium text-sm border border-cyan-400/30 hover:bg-gradient-to-r hover:from-cyan-500/30 hover:to-purple-600/30 transition-all flex items-center justify-center">
-                  Learn More
+                  {t.learnMore}
                   <ExternalLink className="w-4 h-4 ml-2" />
                 </button>
               </div>
@@ -308,7 +303,11 @@ const ServicesSection = () => {
               <div key={index} className="benefit-card rounded-2xl p-6 text-center">
                 <div className="flex justify-center mb-4">
                   <div className={`w-12 h-12 bg-gradient-to-br from-cyan-400 to-purple-400 rounded-xl flex items-center justify-center`}>
-                    <benefit.icon className="w-6 h-6 text-white" />
+                    {/* Icons for benefits - using static icons since benefits structure doesn't include icon property */}
+                    {index === 0 && <Zap className="w-6 h-6 text-white" />}
+                    {index === 1 && <Shield className="w-6 h-6 text-white" />}
+                    {index === 2 && <Clock className="w-6 h-6 text-white" />}
+                    {index === 3 && <TrendingUp className="w-6 h-6 text-white" />}
                   </div>
                 </div>
                 <h4 className="text-lg font-bold text-white mb-2">{benefit.title}</h4>
@@ -320,15 +319,15 @@ const ServicesSection = () => {
           {/* CTA */}
           <div className="text-center">
             <p className="text-gray-300 mb-8 text-lg font-light">
-              Ready to transform your business with 
-              <span className="text-transparent bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text font-semibold"> cutting-edge technology</span>?
+              {t.ctaDescription}
+              <span className="text-transparent bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text font-semibold"> {t.ctaDescriptionHighlight}</span>?
             </p>
             <button 
               onClick={openWhatsApp}
               className="group relative bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-10 py-5 rounded-2xl font-semibold text-lg overflow-hidden transition-all duration-300 hover:scale-105 pulse-glow-service"
             >
               <span className="relative z-10 flex items-center">
-                Discuss Your Project
+                {t.ctaButton}
                 <MessageCircle className="w-5 h-5 ml-3 group-hover:translate-x-1 transition-transform" />
               </span>
               <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -348,11 +347,7 @@ const ServicesSection = () => {
         </div>
 
         {/* Promo Video Modal */}
-
-                <PromoVideo />
-            
-   
-  
+        <PromoVideo />
 
         {/* Service Detail Modal */}
         {selectedService && (
@@ -385,10 +380,10 @@ const ServicesSection = () => {
               <div className="mb-8">
                 <h3 className="text-2xl font-bold text-white mb-4 flex items-center">
                   <Zap className="w-6 h-6 mr-3 text-cyan-400" />
-                  Who Needs This Service?
+                  {t.whoNeedsTitle}
                 </h3>
                 <div className="grid md:grid-cols-2 gap-4">
-                  {selectedService.whoNeedsIt.map((item, index) => (
+                  {selectedService.whoNeedsIt.map((item: string, index: number) => (
                     <div key={index} className="flex items-center text-gray-300">
                       <div className="w-2 h-2 bg-gradient-to-r from-cyan-400 to-purple-400 rounded-full mr-3"></div>
                       {item}
@@ -401,10 +396,10 @@ const ServicesSection = () => {
               <div className="mb-8">
                 <h3 className="text-2xl font-bold text-white mb-4 flex items-center">
                   <TrendingUp className="w-6 h-6 mr-3 text-purple-400" />
-                  Business Challenges We Solve
+                  {t.challengesTitle}
                 </h3>
                 <div className="space-y-3">
-                  {selectedService.businessChallenges.map((challenge, index) => (
+                  {selectedService.businessChallenges.map((challenge:string, index:number) => (
                     <div key={index} className="flex items-start text-gray-300">
                       <div className="w-2 h-2 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full mr-3 mt-2 flex-shrink-0"></div>
                       <span>{challenge}</span>
@@ -417,10 +412,10 @@ const ServicesSection = () => {
               <div className="mb-8">
                 <h3 className="text-2xl font-bold text-white mb-4 flex items-center">
                   <Shield className="w-6 h-6 mr-3 text-emerald-400" />
-                  Key Features & Technologies
+                  {t.featuresTitle}
                 </h3>
                 <div className="flex flex-wrap gap-3">
-                  {selectedService.features.map((feature, index) => (
+                  {selectedService.features.map((feature:string, index:number) => (
                     <div key={index} className="feature-badge px-4 py-2 rounded-lg">
                       <span className="text-white font-medium">{feature}</span>
                     </div>
@@ -432,10 +427,10 @@ const ServicesSection = () => {
               <div className="mb-8">
                 <h3 className="text-2xl font-bold text-white mb-6 flex items-center">
                   <BarChart3 className="w-6 h-6 mr-3 text-pink-400" />
-                  Complete Guide & Benefits
+                  {t.guideTitle}
                 </h3>
                 <div className="text-gray-300 leading-relaxed space-y-4">
-                  {selectedService.detailedDescription.split('\n').map((paragraph, index) => {
+                  {selectedService.detailedDescription.split('\n').map((paragraph:string, index:number) => {
                     if (paragraph.trim() === '') return null;
                     
                     if (paragraph.startsWith('**') && paragraph.endsWith('**')) {
@@ -471,13 +466,13 @@ const ServicesSection = () => {
                   className="flex-1 bg-gradient-to-r from-green-500 to-green-600 text-white px-6 py-4 rounded-xl font-semibold transition-all duration-300 hover:scale-105 flex items-center justify-center"
                 >
                   <MessageCircle className="w-5 h-5 mr-2" />
-                  Discuss This Service
+                  {t.discussButton}
                 </button>
                 <button
                   onClick={() => setSelectedService(null)}
                   className="flex-1 bg-gradient-to-r from-gray-600 to-gray-700 text-white px-6 py-4 rounded-xl font-semibold transition-all duration-300 hover:scale-105"
                 >
-                  View Other Services
+                  {t.otherServicesButton}
                 </button>
               </div>
             </div>

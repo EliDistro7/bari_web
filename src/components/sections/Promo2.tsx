@@ -25,9 +25,9 @@ const PromoVideo: React.FC = () => {
     {
       icon: Globe,
       titleEn: "WEB APPLICATIONS",
-      titleSw: "PROGRAMU ZA WAVUTI",
+      titleSw: "Web Applications",
       descEn: "Transform your business with powerful web solutions",
-      descSw: "Badilisha biashara yako kwa mifumo ya mtandao",
+      descSw: "Ongeza thamani ya biashara yako kwa kuifungulia tovuti",
       color: "#00D4FF", // Cyan
       features: ["REAL-TIME PROCESSING", "AUTOMATED WORKFLOWS", "CUSTOMER PORTALS", "BUSINESS INTELLIGENCE"],
       businessValue: "300% EFFICIENCY BOOST",
@@ -38,54 +38,54 @@ const PromoVideo: React.FC = () => {
     {
       icon: FileText,
       titleEn: "PROFESSIONAL WEBSITES", 
-      titleSw: "TOVUTI ZA KITAALAMU",
+      titleSw: "PROFESSIONAL WEBSITES",
       descEn: "Lightning-fast websites that convert visitors to customers",
-      descSw: "Tovuti za haraka zinazobadilisha wageni kuwa wateja",
+      descSw: "Tovuti za haraka zinazomshawishiwishi mtmbeleaji kuwa mteja",
       color: "#00FF41", // Electric green
       features: ["LIGHTNING SPEED", "SEO OPTIMIZED", "MOBILE RESPONSIVE", "EASY MAINTENANCE"],
       businessValue: "50% MORE CUSTOMERS FROM GOOGLE",
       businessValueSw: "WATEJA 50% ZAIDI KUTOKA GOOGLE",
       guaranteeEn: "TOP GOOGLE RANKINGS GUARANTEED!",
-      guaranteeSw: "NAFASI YA JUU GOOGLE IMEDHAMINIWA!"
+      guaranteeSw: "NAFASI YA JUU KWENYE GOOGLE SEO!"
     },
     {
       icon: Smartphone,
       titleEn: "MOBILE APPLICATIONS",
-      titleSw: "PROGRAMU ZA SIMU",
+      titleSw: "MOBILE APPS",
       descEn: "Reach customers everywhere with powerful mobile apps",
-      descSw: "Wafikia wateja kila mahali kwa programu za simu",
+      descSw: "Wafikie wateja kirahisi kwa kutengeneza app ya biashara yako",
       color: "#FF6B35", // Orange
       features: ["PUSH NOTIFICATIONS", "OFFLINE CAPABILITY", "NATIVE PERFORMANCE", "APP STORE READY"],
       businessValue: "200% CUSTOMER ENGAGEMENT",
-      businessValueSw: "USHIRIKI WA WATEJA 200%",
+      businessValueSw: "KUONGEZA UKARIBU NA WATEJA 200%",
       guaranteeEn: "VIRAL APP SUCCESS OR REFUND!",
       guaranteeSw: "MAFANIKIO YA APP AU MALIPO!"
     },
     {
       icon: Database,
       titleEn: "SYSTEM INTEGRATION",
-      titleSw: "MUUNGANISHO WA MIFUMO",
+      titleSw: "KUUNGANISHA MIFUMO",
       descEn: "Connect all your systems for seamless operations",
-      descSw: "Unganisha mifumo yako yote kwa uendeshaji mzuri",
+      descSw: "Unganisha mifumo yako yote kwa uendeshaji BORA",
       color: "#8B5CF6", // Purple
       features: ["AUTOMATED DATA FLOW", "ELIMINATE MANUAL WORK", "REAL-TIME SYNC", "ERROR REDUCTION"],
       businessValue: "80% LESS MANUAL WORK",
-      businessValueSw: "PUNGUZA KAZI YA MKONO 80%",
+      businessValueSw: "PUNGUZA PAPERWORK",
       guaranteeEn: "SEAMLESS INTEGRATION GUARANTEED!",
-      guaranteeSw: "MUUNGANISHO MZURI UMEDHAMINIWA!"
+      guaranteeSw: "MUUNGANISHO BORA!"
     },
     {
       icon: BarChart3,
       titleEn: "BUSINESS INTELLIGENCE",
-      titleSw: "AKILI YA BIASHARA", 
+      titleSw: "BUSINESS INTELLIGENCE", 
       descEn: "Transform data into powerful business insights",
       descSw: "Badilisha data kuwa maarifa ya biashara",
       color: "#10B981", // Emerald
       features: ["REAL-TIME DASHBOARDS", "PREDICTIVE ANALYTICS", "DATA VISUALIZATION", "SMART REPORTS"],
       businessValue: "MAKE DECISIONS 10X FASTER",
-      businessValueSw: "FANYA MAAMUZI HARAKA MARA 10",
+      businessValueSw: "FANYA MAAMUZI HARAKA MARA 10 ZAIDI",
       guaranteeEn: "CRYSTAL CLEAR INSIGHTS OR FREE!",
-      guaranteeSw: "MAARIFA WAZI AU BURE!"
+      guaranteeSw: "MAARIFA WAZI KUHUSU BIASHARA YAKO!"
     }
   ];
 
@@ -274,7 +274,7 @@ const PromoVideo: React.FC = () => {
       ctx.shadowBlur = 20;
       
       const tagline = language === 'sw' 
-        ? 'SULUHISHO ZA TEKNOLOJIA ZA KISASA'
+        ? 'SULUTIONS ZA TEKNOLOJIA ZA KISASA'
         : 'CUTTING-EDGE TECHNOLOGY SOLUTIONS';
       ctx.fillText(tagline, centerX, centerY - 15);
       ctx.restore();
