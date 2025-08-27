@@ -32,6 +32,7 @@ import ServicesSection from '@/components/sections/ServicesSection';
 import ProjectShowcase from '@/components/sections/ProjectShowcase';
 import PartnersBanner from '@/components/sections/Partner';
 import PromoVideo from '@/components/sections/Promo2';
+import Map from '@/components/sections/Map';
 
 const Portfolio = () => {
   const [activeProject, setActiveProject] = useState(0);
@@ -129,6 +130,7 @@ const Portfolio = () => {
 
       {/* Consultation CTA */}
        <ConsultationCTA />
+       <Map />
 
       {/* Footer */}
      <Footer />
