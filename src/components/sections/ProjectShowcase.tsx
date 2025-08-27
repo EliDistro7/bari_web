@@ -411,22 +411,22 @@ const ProjectsShowcase = () => {
           </div>
 
           {/* Enhanced Projects Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10 ">
             {filteredProjects.map((project, index) => {
               const TypeIcon = getTypeIcon(project.type);
               const ProjectIcon = project.icon;
               return (
                 <div
                   key={project.id}
-                  className="project-card-3d rounded-3xl p-8 shadow-2xl"
+                  className="project-card-3d rounded-3xl p-8 px-0 shadow-2xl"
                   style={{animationDelay: `${index * 0.15}s`}}
                 >
                   {/* Enhanced Project Image */}
-                  <div className="relative mb-8 rounded-2xl overflow-hidden project-image">
+                  <div className="relative mb-8 overflow-hidden project-image">
                     <img 
                       src={project.image} 
                       alt={project.title}
-                      className="w-full h-52 object-cover"
+                      className="w-full h-96 object-cover"
                       loading="lazy"
                     />
                     <div className="absolute inset-0 image-overlay flex items-center justify-center">
@@ -451,16 +451,16 @@ const ProjectsShowcase = () => {
                   </div>
 
                   {/* Enhanced Project Title & Description */}
-                  <h3 className="text-2xl md:text-3xl font-black text-white mb-4 neon-text-bold leading-tight">
+                  <h3 className="text-2xl md:text-3xl font-black px-8 text-white mb-4 neon-text-bold leading-tight">
                     {project.title}
                   </h3>
-                  <p className="text-gray-300 mb-8 leading-relaxed text-base font-medium">
+                  <p className="text-gray-300 mb-8 leading-relaxed px-8 text-base font-medium">
                     {project.description}
                   </p>
 
                   {/* Enhanced Progress Bar */}
                   {project.progress && (
-                    <div className="mb-8">
+                    <div className="mb-8 px-8">
                       <div className="flex justify-between items-center mb-3">
                         <span className="text-base text-gray-300 font-semibold">{t.progress}</span>
                         <span className="text-base font-black text-white bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">{project.progress}%</span>
@@ -475,7 +475,7 @@ const ProjectsShowcase = () => {
                   )}
 
                   {/* Enhanced Tech Stack */}
-                  <div className="flex flex-wrap gap-3 mb-8">
+                  <div className="flex flex-wrap gap-3 mb-8 px-8">
                     {project.tech.map((tech, techIndex) => (
                       <span 
                         key={techIndex} 
@@ -487,10 +487,10 @@ const ProjectsShowcase = () => {
                   </div>
 
                   {/* Enhanced Status */}
-                  <p className="text-base credibility-boost mb-8 font-black tracking-wide">{project.status}</p>
+                  <p className="text-base credibility-boost mb-8 px-8 font-black tracking-wide">{project.status}</p>
 
                   {/* Enhanced Action Buttons */}
-                  <div className="flex space-x-4">
+                  <div className="flex space-x-4 px-8">
                     {project.liveUrl && (
                       <a 
                         href={project.liveUrl} 
