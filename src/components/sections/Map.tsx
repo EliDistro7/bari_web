@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { MapPin, Navigation, ExternalLink, Maximize2, Minimize2 } from 'lucide-react';
+import { useLanguage } from '@/context/language';
 
 type Language = 'eng' | 'sw';
 
@@ -21,7 +22,7 @@ type Translation = {
 
 const MapEmbed: React.FC = () => {
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const [language, setLanguage] = useState<Language>('sw'); // Default to Swahili
+  const { language } = useLanguage();
 
   const translations: Record<Language, Translation> = {
     eng: {
@@ -56,7 +57,7 @@ const MapEmbed: React.FC = () => {
     }
   };
 
-  const t = translations[language];
+  const t = translations[language as Language];
 
   // Updated coordinates for the church location near Future Holders Company Limited
   const coordinates = {
@@ -79,9 +80,7 @@ const MapEmbed: React.FC = () => {
     setIsFullscreen(!isFullscreen);
   };
 
-  const toggleLanguage = () => {
-    setLanguage(language === 'eng' ? 'sw' : 'eng');
-  };
+
 
   return (
     <>
@@ -231,12 +230,7 @@ const MapEmbed: React.FC = () => {
                   <MapPin className="text-pink-400 icon-glow" size={32} />
                   {t.title}
                 </h2>
-                <button
-                  onClick={toggleLanguage}
-                  className="language-toggle px-4 py-2 rounded-lg text-sm font-medium"
-                >
-                  {language === 'eng' ? 'Kiswahili' : 'English'}
-                </button>
+              
               </div>
               <p className="text-gray-300 text-xl mb-2">{t.location}</p>
               <div className="coordinates-display inline-block px-4 py-2 rounded-lg">
