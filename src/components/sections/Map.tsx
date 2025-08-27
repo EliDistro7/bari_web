@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { MapPin, Navigation, ExternalLink, Maximize2, Minimize2 } from 'lucide-react';
 import { useLanguage } from '@/context/language';
 
-type Language = 'eng' | 'sw';
+type Language = 'en' | 'sw';
 
 type Translation = {
   title: string;
@@ -25,7 +25,7 @@ const MapEmbed: React.FC = () => {
   const { language } = useLanguage();
 
   const translations: Record<Language, Translation> = {
-    eng: {
+    en: {
       title: "My Location",
       location: "Yombo Kwa Limboa, Dar es Salaam, Tanzania",
       address: "Yombo Kwa Limboa, Dar es Salaam, Tanzania",
@@ -230,7 +230,7 @@ const MapEmbed: React.FC = () => {
                   <MapPin className="text-pink-400 icon-glow" size={32} />
                   {t.title}
                 </h2>
-              
+               
               </div>
               <p className="text-gray-300 text-xl mb-2">{t.location}</p>
               <div className="coordinates-display inline-block px-4 py-2 rounded-lg">
