@@ -115,11 +115,12 @@ const Portfolio = () => {
 
       {/* Hero Section */}
      <HeroSection />
+      {/* Interactive Project Showcase */}
+      <ProjectShowcase />
    
     <PartnersBanner />
 
-      {/* Interactive Project Showcase */}
-      <ProjectShowcase />
+     
     
 
       {/* Services Section */}

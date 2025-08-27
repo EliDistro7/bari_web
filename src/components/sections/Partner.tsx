@@ -2,583 +2,327 @@ import React from 'react';
 import { useLanguage } from '@/context/language';
 
 const PartnersBanner = () => {
- 
   const {language} = useLanguage();
 
   type Language = 'en' | 'sw';
   type Translation = {
     trustedPartners: string;
-    powering: string;
-    innovation: string;
     subtitle: string;
-    transform: string;
     activeClients: string;
     industries: string;
     retention: string;
     support: string;
-    readyToJoin: string;
-    innovativeCompanies: string;
     startPartnership: string;
-    activePartner: string;
   };
+
   const translations: Record<Language, Translation> = {
     en: {
       trustedPartners: "Trusted Partners",
-      powering: "POWERING",
-      innovation: "INNOVATION",
-      subtitle: "Collaborating with forward-thinking companies to",
-      transform: "transform their digital presence",
+      subtitle: "Collaborating with forward-thinking companies to transform their digital presence",
       activeClients: "Active Clients",
       industries: "Industries",
       retention: "Retention",
       support: "Support",
-      readyToJoin: "Ready to join these",
-      innovativeCompanies: "innovative companies",
-      startPartnership: "Start Your Partnership",
-      activePartner: "Active Partner"
+      startPartnership: "Start Your Partnership"
     },
     sw: {
       trustedPartners: "Washirika wa Kuaminika",
-      powering: "KUENDESHA",
-      innovation: "UVUMBUZI",
-      subtitle: "Kushirikiana na makampuni yanayotazama mbele ili",
-      transform: "kubadilisha uwepo wao wa kidijitali",
+      subtitle: "Kushirikiana na makampuni yanayotazama mbele ili kubadilisha uwepo wao wa kidijitali",
       activeClients: "Wateja hai",
       industries: "Viwanda",
       retention: "Kuhifadhi",
       support: "Msaada",
-      readyToJoin: "Tayari kujiunga na hawa",
-      innovativeCompanies: "makampuni ya uvumbuzi",
-      startPartnership: "Anza Ushirikiano Wako",
-      activePartner: "Mshirika hai"
+      startPartnership: "Anza Ushirikiano Wako"
     }
   };
 
-  // Use dynamic translation based on current language
   const t = translations[language as Language] || translations.en;
 
-  // Real partners data with translations
   const partnersData = {
     en: [
       { 
         id: 1, 
         name: "Amka Kijana Foundation", 
-        logo: "AK", 
+        logo: "AK",
+        logoImage: "/images/partners/amka.png",
         industry: "Healthcare",
-        description: "Reproductive health and mental health education for youth"
+        color: "from-emerald-500 to-teal-600"
       },
       { 
         id: 2, 
         name: "KKKT Church Yombo", 
-        logo: "KY", 
+        logo: "KY",
+        logoImage: "/images/partners/lutherRose.jpg",
         industry: "Religious",
-        description: "Lutheran Church in Dar es Salaam"
+        color: "from-blue-500 to-indigo-600"
       },
       { 
         id: 3, 
         name: "Ubuntu O House", 
-        logo: "UO", 
+        logo: "UO",
+        logoImage: "/images/partners/ubuntu.jpeg",
         industry: "Technology",
-        description: "Technology company in Dar es Salaam"
+        color: "from-purple-500 to-violet-600"
       },
       { 
         id: 4, 
         name: "LubeJunction", 
-        logo: "LJ", 
+        logo: "LJ",
+        logoImage: "/images/partners/lube.jpg",
         industry: "Automotive",
-        description: "Lubricants for machines and automobiles"
+        color: "from-orange-500 to-red-600"
       },
       { 
         id: 5, 
         name: "Raha Energise", 
-        logo: "RE", 
+        logo: "RE",
+        logoImage: "/images/partners/raha-energise-logo.png",
         industry: "Industrial",
-        description: "Lubricants for machines"
+        color: "from-yellow-500 to-amber-600"
       },
       { 
         id: 6, 
         name: "Future Holders Company", 
-        logo: "FH", 
+        logo: "FH",
+        logoImage: "/images/partners/fh.png",
         industry: "Marketing",
-        description: "Marketing company in Dar es Salaam"
+        color: "from-pink-500 to-rose-600"
       },
       { 
         id: 7, 
         name: "Fourfreyn Company", 
-        logo: "FF", 
+        logo: "FF",
+        logoImage: "/images/partners/fourfreyn-logo.png",
         industry: "Agriculture",
-        description: "Agriculture implements in Dar es Salaam"
+        color: "from-green-500 to-emerald-600"
       },
     ],
     sw: [
       { 
         id: 1, 
         name: "Amka Kijana Foundation", 
-        logo: "AK", 
+        logo: "AK",
+        logoImage: "/images/partners/amka.png",
         industry: "Afya",
-        description: "Elimu ya afya ya uzazi na afya ya akili kwa vijana"
+        color: "from-emerald-500 to-teal-600"
       },
       { 
         id: 2, 
         name: "KKKT Church Yombo", 
-        logo: "KY", 
+        logo: "KY",
+        logoImage: "/images/partners/lutherRose.jpg",
         industry: "Kidini",
-        description: "Kanisa la Kilutheri huko Dar es Salaam"
+        color: "from-blue-500 to-indigo-600"
       },
       { 
         id: 3, 
         name: "Ubuntu O House", 
-        logo: "UO", 
+        logo: "UO",
+        logoImage: "/images/partners/ubuntu.jpeg",
         industry: "Teknolojia",
-        description: "Kampuni ya teknolojia huko Dar es Salaam"
+        color: "from-purple-500 to-violet-600"
       },
       { 
         id: 4, 
         name: "LubeJunction", 
-        logo: "LJ", 
+        logo: "LJ",
+        logoImage: "/images/partners/lube.jpg",
         industry: "Magari",
-        description: "Mafuta ya mashine na magari"
+        color: "from-orange-500 to-red-600"
       },
       { 
         id: 5, 
         name: "Raha Energise", 
-        logo: "RE", 
+        logo: "RE",
+        logoImage: "/images/partners/raha-energise-logo.png",
         industry: "Viwanda",
-        description: "Mafuta ya mashine"
+        color: "from-yellow-500 to-amber-600"
       },
       { 
         id: 6, 
         name: "Future Holders Company", 
-        logo: "FH", 
+        logo: "FH",
+        logoImage: "/images/partners/fh.png",
         industry: "Uuzaji",
-        description: "Kampuni ya uuzaji huko Dar es Salaam"
+        color: "from-pink-500 to-rose-600"
       },
       { 
         id: 7, 
         name: "Fourfreyn Company", 
-        logo: "FF", 
+        logo: "FF",
+        logoImage: "/images/partners/fourfreyn-logo.png",
         industry: "Kilimo",
-        description: "Vifaa vya kilimo huko Dar es Salaam"
+        color: "from-green-500 to-emerald-600"
       },
     ]
   };
 
   const partners = partnersData[language as 'en' | 'sw'] || partnersData.en;
 
+  type Partner = {
+    id: number;
+    name: string;
+    logo: string;
+    logoImage: string;
+    industry: string;
+    color: string;
+  };
+
+  const PartnerLogo = ({ partner }: { partner: Partner }) => {
+    const [imageError, setImageError] = React.useState(false);
+
+    const handleImageError = () => {
+      setImageError(true);
+    };
+
+    if (imageError || !partner.logoImage) {
+      return (
+        <div className={`w-16 h-16 bg-gradient-to-br ${partner.color} rounded-2xl flex items-center justify-center shadow-lg`}>
+          <span className="text-white font-black text-xl tracking-tight">
+            {partner.logo}
+          </span>
+        </div>
+      );
+    }
+
+    return (
+      <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-lg p-2 border border-gray-100">
+        <img
+          src={partner.logoImage}
+          alt={`${partner.name} logo`}
+          className="w-full h-full object-contain"
+          onError={handleImageError}
+        />
+      </div>
+    );
+  };
+
+  const StatsCard = ({ value, label, color, delay }: { value: string; label: string; color: string; delay: string }) => (
+    <div className={`group bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 p-6 hover:bg-white/15 hover:border-white/30 hover:scale-105 transform transition-all duration-500 ${delay} hover:shadow-2xl hover:shadow-cyan-500/10`}>
+      <div className={`text-4xl font-black ${color} mb-3 group-hover:scale-110 transition-transform duration-300`}>
+        {value}
+      </div>
+      <div className="text-gray-300 text-sm font-semibold uppercase tracking-wider">
+        {label}
+      </div>
+    </div>
+  );
+
   return (
-    <>
+    <section id='partners' className="py-24 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-cyan-500/20 rounded-full blur-3xl"></div>
+      </div>
+      
+      <div className="max-w-7xl mx-auto px-6 relative">
+        {/* Header */}
+        <div className="text-center mb-20 animate-fade-in">
+          <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 backdrop-blur-sm rounded-full mb-8 border border-white/20">
+            <span className="text-cyan-400 font-bold text-sm uppercase tracking-widest">
+              {t.trustedPartners}
+            </span>
+          </div>
+          
+          <h2 className="text-5xl md:text-7xl font-black text-white mb-8 bg-gradient-to-r from-white via-cyan-200 to-white bg-clip-text text-transparent">
+            Our Partners
+          </h2>
+          
+          <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed font-medium">
+            {t.subtitle}
+          </p>
+        </div>
+
+        {/* Partners Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-20">
+          {partners.map((partner, index) => (
+            <div
+              key={partner.id}
+              className={`group bg-white/10 backdrop-blur-md rounded-3xl border border-white/20 p-8 hover:bg-white/15 hover:border-white/30 hover:scale-105 hover:-translate-y-2 transform transition-all duration-500 hover:shadow-2xl hover:shadow-purple-500/20`}
+              style={{ animationDelay: `${index * 100}ms` }}
+            >
+              <div className="flex flex-col items-center text-center space-y-4">
+                <div className="group-hover:scale-110 transition-transform duration-300">
+                  <PartnerLogo partner={partner} />
+                </div>
+                
+                <div>
+                  <h3 className="font-bold text-white text-lg leading-tight mb-2 group-hover:text-cyan-300 transition-colors duration-300">
+                    {partner.name}
+                  </h3>
+                  <span className="inline-block px-3 py-1 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 text-cyan-400 text-sm font-semibold rounded-full border border-cyan-400/30">
+                    {partner.industry}
+                  </span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Stats */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto mb-20">
+          <StatsCard
+            value="7+"
+            label={t.activeClients}
+            color="text-cyan-400"
+            delay="animate-slide-up-1"
+          />
+          <StatsCard
+            value="6"
+            label={t.industries}
+            color="text-purple-400"
+            delay="animate-slide-up-2"
+          />
+          <StatsCard
+            value="98%"
+            label={t.retention}
+            color="text-emerald-400"
+            delay="animate-slide-up-3"
+          />
+          <StatsCard
+            value="24/7"
+            label={t.support}
+            color="text-pink-400"
+            delay="animate-slide-up-4"
+          />
+        </div>
+
+        {/* CTA */}
+        <div className="text-center">
+          <button className="group relative bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 text-white px-12 py-5 rounded-2xl font-bold text-xl hover:shadow-2xl hover:shadow-cyan-500/30 transition-all duration-300 hover:scale-105 hover:-translate-y-1 border-2 border-transparent hover:border-white/20">
+            <span className="relative z-10">{t.startPartnership}</span>
+            <div className="absolute inset-0 bg-gradient-to-r from-cyan-600 via-purple-600 to-pink-600 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          </button>
+        </div>
+      </div>
+
       <style jsx>{`
-        .marquee-row {
-          animation: marqueeLeft 12s linear infinite;
+        @keyframes fade-in {
+          from { opacity: 0; transform: translateY(30px); }
+          to { opacity: 1; transform: translateY(0); }
         }
-        
-        .marquee-row-reverse {
-          animation: marqueeRight 14s linear infinite;
+        @keyframes slide-up {
+          from { opacity: 0; transform: translateY(40px); }
+          to { opacity: 1; transform: translateY(0); }
         }
-        
-        .marquee-row:hover,
-        .marquee-row-reverse:hover {
-          animation-play-state: paused;
+        .animate-fade-in {
+          animation: fade-in 1s ease-out;
         }
-        
-        @keyframes marqueeLeft {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
+        .animate-slide-up-1 {
+          animation: slide-up 0.8s ease-out 0.1s both;
         }
-        
-        @keyframes marqueeRight {
-          0% { transform: translateX(-50%); }
-          100% { transform: translateX(0); }
+        .animate-slide-up-2 {
+          animation: slide-up 0.8s ease-out 0.2s both;
         }
-        
-        @media (max-width: 768px) {
-          .marquee-row {
-            animation: marqueeLeft 16s linear infinite;
-          }
-          
-          .marquee-row-reverse {
-            animation: marqueeRight 18s linear infinite;
-          }
+        .animate-slide-up-3 {
+          animation: slide-up 0.8s ease-out 0.3s both;
         }
-        
-        .partner-card-3d {
-          transform-style: preserve-3d;
-          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-          background: rgba(255, 255, 255, 0.08);
-          backdrop-filter: blur(25px);
-          border: 1px solid rgba(255, 255, 255, 0.15);
-          box-shadow: 
-            0 8px 32px rgba(0, 0, 0, 0.2),
-            inset 0 1px 0 rgba(255, 255, 255, 0.1);
-          flex-shrink: 0;
-        }
-        
-        .partner-card-3d:hover {
-          transform: translateY(-8px) rotateY(6deg) rotateX(3deg);
-          box-shadow: 
-            0 20px 40px rgba(0, 0, 0, 0.25),
-            0 0 25px rgba(102, 126, 234, 0.3),
-            0 0 40px rgba(118, 75, 162, 0.15),
-            inset 0 1px 0 rgba(255, 255, 255, 0.2);
-          border-color: rgba(102, 126, 234, 0.4);
-          background: rgba(255, 255, 255, 0.12);
-        }
-        
-        @media (max-width: 768px) {
-          .partner-card-3d:hover {
-            transform: translateY(-4px) rotateY(3deg) rotateX(2deg);
-            box-shadow: 
-              0 12px 24px rgba(0, 0, 0, 0.2),
-              0 0 20px rgba(102, 126, 234, 0.25),
-              inset 0 1px 0 rgba(255, 255, 255, 0.15);
-          }
-        }
-        
-        .logo-gradient-3d {
-          background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-          box-shadow: 
-            0 6px 12px rgba(102, 126, 234, 0.35),
-            inset 0 1px 0 rgba(255, 255, 255, 0.25),
-            inset 0 -1px 0 rgba(0, 0, 0, 0.1);
-          backdrop-filter: blur(10px);
-        }
-        
-        .floating-3d {
-          animation: float3d 6s ease-in-out infinite;
-          transform-style: preserve-3d;
-        }
-        
-        @keyframes float3d {
-          0%, 100% { 
-            transform: translateY(0px) translateZ(0px) rotateX(0deg) rotateY(0deg); 
-          }
-          25% { 
-            transform: translateY(-10px) translateZ(15px) rotateX(6deg) rotateY(8deg); 
-          }
-          50% { 
-            transform: translateY(-15px) translateZ(8px) rotateX(-3deg) rotateY(-6deg); 
-          }
-          75% { 
-            transform: translateY(-8px) translateZ(20px) rotateX(8deg) rotateY(4deg); 
-          }
-        }
-        
-        @media (max-width: 768px) {
-          .floating-3d {
-            animation: float3d-mobile 4s ease-in-out infinite;
-          }
-          
-          @keyframes float3d-mobile {
-            0%, 100% { 
-              transform: translateY(0px) translateZ(0px) rotateX(0deg) rotateY(0deg); 
-            }
-            25% { 
-              transform: translateY(-6px) translateZ(8px) rotateX(3deg) rotateY(4deg); 
-            }
-            50% { 
-              transform: translateY(-8px) translateZ(5px) rotateX(-2deg) rotateY(-3deg); 
-            }
-            75% { 
-              transform: translateY(-4px) translateZ(10px) rotateX(4deg) rotateY(2deg); 
-            }
-          }
-        }
-        
-        .pulse-glow {
-          animation: pulseGlow 3s ease-in-out infinite;
-        }
-        
-        @keyframes pulseGlow {
-          0%, 100% { 
-            box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
-            opacity: 1;
-          }
-          50% { 
-            box-shadow: 0 0 40px rgba(118, 75, 162, 0.5);
-            opacity: 0.8;
-          }
-        }
-        
-        .neon-text {
-          text-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
-        }
-        
-        .glass-stat {
-          background: rgba(255, 255, 255, 0.1);
-          backdrop-filter: blur(15px);
-          border: 1px solid rgba(255, 255, 255, 0.15);
-          box-shadow: 
-            0 4px 12px rgba(0, 0, 0, 0.15),
-            inset 0 1px 0 rgba(255, 255, 255, 0.1);
-          transition: all 0.3s ease;
-        }
-        
-        .glass-stat:hover {
-          background: rgba(255, 255, 255, 0.15);
-          transform: translateY(-4px);
-          box-shadow: 
-            0 8px 24px rgba(0, 0, 0, 0.2),
-            inset 0 1px 0 rgba(255, 255, 255, 0.15);
-        }
-        
-        .line-clamp-2 {
-          display: -webkit-box;
-          -webkit-line-clamp: 2;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-        }
-        
-        .scrolling-container {
-          overflow: hidden;
-          mask-image: linear-gradient(
-            to right, 
-            transparent 0%, 
-            black 5%, 
-            black 95%, 
-            transparent 100%
-          );
-          -webkit-mask-image: linear-gradient(
-            to right, 
-            transparent 0%, 
-            black 5%, 
-            black 95%, 
-            transparent 100%
-          );
-        }
-        
-        @media (max-width: 768px) {
-          .scrolling-container {
-            mask-image: linear-gradient(
-              to right, 
-              transparent 0%, 
-              black 3%, 
-              black 97%, 
-              transparent 100%
-            );
-            -webkit-mask-image: linear-gradient(
-              to right, 
-              transparent 0%, 
-              black 3%, 
-              black 97%, 
-              transparent 100%
-            );
-          }
+        .animate-slide-up-4 {
+          animation: slide-up 0.8s ease-out 0.4s both;
         }
       `}</style>
-
-      <section className="relative py-24 overflow-hidden">
-        {/* 3D Background Grid */}
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900"></div>
-        <div className="absolute inset-0 opacity-20">
-          <svg width="100%" height="100%" className="absolute inset-0">
-            <defs>
-              <pattern id="grid3d" width="100" height="100" patternUnits="userSpaceOnUse">
-                <path d="M 100 0 L 0 0 0 100" fill="none" stroke="url(#gridGradient)" strokeWidth="1" opacity="0.3"/>
-              </pattern>
-              <linearGradient id="gridGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" style={{stopColor: '#667eea', stopOpacity: 1}} />
-                <stop offset="50%" style={{stopColor: '#764ba2', stopOpacity: 0.8}} />
-                <stop offset="100%" style={{stopColor: '#f093fb', stopOpacity: 0.6}} />
-              </linearGradient>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#grid3d)" transform="perspective(1000px) rotateX(60deg)" />
-          </svg>
-        </div>
-        
-        {/* 3D Geometric Shapes */}
-        <div className="absolute inset-0">
-          {/* Large 3D Cubes */}
-          <div className="absolute top-20 left-10 w-32 h-32 opacity-10 floating-3d" style={{animationDelay: '0s'}}>
-            <div className="w-full h-full bg-gradient-to-br from-cyan-400 to-blue-500 transform rotate-45 rounded-lg shadow-2xl" 
-                 style={{transform: 'rotateX(45deg) rotateY(45deg) rotateZ(15deg)'}}></div>
-          </div>
-          
-          <div className="absolute top-1/3 right-20 w-24 h-24 opacity-15 floating-3d" style={{animationDelay: '2s'}}>
-            <div className="w-full h-full bg-gradient-to-br from-purple-400 to-pink-400 transform rounded-xl shadow-2xl" 
-                 style={{transform: 'rotateX(30deg) rotateY(60deg) rotateZ(-20deg)'}}></div>
-          </div>
-          
-          <div className="absolute bottom-32 left-1/4 w-20 h-20 opacity-20 floating-3d" style={{animationDelay: '4s'}}>
-            <div className="w-full h-full bg-gradient-to-br from-emerald-400 to-cyan-400 transform rounded-lg shadow-2xl" 
-                 style={{transform: 'rotateX(60deg) rotateY(30deg) rotateZ(45deg)'}}></div>
-          </div>
-          
-          {/* 3D Wireframe Elements */}
-          <div className="absolute top-1/2 left-1/2 w-40 h-40 opacity-5 floating-3d" style={{animationDelay: '1s', transform: 'translate(-50%, -50%)'}}>
-            <div className="w-full h-full border-2 border-cyan-400 transform rounded-full" 
-                 style={{transform: 'rotateX(45deg) rotateY(45deg)'}}></div>
-          </div>
-          
-          {/* Floating Particles */}
-          <div className="absolute top-1/4 left-1/3 w-2 h-2 bg-cyan-400 rounded-full opacity-40 floating-3d pulse-glow"></div>
-          <div className="absolute top-2/3 right-1/3 w-3 h-3 bg-purple-400 rounded-full opacity-30 floating-3d pulse-glow" style={{animationDelay: '1.5s'}}></div>
-          <div className="absolute bottom-1/4 left-2/3 w-1.5 h-1.5 bg-pink-400 rounded-full opacity-50 floating-3d pulse-glow" style={{animationDelay: '3s'}}></div>
-          <div className="absolute top-3/4 left-1/4 w-2.5 h-2.5 bg-emerald-400 rounded-full opacity-35 floating-3d pulse-glow" style={{animationDelay: '2.5s'}}></div>
-          
-          {/* 3D Lines/Connections */}
-          <svg className="absolute inset-0 w-full h-full opacity-10">
-            <defs>
-              <linearGradient id="lineGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" style={{stopColor: '#667eea'}} />
-                <stop offset="100%" style={{stopColor: '#764ba2'}} />
-              </linearGradient>
-              <linearGradient id="lineGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" style={{stopColor: '#764ba2'}} />
-                <stop offset="100%" style={{stopColor: '#f093fb'}} />
-              </linearGradient>
-            </defs>
-            <line x1="10%" y1="20%" x2="40%" y2="80%" stroke="url(#lineGrad1)" strokeWidth="2" className="floating-3d" />
-            <line x1="60%" y1="30%" x2="90%" y2="70%" stroke="url(#lineGrad2)" strokeWidth="1.5" className="floating-3d" />
-            <line x1="20%" y1="60%" x2="80%" y2="40%" stroke="url(#lineGrad1)" strokeWidth="1" className="floating-3d" />
-          </svg>
-        </div>
-
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
-          {/* Header */}
-          <div className="text-center mb-20">
-            <div className="inline-block mb-6">
-              <div className="glass-stat px-6 py-3 rounded-full">
-                <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent font-semibold text-sm uppercase tracking-wider">
-                  {t.trustedPartners}
-                </span>
-              </div>
-            </div>
-            
-            <h2 className="text-5xl md:text-6xl font-black text-white mb-6 neon-text">
-              {t.powering}
-              <span className="block bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-                {t.innovation}
-              </span>
-            </h2>
-            <p className="text-xl text-gray-300 max-w-2xl mx-auto font-light">
-              {t.subtitle}
-              <span className="text-transparent bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text font-semibold"> {t.transform}</span>
-            </p>
-          </div>
-
-          {/* Scrolling Partners - Two Rows */}
-          <div className="space-y-8 mb-20">
-            {/* First row - left to right */}
-            <div className="scrolling-container">
-              <div className="flex space-x-4 md:space-x-6 marquee-row">
-                {[...partners, ...partners, ...partners].map((partner, index) => (
-                  <div
-                    key={`row1-${partner.id}-${index}`}
-                    className="partner-card-3d rounded-2xl p-3 sm:p-4 md:p-6 w-[180px] sm:w-[220px] md:w-[300px] shadow-2xl"
-                  >
-                    <div className="flex items-start space-x-4">
-                      {/* 3D Logo */}
-                      <div className="logo-gradient-3d w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl flex items-center justify-center transform-gpu flex-shrink-0">
-                        <span className="text-white font-bold text-sm sm:text-lg md:text-xl drop-shadow-lg">
-                          {partner.logo}
-                        </span>
-                      </div>
-                      
-                      {/* Company Info */}
-                      <div className="flex-1 min-w-0">
-                        <h3 className="font-bold text-sm sm:text-base md:text-lg text-white mb-1 neon-text leading-tight">
-                          {partner.name}
-                        </h3>
-                        <p className="text-gray-400 text-xs uppercase tracking-wider mb-2">
-                          {partner.industry}
-                        </p>
-                        <p className="text-gray-500 text-xs leading-tight line-clamp-2">
-                          {partner.description}
-                        </p>
-                      </div>
-                    </div>
-                    
-                    {/* Status Indicator */}
-                    <div className="flex items-center justify-center mt-3 sm:mt-4 pt-2 sm:pt-3 border-t border-gray-700">
-                      <div className="w-2 h-2 sm:w-3 sm:h-3 bg-gradient-to-r from-emerald-400 to-cyan-400 rounded-full mr-2 pulse-glow"></div>
-                      <span className="text-xs text-gray-500 font-medium uppercase tracking-wider">
-                        {t.activePartner}
-                      </span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Second row - right to left */}
-            <div className="scrolling-container">
-              <div className="flex space-x-4 md:space-x-6 marquee-row-reverse">
-                {[...partners, ...partners, ...partners].reverse().map((partner, index) => (
-                  <div
-                    key={`row2-${partner.id}-${index}`}
-                    className="partner-card-3d rounded-2xl p-3 sm:p-4 md:p-6 w-[180px] sm:w-[220px] md:w-[300px] shadow-2xl"
-                  >
-                    <div className="flex items-start space-x-4">
-                      {/* 3D Logo */}
-                      <div className="logo-gradient-3d w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl flex items-center justify-center transform-gpu flex-shrink-0">
-                        <span className="text-white font-bold text-sm sm:text-lg md:text-xl drop-shadow-lg">
-                          {partner.logo}
-                        </span>
-                      </div>
-                      
-                      {/* Company Info */}
-                      <div className="flex-1 min-w-0">
-                        <h3 className="font-bold text-sm sm:text-base md:text-lg text-white mb-1 neon-text leading-tight">
-                          {partner.name}
-                        </h3>
-                        <p className="text-gray-400 text-xs uppercase tracking-wider mb-2">
-                          {partner.industry}
-                        </p>
-                        <p className="text-gray-500 text-xs leading-tight line-clamp-2">
-                          {partner.description}
-                        </p>
-                      </div>
-                    </div>
-                    
-                    {/* Status Indicator */}
-                    <div className="flex items-center justify-center mt-3 sm:mt-4 pt-2 sm:pt-3 border-t border-gray-700">
-                      <div className="w-2 h-2 sm:w-3 sm:h-3 bg-gradient-to-r from-emerald-400 to-cyan-400 rounded-full mr-2 pulse-glow"></div>
-                      <span className="text-xs text-gray-500 font-medium uppercase tracking-wider">
-                        {t.activePartner}
-                      </span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* 3D Stats Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mb-16">
-            <div className="glass-stat rounded-2xl p-6 text-center">
-              <div className="text-4xl font-black bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mb-3">7+</div>
-              <div className="text-gray-400 text-sm uppercase tracking-wider">{t.activeClients}</div>
-            </div>
-            <div className="glass-stat rounded-2xl p-6 text-center">
-              <div className="text-4xl font-black bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-3">6</div>
-              <div className="text-gray-400 text-sm uppercase tracking-wider">{t.industries}</div>
-            </div>
-            <div className="glass-stat rounded-2xl p-6 text-center">
-              <div className="text-4xl font-black bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent mb-3">98%</div>
-              <div className="text-gray-400 text-sm uppercase tracking-wider">{t.retention}</div>
-            </div>
-            <div className="glass-stat rounded-2xl p-6 text-center">
-              <div className="text-4xl font-black bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent mb-3">24/7</div>
-              <div className="text-gray-400 text-sm uppercase tracking-wider">{t.support}</div>
-            </div>
-          </div>
-
-          {/* CTA */}
-          <div className="text-center">
-            <p className="text-gray-300 mb-8 text-lg font-light">
-              {t.readyToJoin}
-              <span className="text-transparent bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text font-semibold"> {t.innovativeCompanies}</span>?
-            </p>
-            <button className="group relative bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-10 py-5 rounded-2xl font-semibold text-lg overflow-hidden transition-all duration-300 hover:scale-105">
-              <span className="relative z-10">
-                {t.startPartnership}
-              </span>
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            </button>
-          </div>
-        </div>
-      </section>
-    </>
+    </section>
   );
 };
 

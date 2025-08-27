@@ -12,17 +12,17 @@ const Header = () => {
       role: "Software Developer",
       projects: "Projects",
       services: "Services",
-      assessment: "Assessment",
-      calculator: "ROI Calculator",
+      location: "My Location",
+      partners: "My Partners",
       getStarted: "Get Started",
       language: "Language"
     },
     sw: {
       role: "Software Developer",
-      projects: "Miradi",
+      projects: "Projects",
       services: "Huduma",
-      assessment: "Tathmini",
-      calculator: "Kikokotoo cha Mapato",
+      location: "Mahali Nilipo",
+      partners: "Wadau Wangu",
       getStarted: "Anza Sasa",
       language: "Lugha"
     }
@@ -275,11 +275,11 @@ const Header = () => {
               <a href="#services" className="nav-link text-gray-300 hover:text-white font-medium">
                 {t.services}
               </a>
-              <a href="#assessment" className="nav-link text-gray-300 hover:text-white font-medium">
-                {t.assessment}
+              <a href="#location" className="nav-link text-gray-300 hover:text-white font-medium">
+                {t.location}
               </a>
-              <a href="#calculator" className="nav-link text-gray-300 hover:text-white font-medium">
-                {t.calculator}
+              <a href="#partners" className="nav-link text-gray-300 hover:text-white font-medium">
+                {t.partners}
               </a>
             </div>
 
@@ -362,7 +362,7 @@ const Header = () => {
                 >
                   <div className="flex items-center">
                     <Rocket className="w-5 h-5 mr-3 text-pink-400" />
-                    {t.assessment}
+                    {t.location}
                   </div>
                 </a>
                 <a 
@@ -372,7 +372,7 @@ const Header = () => {
                 >
                   <div className="flex items-center">
                     <div className="w-5 h-5 mr-3 bg-gradient-to-r from-cyan-400 to-purple-400 rounded"></div>
-                    {t.calculator}
+                    {t.partners}
                   </div>
                 </a>
                 
