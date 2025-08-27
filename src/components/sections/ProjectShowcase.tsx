@@ -223,6 +223,21 @@ const ProjectsShowcase = () => {
           background: rgba(255, 255, 255, 0.12);
         }
         
+        /* Disable hover effects on mobile */
+        @media (max-width: 768px) {
+          .project-card-3d:hover {
+            transform: none;
+            box-shadow: none;
+            border-color: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.08);
+          }
+          
+          .project-card-3d:hover .project-image {
+            transform: none;
+            box-shadow: none;
+          }
+        }
+        
         .category-btn {
           transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
           background: rgba(255, 255, 255, 0.1);
@@ -237,10 +252,23 @@ const ProjectsShowcase = () => {
           border-color: rgba(255, 255, 255, 0.3);
         }
         
+        @media (max-width: 768px) {
+          .category-btn.active {
+            transform: none;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+          }
+        }
+        
         .category-btn:hover:not(.active) {
           background: rgba(255, 255, 255, 0.15);
           transform: translateY(-2px) scale(1.01);
           border-color: rgba(102, 126, 234, 0.3);
+        }
+        
+        @media (max-width: 768px) {
+          .category-btn:hover:not(.active) {
+            transform: none;
+          }
         }
         
         .tech-badge {
@@ -315,7 +343,7 @@ const ProjectsShowcase = () => {
         }
       `}</style>
 
-      <section id='projects' className="relative py-28 overflow-hidden px-0 mx-0">
+      <section id='projects' className="relative py-16 sm:py-28 overflow-hidden">
         {/* Enhanced 3D Background */}
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900"></div>
         
@@ -337,8 +365,8 @@ const ProjectsShowcase = () => {
           </svg>
         </div>
         
-        {/* Enhanced Floating Elements */}
-        <div className="absolute inset-0">
+        {/* Enhanced Floating Elements - Hidden on mobile */}
+        <div className="absolute inset-0 hidden md:block">
           <div className="absolute top-20 left-20 w-32 h-32 opacity-15 floating-3d-slow">
             <div className="w-full h-full bg-gradient-to-br from-cyan-400 to-blue-500 transform rounded-xl shadow-2xl pulse-glow-bold" 
                  style={{transform: 'rotateX(35deg) rotateY(45deg) rotateZ(10deg)'}}></div>
@@ -360,24 +388,24 @@ const ProjectsShowcase = () => {
           <div className="absolute bottom-1/3 right-1/3 text-pink-400 opacity-30 text-3xl floating-3d-slow pulse-glow-bold font-black" style={{animationDelay: '3s'}}>( )</div>
         </div>
 
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
           {/* Enhanced Header */}
-          <div className="text-center mb-24">
-            <div className="inline-block mb-8">
-              <div className="category-btn px-8 py-4 rounded-full">
-                <span className="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent font-black text-base uppercase tracking-widest">
+          <div className="text-center mb-16 sm:mb-24">
+            <div className="inline-block mb-6 sm:mb-8">
+              <div className="category-btn px-4 sm:px-8 py-3 sm:py-4 rounded-full">
+                <span className="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent font-black text-sm sm:text-base uppercase tracking-widest">
                   {t.portfolioShowcase}
                 </span>
               </div>
             </div>
             
-            <h2 className="text-6xl md:text-7xl font-black text-white mb-8 neon-text-bold leading-tight">
+            <h2 className="text-4xl sm:text-6xl md:text-7xl font-black text-white mb-6 sm:mb-8 neon-text-bold leading-tight">
               {t.digitalText}
               <span className="block bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
                 {t.masterpiecesText}
               </span>
             </h2>
-            <p className="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto font-medium leading-relaxed">
+            <p className="text-lg sm:text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto font-medium leading-relaxed px-4">
               {t.exploreText}
               <span className="text-transparent bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text font-black"> {t.innovativeSolutions}</span>
               {t.fromProduction}
@@ -385,21 +413,22 @@ const ProjectsShowcase = () => {
           </div>
 
           {/* Enhanced Category Filters */}
-          <div className="flex flex-wrap justify-center gap-6 mb-20">
+          <div className="flex flex-wrap justify-center gap-3 sm:gap-6 mb-16 sm:mb-20 px-2">
             {categories.map((category) => {
               const IconComponent = category.icon;
               return (
                 <button
                   key={category.id}
                   onClick={() => setActiveCategory(category.id)}
-                  className={`category-btn px-8 py-5 rounded-2xl font-bold text-base transition-all duration-300 ${
+                  className={`category-btn px-4 sm:px-8 py-3 sm:py-5 rounded-2xl font-bold text-sm sm:text-base transition-all duration-300 ${
                     activeCategory === category.id ? 'active text-white' : 'text-gray-300 hover:text-white'
                   }`}
                 >
-                  <div className="flex items-center space-x-4">
-                    <IconComponent className="w-6 h-6" />
-                    <span>{category.label}</span>
-                    <span className={`px-3 py-1 rounded-full text-sm font-black ${
+                  <div className="flex items-center space-x-2 sm:space-x-4">
+                    <IconComponent className="w-5 h-5 sm:w-6 sm:h-6" />
+                    <span className="hidden sm:inline">{category.label}</span>
+                    <span className="sm:hidden">{category.label.split(' ')[0]}</span>
+                    <span className={`px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-black ${
                       activeCategory === category.id ? 'bg-white/25' : 'bg-white/15'
                     }`}>
                       {category.count}
@@ -411,32 +440,32 @@ const ProjectsShowcase = () => {
           </div>
 
           {/* Enhanced Projects Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10 ">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-10">
             {filteredProjects.map((project, index) => {
               const TypeIcon = getTypeIcon(project.type);
               const ProjectIcon = project.icon;
               return (
                 <div
                   key={project.id}
-                  className="project-card-3d rounded-3xl p-8 px-0 shadow-2xl"
+                  className="project-card-3d rounded-2xl sm:rounded-3xl p-4 sm:p-8 px-0 shadow-2xl"
                   style={{animationDelay: `${index * 0.15}s`}}
                 >
                   {/* Enhanced Project Image */}
-                  <div className="relative mb-8 overflow-hidden project-image">
+                  <div className="relative mb-6 sm:mb-8 overflow-hidden project-image rounded-2xl">
                     <img 
                       src={project.image} 
                       alt={project.title}
-                      className="w-full h-96 object-cover"
+                      className="w-full h-64 sm:h-96 object-cover"
                       loading="lazy"
                     />
                     <div className="absolute inset-0 image-overlay flex items-center justify-center">
                       <div className="flex items-center space-x-3">
-                        <TypeIcon className="w-8 h-8 text-white" />
-                        <span className="text-white font-black text-lg tracking-wider">{project.type.toUpperCase()}</span>
+                        <TypeIcon className="w-6 sm:w-8 h-6 sm:h-8 text-white" />
+                        <span className="text-white font-black text-base sm:text-lg tracking-wider">{project.type.toUpperCase()}</span>
                       </div>
                     </div>
-                    <div className="absolute top-4 right-4">
-                      <span className={`px-4 py-2 rounded-full text-sm font-black backdrop-blur-lg ${
+                    <div className="absolute top-3 sm:top-4 right-3 sm:right-4">
+                      <span className={`px-3 sm:px-4 py-1 sm:py-2 rounded-full text-xs sm:text-sm font-black backdrop-blur-lg ${
                         project.category === 'completed' ? 'bg-green-500/90 text-white shadow-lg shadow-green-500/50' :
                         project.category === 'progress' ? 'bg-yellow-500/90 text-white shadow-lg shadow-yellow-500/50' :
                         'bg-blue-500/90 text-white shadow-lg shadow-blue-500/50'
@@ -445,29 +474,29 @@ const ProjectsShowcase = () => {
                          project.category === 'progress' ? t.wip : t.demo}
                       </span>
                     </div>
-                    <div className="absolute top-4 left-4 project-icon p-3 rounded-xl">
-                      <ProjectIcon className="w-6 h-6 text-white" />
+                    <div className="absolute top-3 sm:top-4 left-3 sm:left-4 project-icon p-2 sm:p-3 rounded-xl">
+                      <ProjectIcon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                     </div>
                   </div>
 
                   {/* Enhanced Project Title & Description */}
-                  <h3 className="text-2xl md:text-3xl font-black px-8 text-white mb-4 neon-text-bold leading-tight">
+                  <h3 className="text-xl sm:text-2xl md:text-3xl font-black px-4 sm:px-8 text-white mb-3 sm:mb-4 neon-text-bold leading-tight">
                     {project.title}
                   </h3>
-                  <p className="text-gray-300 mb-8 leading-relaxed px-8 text-base font-medium">
+                  <p className="text-gray-300 mb-6 sm:mb-8 leading-relaxed px-4 sm:px-8 text-sm sm:text-base font-medium">
                     {project.description}
                   </p>
 
                   {/* Enhanced Progress Bar */}
                   {project.progress && (
-                    <div className="mb-8 px-8">
+                    <div className="mb-6 sm:mb-8 px-4 sm:px-8">
                       <div className="flex justify-between items-center mb-3">
-                        <span className="text-base text-gray-300 font-semibold">{t.progress}</span>
-                        <span className="text-base font-black text-white bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">{project.progress}%</span>
+                        <span className="text-sm sm:text-base text-gray-300 font-semibold">{t.progress}</span>
+                        <span className="text-sm sm:text-base font-black text-white bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">{project.progress}%</span>
                       </div>
-                      <div className="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+                      <div className="w-full bg-gray-700 rounded-full h-2 sm:h-3 overflow-hidden">
                         <div 
-                          className="progress-bar h-3 rounded-full transition-all duration-1000 shadow-lg"
+                          className="progress-bar h-2 sm:h-3 rounded-full transition-all duration-1000 shadow-lg"
                           style={{width: `${project.progress}%`, backgroundSize: '200% 100%'}}
                         ></div>
                       </div>
@@ -475,11 +504,11 @@ const ProjectsShowcase = () => {
                   )}
 
                   {/* Enhanced Tech Stack */}
-                  <div className="flex flex-wrap gap-3 mb-8 px-8">
+                  <div className="flex flex-wrap gap-2 sm:gap-3 mb-6 sm:mb-8 px-4 sm:px-8">
                     {project.tech.map((tech, techIndex) => (
                       <span 
                         key={techIndex} 
-                        className="tech-badge px-4 py-2 rounded-xl text-sm font-bold text-white shadow-lg"
+                        className="tech-badge px-2 sm:px-4 py-1 sm:py-2 rounded-xl text-xs sm:text-sm font-bold text-white shadow-lg"
                       >
                         {tech}
                       </span>
@@ -487,18 +516,18 @@ const ProjectsShowcase = () => {
                   </div>
 
                   {/* Enhanced Status */}
-                  <p className="text-base credibility-boost mb-8 px-8 font-black tracking-wide">{project.status}</p>
+                  <p className="text-sm sm:text-base credibility-boost mb-6 sm:mb-8 px-4 sm:px-8 font-black tracking-wide">{project.status}</p>
 
                   {/* Enhanced Action Buttons */}
-                  <div className="flex space-x-4 px-8">
+                  <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4 px-4 sm:px-8">
                     {project.liveUrl && (
                       <a 
                         href={project.liveUrl} 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="flex-1 bg-gradient-to-r from-green-500 to-emerald-600 text-white px-5 py-4 rounded-xl font-black text-sm transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-2xl flex items-center justify-center"
+                        className="flex-1 bg-gradient-to-r from-green-500 to-emerald-600 text-white px-4 sm:px-5 py-3 sm:py-4 rounded-xl font-black text-xs sm:text-sm transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-2xl flex items-center justify-center"
                       >
-                        <ExternalLink className="w-5 h-5 mr-2" />
+                        <ExternalLink className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                         {t.visitLive}
                       </a>
                     )}
@@ -508,9 +537,9 @@ const ProjectsShowcase = () => {
                         href={project.liveUrl} 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="flex-1 bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-5 py-4 rounded-xl font-black text-sm transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-2xl flex items-center justify-center"
+                        className="flex-1 bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-4 sm:px-5 py-3 sm:py-4 rounded-xl font-black text-xs sm:text-sm transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-2xl flex items-center justify-center"
                       >
-                        <Play className="w-5 h-5 mr-2" />
+                        <Play className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                         {t.viewDemo}
                       </a>
                     )}
@@ -520,9 +549,9 @@ const ProjectsShowcase = () => {
                         href={project.githubUrl} 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="px-5 py-4 bg-gray-700 hover:bg-gray-600 text-white rounded-xl transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-2xl"
+                        className="px-4 sm:px-5 py-3 sm:py-4 bg-gray-700 hover:bg-gray-600 text-white rounded-xl transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-2xl flex items-center justify-center sm:block"
                       >
-                        <Github className="w-5 h-5" />
+                        <Github className="w-4 h-4 sm:w-5 sm:h-5" />
                       </a>
                     )}
                   </div>
@@ -532,15 +561,15 @@ const ProjectsShowcase = () => {
           </div>
 
           {/* Enhanced Bottom CTA */}
-          <div className="text-center mt-24">
-            <p className="text-gray-300 mb-10 text-xl md:text-2xl font-medium leading-relaxed">
+          <div className="text-center mt-16 sm:mt-24 px-4">
+            <p className="text-gray-300 mb-8 sm:mb-10 text-lg sm:text-xl md:text-2xl font-medium leading-relaxed">
               {t.haveProject}
               <span className="text-transparent bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text font-black"> {t.buildSomething}</span> {t.together}
             </p>
-            <button className="group relative bg-gradient-to-r from-cyan-500 via-purple-600 to-pink-600 text-white px-12 py-6 rounded-2xl font-black text-xl overflow-hidden transition-all duration-300 hover:scale-105 pulse-glow-bold shadow-2xl">
+            <button className="group relative bg-gradient-to-r from-cyan-500 via-purple-600 to-pink-600 text-white px-8 sm:px-12 py-4 sm:py-6 rounded-2xl font-black text-lg sm:text-xl overflow-hidden transition-all duration-300 hover:scale-105 pulse-glow-bold shadow-2xl">
               <span className="relative z-10 flex items-center">
                 {t.startProject}
-                <Rocket className="w-6 h-6 ml-4 group-hover:translate-x-2 group-hover:rotate-12 transition-transform duration-300" />
+                <Rocket className="w-5 h-5 sm:w-6 sm:h-6 ml-3 sm:ml-4 group-hover:translate-x-2 group-hover:rotate-12 transition-transform duration-300" />
               </span>
               <div className="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </button>
