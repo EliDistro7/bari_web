@@ -315,7 +315,7 @@ const ProjectsShowcase = () => {
         }
       `}</style>
 
-      <section id='projects' className="relative py-28 overflow-hidden">
+      <section id='projects' className="relative py-28 overflow-hidden px-0 mx-0">
         {/* Enhanced 3D Background */}
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900"></div>
         
