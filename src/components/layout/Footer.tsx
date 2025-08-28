@@ -1,3 +1,4 @@
+'use client';
 import React, { useState } from 'react';
 import { 
   Mail, 
@@ -438,7 +439,7 @@ const Footer = () => {
                     <Mail className="w-4 h-4 mr-3 text-cyan-400" />
                     <div>
                       <div className="font-medium text-gray-300">{t.email}</div>
-                      <div>hello@barikikaeno.dev</div>
+                      <div>elibarikaneno@gmail.com</div>
                     </div>
                   </div>
                 </div>
@@ -447,7 +448,7 @@ const Footer = () => {
                     <Phone className="w-4 h-4 mr-3 text-purple-400" />
                     <div>
                       <div className="font-medium text-gray-300">{t.phone}</div>
-                      <div>+255 123 456 789</div>
+                      <div>+255 765 762 688</div>
                     </div>
                   </div>
                 </div>
@@ -498,7 +499,7 @@ const Footer = () => {
               <div className="flex items-center space-x-4">
                 <span className="text-gray-400 text-sm font-medium mr-2">{t.followMe}:</span>
                 <a
-                  href="https://github.com/barikikaeno"
+                  href="https://github.com/barikikaneno"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="social-icon github flex items-center justify-center"
@@ -506,7 +507,7 @@ const Footer = () => {
                   <Github className="w-5 h-5 text-gray-300" />
                 </a>
                 <a
-                  href="https://linkedin.com/in/barikikaeno"
+                  href="https://linkedin.com/in/barikikaneno"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="social-icon linkedin flex items-center justify-center"
@@ -514,7 +515,7 @@ const Footer = () => {
                   <Linkedin className="w-5 h-5 text-gray-300" />
                 </a>
                 <a
-                  href="https://twitter.com/barikikaeno"
+                  href="https://twitter.com/barikikaneno"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="social-icon twitter flex items-center justify-center"

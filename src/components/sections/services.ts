@@ -1116,10 +1116,10 @@ Ufunguo ni kuanza na uchambuzi wa athari kubwa, wa ushindi wa haraka na kukuza u
       { title: "Suluhisho za Kupanda", desc: "Muundo tayari kwa ukuaji" }
     ],
     sectionTitle: "HUDUMA ZANGU",
-    sectionSubtitle: "KARIBU UPATE TUFANYE KAZI PAMOJA",
+    sectionSubtitle: "KARIBU TUFANYE KAZI PAMOJA",
     sectionDescription: "Kutoka wazo hadi utekelezaji, ninatoa",
     sectionDescriptionHighlight: "huduma za development za programu za websites na mobile apps",
-    sectionDescriptionEnd: "ambazo hubadilisha biashara yako",
+    sectionDescriptionEnd: "kuleta matokeo bora mtandaoni",
     ctaDescription: "Tayari kubadilisha biashara yako na",
     ctaDescriptionHighlight: "teknolojia ya hali ya juu",
     ctaButton: "Jadili Mradi Wako",

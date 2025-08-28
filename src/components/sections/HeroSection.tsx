@@ -450,6 +450,8 @@ const HeroSection = () => {
                   {/* Floating Tech Stack Badge */}
                   <div className="absolute bottom-6 left-6 right-6">
                     <div className="glass-effect px-4 py-3 rounded-xl">
+
+                      
                       <div className="flex items-center justify-between">
                         <div className="flex items-center">
                           <div className={`w-3 h-3 rounded-full bg-gradient-to-r ${currentService.gradient} mr-3`}></div>
@@ -471,17 +473,17 @@ const HeroSection = () => {
           {/* Stats Row - Mobile Only */}
           <div className="lg:hidden flex flex-wrap justify-center items-center gap-6 text-gray-300 mt-12">
             <div className="text-center">
-              <div className="text-2xl font-bold text-cyan-400 mb-1">100+</div>
+              <div className="text-2xl font-bold text-cyan-400 mb-1">10+</div>
               <div className="text-xs uppercase tracking-wider">{t.projects}</div>
             </div>
             <div className="w-px h-8 bg-gray-600"></div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-purple-400 mb-1">5+</div>
+              <div className="text-2xl font-bold text-purple-400 mb-1">3+</div>
               <div className="text-xs uppercase tracking-wider">{t.years}</div>
             </div>
             <div className="w-px h-8 bg-gray-600"></div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-pink-400 mb-1">50+</div>
+              <div className="text-2xl font-bold text-pink-400 mb-1">7+</div>
               <div className="text-xs uppercase tracking-wider">{t.clients}</div>
             </div>
           </div>

@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import { Menu, X, Code2, Sparkles, Rocket, Globe } from 'lucide-react';
 import { useLanguage } from '@/context/language';
@@ -14,6 +16,7 @@ const Header = () => {
       services: "Services",
       location: "My Location",
       partners: "My Partners",
+      resources: "Resources",
       getStarted: "Get Started",
       language: "Language"
     },
@@ -22,7 +25,8 @@ const Header = () => {
       projects: "Projects",
       services: "Huduma",
       location: "Mahali Nilipo",
-      partners: "Wadau Wangu",
+      partners: "Washirika",
+      resources: "Rasilimali",
       getStarted: "Anza Sasa",
       language: "Lugha"
     }
@@ -281,6 +285,9 @@ const Header = () => {
               <a href="#partners" className="nav-link text-gray-300 hover:text-white font-medium">
                 {t.partners}
               </a>
+              <a href="/resources" className="nav-link text-gray-300 hover:text-white font-medium">
+                {t.resources}
+              </a>
             </div>
 
             {/* Language Switcher, CTA Button & Mobile Menu Toggle */}
@@ -320,20 +327,7 @@ const Header = () => {
             <div className="md:hidden absolute top-full left-0 right-0 mobile-menu mt-2 mx-4 rounded-2xl shadow-2xl overflow-hidden">
               <div className="py-4">
                 {/* Mobile Profile Section */}
-                <div className="px-6 py-4 border-b border-gray-700/50">
-                  <div className="flex items-center space-x-3">
-                    <div className="profile-image scale-90">
-                      <div className="profile-inner">BK</div>
-                      <div className="verified-badge">
-                        <span className="verified-check">✓</span>
-                      </div>
-                    </div>
-                    <div>
-                      <div className="text-lg font-bold brand-name">Bariki Kaneno</div>
-                      <div className="text-xs text-gray-400">{t.role}</div>
-                    </div>
-                  </div>
-                </div>
+              
                 
                 <a 
                   href="#projects" 
@@ -375,6 +369,15 @@ const Header = () => {
                     {t.partners}
                   </div>
                 </a>
+                <a 
+                  href="/resources" 
+                  className="mobile-menu-item block px-6 py-3 text-gray-300 hover:text-white font-medium"
+                  onClick={() => setIsMenuOpen(false)}>
+                  <div className="flex items-center">
+                    <Globe className="w-5 h-5 mr-3 text-green-400 floating-icon" />
+                    {t.resources}
+                  </div>
+                  </a>
                 
                 {/* Mobile Get Started Button */}
                 <div className="px-6 py-3 border-t border-gray-700/50 mt-2">
