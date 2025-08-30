@@ -8,6 +8,12 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { language, setLanguage } = useLanguage();
 
+   const openWhatsApp = () => {
+    const message = "Hi! I'm interested in learning more about your development services. Could you please provide more information?";
+    const url = `https://wa.me/255765762688?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
+  };
+
   // Translation object
   const translations = {
     en: {
@@ -260,7 +266,7 @@ const Header = () => {
               <div className="flex items-center space-x-3">
                 <div className="flex flex-col">
                   <div className="text-xl sm:text-2xl font-black brand-name logo-glow">
-                    Bariki Kaneno
+                    Bari Kaneno
                   </div>
                   <div className="text-xs text-gray-400 font-medium -mt-1">
                     {t.role}
@@ -302,7 +308,9 @@ const Header = () => {
                 <span className="text-xs font-semibold uppercase ml-1">{language}</span>
               </button>
 
-              <button className="cta-button hidden md:block text-white px-6 py-3 rounded-xl font-semibold text-sm overflow-hidden">
+              <button
+               onClick={openWhatsApp}
+               className="cta-button hidden md:block text-white px-6 py-3 rounded-xl font-semibold text-sm overflow-hidden">
                 <span className="flex items-center">
                   {t.getStarted}
                 </span>
