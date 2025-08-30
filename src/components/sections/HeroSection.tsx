@@ -443,7 +443,7 @@ const HeroSection = () => {
 
                 {/* Enhanced Hero Title */}
                 <div className={`space-y-6 ${isLoaded ? 'reveal-animation reveal-delay-1' : ''}`}>
-                  <h1 className="text-5xl sm:text-4xl lg:text-5xl xl:text-7xl font-black tracking-tight">
+                  <h1 className="text-4xl sm:text-4xl lg:text-5xl xl:text-7xl font-black tracking-tight">
                     <span className="block text-shimmer mb-3 leading-none">
                       {t.tagline}
                     </span>
