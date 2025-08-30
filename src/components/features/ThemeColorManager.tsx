@@ -5,12 +5,12 @@ import { useEffect, useState } from 'react';
 const ThemeColorManager = () => {
   const [activeServiceIndex, setActiveServiceIndex] = useState(0);
 
-  // Dark purple theme colors for browser taskbar
+  // Very dark purple theme colors for browser taskbar
   const themeColors = [
-    '#6b21a8', // Deep Purple - Web Applications
-    '#7c3aed', // Medium Purple - Mobile Applications  
-    '#8b5cf6', // Light Purple - Static Websites
-    '#4c1d95'  // Dark Violet - Backend Systems
+    '#2d1b69', // Very Dark Purple - Web Applications
+    '#1e1b4b', // Deep Indigo Purple - Mobile Applications  
+    '#312e81', // Dark Slate Purple - Static Websites
+    '#1a1625'  // Almost Black Purple - Backend Systems
   ];
 
   // Service rotation timing (matches HeroSection)
