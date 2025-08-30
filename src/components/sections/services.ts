@@ -720,9 +720,9 @@ Tofauti na programu ngumu za wavuti, tovuti za kistatic zinahitaji matengenezo y
       },
       {
         icon: Smartphone, 
-        title: "Maendeleo ya Simu", 
-        shortDesc: "Programu asili na za majukwaa mbalimbali kwa iOS na Android",
-        desc: "Programu za simu asili na za majukwaa mbalimbali kwa iOS na Android",
+        title: "Mobile App", 
+        shortDesc: "Mobile Apps kwa ajili majukwaa mbalimbali kwa iOS na Android",
+        desc: "Mobile Apps za majukwaa mbalimbali kwa iOS na Android",
         features: ["React Native", "Flutter", "Native iOS/Android", "Tayari kwa App Store"],
         gradient: "from-purple-400 to-pink-500",
         whoNeedsIt: [
