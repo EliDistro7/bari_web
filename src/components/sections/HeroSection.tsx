@@ -1,23 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Zap, ArrowRight, Play, CheckCircle, Sparkles, Code2, Rocket, Globe, Smartphone, Monitor, Server } from 'lucide-react';
-import { Inter, JetBrains_Mono } from 'next/font/google';
-import { useLanguage } from '@/context/language';
-
-const inter = Inter({ 
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700', '800', '900'],
-  display: 'swap'
-});
-
-const jetBrainsMono = JetBrains_Mono({ 
-  subsets: ['latin'],
-  weight: ['400', '500', '600'],
-  display: 'swap'
-});
 
 const HeroSection = () => {
   const [currentServiceIndex, setCurrentServiceIndex] = useState(0);
-  const { language } = useLanguage();
+  const [language, setLanguage] = useState('en'); // Mock language context
 
   // Translation object
   const translations = {
@@ -177,13 +163,6 @@ const HeroSection = () => {
           50% { opacity: .8; }
         }
         
-        .bg-mesh {
-          background-image: 
-            radial-gradient(circle at 25% 25%, #667eea 0%, transparent 50%),
-            radial-gradient(circle at 75% 75%, #764ba2 0%, transparent 50%),
-            radial-gradient(circle at 50% 50%, #f093fb 0%, transparent 50%);
-        }
-        
         .glass-effect {
           background: rgba(255, 255, 255, 0.1);
           backdrop-filter: blur(10px);
@@ -294,32 +273,21 @@ const HeroSection = () => {
         }
       `}</style>
       
-      <section className={`${inter.className} relative min-h-screen flex items-center justify-center px-6 overflow-hidden`}>
+      <section className="relative bg-slate-900 min-h-screen flex items-center justify-center px-6 overflow-hidden">
         {/* Mobile Background Image with Overlay - Only on small screens */}
-        <div className="absolute inset-0 lg:hidden">
+        <div className="lg:hidden">
           <div 
             key={`mobile-bg-${currentServiceIndex}`}
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-1000"
+            className="absolute inset-0 pb-6 transition-all duration-1000"
             style={{
-              backgroundImage: `url(${currentService.image})`
+              backgroundImage: `url(${currentService.image})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat'
             }}
           />
           <div className="absolute inset-0 mobile-bg-overlay" />
         </div>
-
-        {/* Animated Background - Desktop */}
-        <div className="absolute inset-0 bg-mesh opacity-10 hidden lg:block"></div>
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 hidden lg:block"></div>
-        
-        {/* Floating Elements */}
-        <div className="absolute top-20 left-10 w-20 h-20 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full opacity-20 floating-animation hidden lg:block"></div>
-        <div className="absolute top-40 right-20 w-32 h-32 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full opacity-15 floating-animation hidden lg:block" style={{animationDelay: '2s'}}></div>
-        <div className="absolute bottom-32 left-1/4 w-16 h-16 bg-gradient-to-r from-emerald-400 to-cyan-400 rounded-full opacity-25 floating-animation hidden lg:block" style={{animationDelay: '4s'}}></div>
-        
-        {/* Code Particles */}
-        <div className="absolute top-1/4 left-10 text-cyan-400 opacity-30 text-sm pulse-animation font-mono hidden lg:block">&lt;/&gt;</div>
-        <div className="absolute top-1/3 right-16 text-purple-400 opacity-30 text-lg pulse-animation font-mono hidden lg:block" style={{animationDelay: '1s'}}>{ }</div>
-        <div className="absolute bottom-1/3 right-1/4 text-pink-400 opacity-30 text-sm pulse-animation font-mono hidden lg:block" style={{animationDelay: '3s'}}>function()</div>
         
         {/* Main Content Container - Split Layout for Large Screens */}
         <div className="relative z-10 max-w-7xl mx-auto w-full">
@@ -426,7 +394,7 @@ const HeroSection = () => {
                 </div>
                 <div className="w-px h-12 bg-gray-600"></div>
                 <div className="text-center lg:text-left">
-                  <div className="text-3xl font-bold text-pink-400 mb-1">50+</div>
+                  <div className="text-3xl font-bold text-pink-400 mb-1">10+</div>
                   <div className="text-sm uppercase tracking-wider">{t.clients}</div>
                 </div>
               </div>
@@ -450,8 +418,6 @@ const HeroSection = () => {
                   {/* Floating Tech Stack Badge */}
                   <div className="absolute bottom-6 left-6 right-6">
                     <div className="glass-effect px-4 py-3 rounded-xl">
-
-                      
                       <div className="flex items-center justify-between">
                         <div className="flex items-center">
                           <div className={`w-3 h-3 rounded-full bg-gradient-to-r ${currentService.gradient} mr-3`}></div>
@@ -488,6 +454,14 @@ const HeroSection = () => {
             </div>
           </div>
         </div>
+
+        {/* Language Toggle for Demo */}
+        <button
+          onClick={() => setLanguage(language === 'en' ? 'sw' : 'en')}
+          className="fixed top-4 right-4 glass-effect text-white px-4 py-2 rounded-lg text-sm z-20"
+        >
+          {language === 'en' ? 'SW' : 'EN'}
+        </button>
       </section>
     </>
   );

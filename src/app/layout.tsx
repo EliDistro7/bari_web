@@ -40,6 +40,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+
+            <head>
+        {/* Windows-specific tile color */}
+        <meta name="msapplication-TileColor" content="#0f172a" />
+        
+        </head>
    
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
