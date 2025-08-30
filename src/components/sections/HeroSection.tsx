@@ -1,467 +1,726 @@
 import React, { useState, useEffect } from 'react';
-import { Zap, ArrowRight, Play, CheckCircle, Sparkles, Code2, Rocket, Globe, Smartphone, Monitor, Server } from 'lucide-react';
-
+import { Zap, ArrowRight, Play, CheckCircle, Sparkles, Code2, Rocket, Globe, Smartphone, Monitor, Server, Star } from 'lucide-react';
+import { useLanguage } from '@/context/language';
 const HeroSection = () => {
-  const [currentServiceIndex, setCurrentServiceIndex] = useState(0);
-  const [language, setLanguage] = useState('en'); // Mock language context
+  const [activeServiceIndex, setActiveServiceIndex] = useState(0);
+  const {language} = useLanguage();
+  const [isLoaded, setIsLoaded] = useState(false);
 
-  // Translation object
-  const translations = {
+  // Enhanced translation object
+  const content = {
     en: {
       role: "Full-Stack Developer",
-      build: "I BUILD",
+      tagline: "I CREATE",
+      subtitle: "Digital Experiences",
       transform: "that transform businesses",
-      driveResults: "drive real results",
-      concept: "From concept to deployment, crafted with precision.",
-      buildEpic: "Let's Build Something Epic",
-      viewWork: "View My Work",
+      impact: "drive measurable impact",
+      concept: "From concept to deployment, engineered for excellence.",
+      cta: "Start Your Project",
+      portfolio: "View Portfolio",
       projects: "Projects",
       years: "Years", 
       clients: "Happy Clients",
       services: [
         {
-          title: "stunning web applications",
-          subtitle: "Full-stack web solutions that scale",
-          icon: <Globe className="w-5 h-5" />,
-          gradient: "from-cyan-400 to-blue-500",
-          textGradient: "from-cyan-400 via-blue-400 to-purple-400",
-          description: "React, Next.js, Node.js & more",
+          title: "Web Applications",
+          subtitle: "Modern, scalable web solutions",
+          icon: <Globe className="w-6 h-6" />,
+          theme: "cyan",
+          description: "React • Next.js • TypeScript",
           image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop&crop=center&auto=format",
-          imageAlt: "Modern web application dashboard"
+          alt: "Modern web application interface"
         },
         {
-          title: "powerful mobile apps", 
+          title: "Mobile Applications", 
           subtitle: "Cross-platform mobile experiences",
-          icon: <Smartphone className="w-5 h-5" />,
-          gradient: "from-purple-400 to-pink-500",
-          textGradient: "from-purple-400 via-pink-400 to-red-400",
-          description: "React Native, Flutter & Native",
+          icon: <Smartphone className="w-6 h-6" />,
+          theme: "purple",
+          description: "React Native • Flutter • Swift",
           image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=600&fit=crop&crop=center&auto=format",
-          imageAlt: "Mobile app interface design"
+          alt: "Mobile app development workspace"
         },
         {
-          title: "beautiful static websites",
-          subtitle: "Fast, SEO-optimized landing pages", 
-          icon: <Monitor className="w-5 h-5" />,
-          gradient: "from-emerald-400 to-cyan-500",
-          textGradient: "from-emerald-400 via-cyan-400 to-blue-400",
-          description: "JAMstack, Performance-focused",
+          title: "Static Websites",
+          subtitle: "Lightning-fast, SEO-optimized sites", 
+          icon: <Monitor className="w-6 h-6" />,
+          theme: "emerald",
+          description: "JAMstack • Gatsby • Hugo",
           image: "https://images.unsplash.com/photo-1547658719-da2b51169166?w=800&h=600&fit=crop&crop=center&auto=format",
-          imageAlt: "Beautiful website landing page"
+          alt: "Beautiful website design mockup"
         },
         {
-          title: "integrated Web Systems",
-          subtitle: "Custom enterprise solutions",
-          icon: <Server className="w-5 h-5" />,
-          gradient: "from-orange-400 to-red-500", 
-          textGradient: "from-orange-400 via-red-400 to-pink-400",
-          description: "APIs, Databases, Cloud Infrastructure",
+          title: "Backend Systems",
+          subtitle: "Robust server-side architecture",
+          icon: <Server className="w-6 h-6" />,
+          theme: "orange",
+          description: "Node.js • Python • PostgreSQL",
           image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=600&fit=crop&crop=center&auto=format",
-          imageAlt: "Server room with data infrastructure"
+          alt: "Server infrastructure and data center"
         }
       ]
     },
     sw: {
-      role: "Software Developer",
-      build: "NINATENGENEZA",
-      transform: "zinazo badilisha biashara",
-      driveResults: "kuleta matokeo halisi",
-      concept: "Kutoka wazo hadi utekelezaji, kimetengenezwa kwa usahihi.",
-      buildEpic: "Tuunde Kitu Cha Ajabu",
-      viewWork: "Ona Kazi Zangu",
+      role: "Mtaalamu wa Programu",
+      tagline: "NINATENGENEZA",
+      subtitle: "Uzoefu wa Kidijitali",
+      transform: "unaohamasisha biashara",
+      impact: "kuleta athari halisi",
+      concept: "Kutoka wazo hadi utekelezaji, kimeundwa kwa ubora.",
+      cta: "Anza Mradi Wako",
+      portfolio: "Ona Kazi Zangu",
       projects: "Miradi",
       years: "Miaka",
       clients: "Wateja Wenye Furaha",
       services: [
         {
-          title: "Static Websites",
-          subtitle: "Suluhisho kamili la biashara na watu binafsi ",
-          icon: <Globe className="w-5 h-5" />,
-          gradient: "from-cyan-400 to-blue-500",
-          textGradient: "from-cyan-400 via-blue-400 to-purple-400",
-          description: "React, Next.js, Node.js nk",
+          title: "Programu za Mtandao",
+          subtitle: "Suluhisho la kisasa la mtandao",
+          icon: <Globe className="w-6 h-6" />,
+          theme: "cyan",
+          description: "React • Next.js • TypeScript",
           image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop&crop=center&auto=format",
-          imageAlt: "Dashibodi ya programu ya kisasa ya mtandao"
+          alt: "Kiolesura cha programu ya kisasa ya mtandao"
         },
         {
-          title: "Mobile Applications za kisasa", 
-          subtitle: "Uzoefu wa Mobile Applications za kisasa za kila aina",
-          icon: <Smartphone className="w-5 h-5" />,
-          gradient: "from-purple-400 to-pink-500",
-          textGradient: "from-purple-400 via-pink-400 to-red-400",
-          description: "React Native, Flutter na Native",
+          title: "Programu za Simu", 
+          subtitle: "Uzoefu wa programu za simu za kisasa",
+          icon: <Smartphone className="w-6 h-6" />,
+          theme: "purple",
+          description: "React Native • Flutter • Swift",
           image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=600&fit=crop&crop=center&auto=format",
-          imageAlt: "Muundo wa kiolesura cha programu ya simu"
+          alt: "Mazingira ya kutengeneza programu za simu"
         },
         {
-          title: "Web Applications",
-          subtitle: "Web applications za kisasa kwa ajili ya biashara na taasisi, zilizoboreshwa kwa SEO", 
-          icon: <Monitor className="w-5 h-5" />,
-          gradient: "from-emerald-400 to-cyan-500",
-          textGradient: "from-emerald-400 via-cyan-400 to-blue-400",
-          description: "JAMstack, Zilizolenga Utendaji",
+          title: "Tovuti za Kimsingi",
+          subtitle: "Tovuti za haraka, zilizoboreshwa kwa SEO", 
+          icon: <Monitor className="w-6 h-6" />,
+          theme: "emerald",
+          description: "JAMstack • Gatsby • Hugo",
           image: "https://images.unsplash.com/photo-1547658719-da2b51169166?w=800&h=600&fit=crop&crop=center&auto=format",
-          imageAlt: "Ukurasa mzuri wa kufikia tovuti"
+          alt: "Muundo mzuri wa tovuti"
         },
         {
-          title: "Web Systems",
-          subtitle: "Suluhisho maalum za makampuni, taasisi, vikundi na biashara",
-          icon: <Server className="w-5 h-5" />,
-          gradient: "from-orange-400 to-red-500", 
-          textGradient: "from-orange-400 via-red-400 to-pink-400",
-          description: "API, Hifadhidata, Miundombinu ya Wingu",
+          title: "Mifumo ya Nyuma",
+          subtitle: "Miundo imara ya upande wa seva",
+          icon: <Server className="w-6 h-6" />,
+          theme: "orange",
+          description: "Node.js • Python • PostgreSQL",
           image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=600&fit=crop&crop=center&auto=format",
-          imageAlt: "Chumba cha seva na miundombinu ya data"
+          alt: "Miundombinu ya seva na kituo cha data"
         }
       ]
     }
   };
 
-  const t = translations[language as keyof typeof translations] || translations.sw;
-  
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentServiceIndex((prev) => (prev + 1) % t.services.length);
-    }, 3500);
-    
-    return () => clearInterval(interval);
-  }, [t.services.length]);
+  const t = content[language as keyof typeof content] || content.en;
+  const currentService = t.services[activeServiceIndex];
 
-  const currentService = t.services[currentServiceIndex];
+  // Theme configurations
+  const themes = {
+    cyan: {
+      primary: "from-cyan-400 via-cyan-500 to-blue-500",
+      secondary: "from-cyan-300 via-blue-400 to-purple-500",
+      accent: "cyan-400",
+      glow: "0 0 40px rgba(6, 182, 212, 0.5)",
+      shadow: "shadow-cyan-500/30"
+    },
+    purple: {
+      primary: "from-purple-400 via-purple-500 to-pink-500",
+      secondary: "from-purple-300 via-pink-400 to-red-500",
+      accent: "purple-400",
+      glow: "0 0 40px rgba(147, 51, 234, 0.5)",
+      shadow: "shadow-purple-500/30"
+    },
+    emerald: {
+      primary: "from-emerald-400 via-emerald-500 to-teal-500",
+      secondary: "from-emerald-300 via-teal-400 to-cyan-500",
+      accent: "emerald-400",
+      glow: "0 0 40px rgba(16, 185, 129, 0.5)",
+      shadow: "shadow-emerald-500/30"
+    },
+    orange: {
+      primary: "from-orange-400 via-red-500 to-pink-500",
+      secondary: "from-orange-300 via-red-400 to-pink-500",
+      accent: "orange-400",
+      glow: "0 0 40px rgba(251, 146, 60, 0.5)",
+      shadow: "shadow-orange-500/30"
+    }
+  };
+
+  const currentTheme = themes[currentService.theme as keyof typeof themes];
+
+  useEffect(() => {
+    setIsLoaded(true);
+    const timer = setInterval(() => {
+      setActiveServiceIndex((prev) => (prev + 1) % t.services.length);
+    }, 4000);
+    
+    return () => clearInterval(timer);
+  }, [t.services.length]);
 
   return (
     <>
       <style jsx>{`
-        .gradient-text {
-          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
+        .hero-container {
+          background: 
+            radial-gradient(circle at 15% 85%, rgba(6, 182, 212, 0.2) 0%, transparent 60%),
+            radial-gradient(circle at 85% 15%, rgba(147, 51, 234, 0.2) 0%, transparent 60%),
+            radial-gradient(circle at 45% 45%, rgba(16, 185, 129, 0.15) 0%, transparent 55%),
+            radial-gradient(circle at 75% 75%, rgba(251, 146, 60, 0.1) 0%, transparent 50%),
+            linear-gradient(135deg, #020617 0%, #0c0a2e 25%, #1e1b4b 50%, #0c0a2e 75%, #020617 100%);
+          min-height: 100vh;
+          position: relative;
         }
         
-        .neon-glow {
-          box-shadow: 0 0 20px rgba(102, 126, 234, 0.3), 
-                      0 0 40px rgba(118, 75, 162, 0.2),
-                      0 20px 40px rgba(0, 0, 0, 0.1);
+        .floating-orb {
+          position: absolute;
+          border-radius: 50%;
+          filter: blur(2px);
+          animation: float-orb 12s ease-in-out infinite;
         }
         
-        .floating-animation {
-          animation: float 6s ease-in-out infinite;
+        .orb-1 {
+          top: 15%;
+          left: 8%;
+          width: 120px;
+          height: 120px;
+          background: radial-gradient(circle, rgba(6, 182, 212, 0.4) 0%, rgba(6, 182, 212, 0.1) 50%, transparent 80%);
+          animation-delay: 0s;
         }
         
-        .pulse-animation {
-          animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        .orb-2 {
+          top: 65%;
+          right: 12%;
+          width: 180px;
+          height: 180px;
+          background: radial-gradient(circle, rgba(147, 51, 234, 0.35) 0%, rgba(147, 51, 234, 0.1) 50%, transparent 80%);
+          animation-delay: 3s;
         }
         
-        @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-20px); }
+        .orb-3 {
+          bottom: 25%;
+          left: 15%;
+          width: 100px;
+          height: 100px;
+          background: radial-gradient(circle, rgba(16, 185, 129, 0.4) 0%, rgba(16, 185, 129, 0.1) 50%, transparent 80%);
+          animation-delay: 6s;
         }
         
-        @keyframes pulse {
-          0%, 100% { opacity: 1; }
-          50% { opacity: .8; }
+        .orb-4 {
+          top: 40%;
+          right: 35%;
+          width: 60px;
+          height: 60px;
+          background: radial-gradient(circle, rgba(251, 146, 60, 0.3) 0%, transparent 70%);
+          animation-delay: 9s;
         }
         
-        .glass-effect {
+        @keyframes float-orb {
+          0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+          25% { transform: translateY(-30px) translateX(15px) rotate(90deg); }
+          50% { transform: translateY(-15px) translateX(-20px) rotate(180deg); }
+          75% { transform: translateY(-40px) translateX(10px) rotate(270deg); }
+        }
+        
+        .premium-glass {
           background: rgba(255, 255, 255, 0.1);
-          backdrop-filter: blur(10px);
+          backdrop-filter: blur(25px);
           border: 1px solid rgba(255, 255, 255, 0.2);
+          box-shadow: 
+            0 12px 40px rgba(0, 0, 0, 0.4),
+            inset 0 1px 0 rgba(255, 255, 255, 0.15);
         }
         
-        .service-transition {
+        .hero-badge {
+          background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.08) 100%);
+          backdrop-filter: blur(20px);
+          border: 1px solid rgba(255, 255, 255, 0.15);
+          box-shadow: 
+            0 6px 30px rgba(0, 0, 0, 0.2),
+            inset 0 1px 0 rgba(255, 255, 255, 0.15);
+        }
+        
+        .dynamic-glow {
+          box-shadow: ${currentTheme.glow};
           transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
-        .fade-slide-up {
-          animation: fadeSlideUp 0.8s ease-out forwards;
+        .reveal-animation {
+          animation: revealUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+          opacity: 0;
+          transform: translateY(80px);
         }
         
-        @keyframes fadeSlideUp {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
+        .reveal-delay-1 { animation-delay: 0.15s; }
+        .reveal-delay-2 { animation-delay: 0.3s; }
+        .reveal-delay-3 { animation-delay: 0.45s; }
+        .reveal-delay-4 { animation-delay: 0.6s; }
+        
+        @keyframes revealUp {
           to {
             opacity: 1;
             transform: translateY(0);
           }
         }
         
-        .service-indicator {
-          transition: all 0.3s ease;
-          cursor: pointer;
+        .service-morph {
+          animation: serviceMorphIn 1s cubic-bezier(0.23, 1, 0.32, 1) forwards;
         }
         
-        .service-indicator.active {
-          transform: scale(1.2);
-        }
-        
-        .service-icon-float {
-          animation: serviceIconFloat 2s ease-in-out infinite;
-        }
-        
-        @keyframes serviceIconFloat {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          50% { transform: translateY(-5px) rotate(3deg); }
-        }
-        
-        .service-image-container {
-          transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .image-fade-in {
-          animation: imageFadeIn 0.8s ease-out forwards;
-        }
-        
-        @keyframes imageFadeIn {
+        @keyframes serviceMorphIn {
           from {
             opacity: 0;
-            transform: translateX(50px) scale(0.9);
+            transform: translateY(50px) scale(0.92);
+            filter: blur(6px);
           }
           to {
             opacity: 1;
-            transform: translateX(0) scale(1);
+            transform: translateY(0) scale(1);
+            filter: blur(0);
           }
         }
         
-        .mobile-bg-overlay {
-          background: linear-gradient(135deg, 
-            rgba(15, 23, 42, 0.7) 0%, 
-            rgba(30, 27, 75, 0.75) 50%, 
-            rgba(15, 23, 42, 0.7) 100%
+        .icon-orbit {
+          animation: iconOrbit 4s ease-in-out infinite;
+        }
+        
+        @keyframes iconOrbit {
+          0%, 100% { transform: translateY(0) rotate(0deg); }
+          25% { transform: translateY(-12px) rotate(8deg); }
+          50% { transform: translateY(-8px) rotate(-5deg); }
+          75% { transform: translateY(-15px) rotate(3deg); }
+        }
+        
+        .gradient-border {
+          position: relative;
+          background: linear-gradient(135deg, #1e293b, #0f172a);
+        }
+        
+        .gradient-border::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          padding: 2px;
+          background: linear-gradient(135deg, ${currentTheme.primary});
+          border-radius: inherit;
+          mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          mask-composite: xor;
+          -webkit-mask-composite: xor;
+        }
+        
+        .stats-glow {
+          text-shadow: 0 0 25px currentColor;
+        }
+        
+        .interactive-hover {
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .interactive-hover:hover {
+          transform: translateY(-4px);
+        }
+        
+        .magnetic-button {
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+          position: relative;
+          overflow: hidden;
+        }
+        
+        .magnetic-button::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+          transition: left 0.5s;
+        }
+        
+        .magnetic-button:hover::before {
+          left: 100%;
+        }
+        
+        .magnetic-button:hover {
+          transform: translateY(-4px) scale(1.03);
+          box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
+        }
+        
+        .text-shimmer {
+          background: linear-gradient(
+            90deg,
+            #ffffff 0%,
+            #e5e7eb 25%,
+            #ffffff 50%,
+            #e5e7eb 75%,
+            #ffffff 100%
           );
+          background-size: 200% 100%;
+          background-clip: text;
+          -webkit-background-clip: text;
+          color: transparent;
+          animation: shimmer 3s ease-in-out infinite;
         }
-
-        .service-title-container {
-          min-height: 3rem;
-          display: flex;
-          align-items: center;
-          justify-content: center;
+        
+        @keyframes shimmer {
+          0%, 100% { background-position: 200% 0; }
+          50% { background-position: -200% 0; }
         }
-
-        @media (min-width: 768px) {
-          .service-title-container {
-            min-height: 4rem;
+        
+        .pulse-ring {
+          animation: pulseRing 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+        }
+        
+        @keyframes pulseRing {
+          0% {
+            transform: scale(0.8);
+            opacity: 1;
+          }
+          100% {
+            transform: scale(2.4);
+            opacity: 0;
           }
         }
-
-        @media (min-width: 1024px) {
-          .service-title-container {
-            min-height: 5rem;
-            justify-content: flex-start;
-          }
+        
+        .holographic {
+          background: linear-gradient(
+            45deg,
+            transparent 30%,
+            rgba(255, 255, 255, 0.1) 50%,
+            transparent 70%
+          );
+          background-size: 200% 200%;
+          animation: holographic 3s ease-in-out infinite;
         }
-
-        @media (min-width: 1280px) {
-          .service-title-container {
-            min-height: 6rem;
-          }
-        }
-
-        .service-title {
-          line-height: 1.1;
-          word-wrap: break-word;
-          hyphens: auto;
-          text-align: center;
-        }
-
-        @media (min-width: 1024px) {
-          .service-title {
-            text-align: left;
-          }
+        
+        @keyframes holographic {
+          0%, 100% { background-position: 0% 0%; }
+          50% { background-position: 100% 100%; }
         }
       `}</style>
       
-      <section className="relative bg-slate-900 min-h-screen flex items-center justify-center px-6 overflow-hidden">
-        {/* Mobile Background Image with Overlay - Only on small screens */}
-        <div className="lg:hidden">
+      <section className="hero-container relative overflow-hidden min-h-screen">
+        {/* Enhanced Animated Background Orbs */}
+        <div className="floating-orb orb-1"></div>
+        <div className="floating-orb orb-2"></div>
+        <div className="floating-orb orb-3"></div>
+        <div className="floating-orb orb-4"></div>
+        
+        {/* Ambient Background Effects */}
+        <div className="absolute inset-0 opacity-30">
+          <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 rounded-full filter blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-1/4 right-1/3 w-80 h-80 bg-gradient-to-r from-emerald-500/10 via-cyan-500/10 to-blue-500/10 rounded-full filter blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+        </div>
+        
+        {/* Mobile Background Image Overlay */}
+        <div className="lg:hidden absolute inset-0 opacity-20">
           <div 
-            key={`mobile-bg-${currentServiceIndex}`}
-            className="absolute inset-0 pb-6 transition-all duration-1000"
+            className="absolute inset-0 transition-opacity duration-1000"
             style={{
               backgroundImage: `url(${currentService.image})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat'
+              backgroundAttachment: 'fixed'
             }}
-          />
-          <div className="absolute inset-0 mobile-bg-overlay" />
+          >
+            <div className={`absolute inset-0 bg-gradient-to-br ${currentTheme.primary} opacity-40`}></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/50"></div>
+          </div>
         </div>
         
-        {/* Main Content Container - Split Layout for Large Screens */}
-        <div className="relative z-10 max-w-7xl mx-auto w-full">
-          <div className="lg:grid lg:grid-cols-12 lg:gap-12 lg:items-center lg:min-h-screen">
+        {/* Content Wrapper */}
+        <div className="relative flex items-center justify-center px-4 sm:px-6 lg:px-8 min-h-screen">
+          <div className="max-w-7xl mx-auto w-full">
             
-            {/* Text Content - Left Side on Large Screens */}
-            <div className="lg:col-span-7 text-center lg:text-left">
-              {/* Badge with Animated Service Icon */}
-              <div className="mb-8 inline-block">
-                <div className="glass-effect px-6 py-3 rounded-full neon-glow">
-                  <span className="flex items-center text-white font-medium">
-                    <div className="service-icon-float mr-2 text-cyan-400">
-                      {currentService.icon}
-                    </div>
-                    <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent font-semibold">
-                      {t.role}
-                    </span>
-                    <Code2 className="w-4 h-4 ml-2 text-purple-400" />
-                  </span>
-                </div>
-              </div>
-
-              {/* Main Heading with Animated Service */}
-              <h1 className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-black mb-8 leading-tight tracking-tight">
-                <span className="block text-white mb-4">
-                  {t.build}
-                </span>
-                <div className="service-title-container mb-4">
-                  <span 
-                    key={currentServiceIndex}
-                    className={`service-title bg-gradient-to-r ${currentService.textGradient} bg-clip-text text-transparent fade-slide-up service-transition capitalize`}
-                  >
-                    {currentService.title.toUpperCase()}
-                  </span>
-                </div>
-                <span className="block text-white text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-light">
-                  {t.transform}
-                </span>
-              </h1>
-
-              {/* Animated Subtitle */}
-              <div className="mb-8 max-w-3xl lg:max-w-none">
-                <p 
-                  key={`subtitle-${currentServiceIndex}`}
-                  className="text-lg md:text-xl lg:text-2xl text-gray-300 leading-relaxed font-light fade-slide-up mb-4"
-                >
-                  {currentService.subtitle} {language === 'sw' ? 'ambazo' : 'that'} {language== 'en' ? "don't just look amazing—they" : "sio tu kwamba zina muonekano mzuri— bali pia zenye"} 
-                  <span className={`text-transparent bg-gradient-to-r ${currentService.textGradient} bg-clip-text font-semibold`}>
-                    {' '}{t.driveResults}
-                  </span>.
-                </p>
-                <p 
-                  key={`description-${currentServiceIndex}`}
-                  className="text-base lg:text-lg text-gray-400 font-light fade-slide-up"
-                >
-                  {currentService.description} • {t.concept}
-                </p>
-              </div>
-
-              {/* Service Indicators */}
-              <div className="mb-8 lg:mb-12 flex justify-center lg:justify-start items-center space-x-4">
-                {t.services.map((service, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentServiceIndex(index)}
-                    className={`service-indicator w-3 h-3 rounded-full transition-all duration-300 ${
-                      index === currentServiceIndex 
-                        ? `bg-gradient-to-r ${service.gradient} active shadow-lg` 
-                        : 'bg-gray-600 hover:bg-gray-500'
-                    }`}
-                    title={service.title}
-                  />
-                ))}
-              </div>
-
-              {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 lg:gap-6 justify-center lg:justify-start items-center mb-12 lg:mb-16">
-                <button className="group relative bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-8 lg:px-10 py-4 lg:py-5 rounded-2xl font-semibold text-base lg:text-lg overflow-hidden transition-all duration-300 hover:scale-105 neon-glow">
-                  <span className="relative z-10 flex items-center">
-                    {t.buildEpic}
-                    <Rocket className="w-4 lg:w-5 h-4 lg:h-5 ml-3 group-hover:translate-x-1 transition-transform" />
-                  </span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                </button>
+            {/* Main Grid Layout */}
+            <div className="lg:grid lg:grid-cols-2 lg:gap-20 lg:items-center">
+              
+              {/* Left Column - Content */}
+              <div className="text-center lg:text-left space-y-8 lg:space-y-12">
                 
-                <button className="group glass-effect text-white px-8 lg:px-10 py-4 lg:py-5 rounded-2xl font-semibold text-base lg:text-lg transition-all duration-300 hover:scale-105 border border-gray-600 hover:border-cyan-400">
-                  <span className="flex items-center">
-                    <Play className="w-4 lg:w-5 h-4 lg:h-5 mr-3" />
-                    {t.viewWork}
-                  </span>
-                </button>
-              </div>
-
-              {/* Stats Row - Only on Large Screens */}
-              <div className="hidden lg:flex flex-wrap justify-start items-center gap-8 text-gray-300">
-                <div className="text-center lg:text-left">
-                  <div className="text-3xl font-bold text-cyan-400 mb-1">100+</div>
-                  <div className="text-sm uppercase tracking-wider">{t.projects}</div>
-                </div>
-                <div className="w-px h-12 bg-gray-600"></div>
-                <div className="text-center lg:text-left">
-                  <div className="text-3xl font-bold text-purple-400 mb-1">5+</div>
-                  <div className="text-sm uppercase tracking-wider">{t.years}</div>
-                </div>
-                <div className="w-px h-12 bg-gray-600"></div>
-                <div className="text-center lg:text-left">
-                  <div className="text-3xl font-bold text-pink-400 mb-1">10+</div>
-                  <div className="text-sm uppercase tracking-wider">{t.clients}</div>
-                </div>
-              </div>
-            </div>
-
-            {/* Image Section - Right Side on Large Screens */}
-            <div className="hidden lg:block lg:col-span-5">
-              <div className="service-image-container">
-                <div 
-                  key={`desktop-image-${currentServiceIndex}`}
-                  className="relative rounded-2xl overflow-hidden shadow-2xl image-fade-in"
-                >
-                  <img
-                    src={currentService.image}
-                    alt={currentService.imageAlt}
-                    className="w-full h-[500px] xl:h-[600px] object-cover"
-                  />
-                  <div className={`absolute inset-0 bg-gradient-to-t ${currentService.gradient} opacity-20`}></div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
-                  
-                  {/* Floating Tech Stack Badge */}
-                  <div className="absolute bottom-6 left-6 right-6">
-                    <div className="glass-effect px-4 py-3 rounded-xl">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center">
-                          <div className={`w-3 h-3 rounded-full bg-gradient-to-r ${currentService.gradient} mr-3`}></div>
-                          <span className="text-white font-semibold text-sm">
-                            {currentService.description}
-                          </span>
-                        </div>
-                        <div className="text-white/70">
-                          {currentService.icon}
-                        </div>
+                {/* Enhanced Professional Badge */}
+                <div className={`inline-block ${isLoaded ? 'reveal-animation' : ''}`}>
+                  <div className="hero-badge px-8 py-4 rounded-full relative overflow-hidden">
+                    <div className="holographic absolute inset-0"></div>
+                    <div className="relative flex items-center space-x-4">
+                      <div className="icon-orbit text-cyan-300 relative">
+                        {currentService.icon}
+                        <div className={`absolute inset-0 bg-gradient-to-r ${currentTheme.primary} rounded-full opacity-20 pulse-ring`}></div>
                       </div>
+                      <span className="text-white font-bold tracking-wide text-lg">
+                        {t.role}
+                      </span>
+                      <Star className="w-5 h-5 text-yellow-400 animate-pulse" />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Enhanced Hero Title */}
+                <div className={`space-y-6 ${isLoaded ? 'reveal-animation reveal-delay-1' : ''}`}>
+                  <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-9xl font-black tracking-tight">
+                    <span className="block text-shimmer mb-3 leading-none">
+                      {t.tagline}
+                    </span>
+                    <div className="relative overflow-hidden">
+                      <span 
+                        key={`title-${activeServiceIndex}`}
+                        className="block service-morph leading-none font-black text-6xl lg:text-8xl"
+                        style={{ 
+                          background: activeServiceIndex === 0 ? 'linear-gradient(135deg, #22d3ee, #06b6d4, #3b82f6)' :
+                                     activeServiceIndex === 1 ? 'linear-gradient(135deg, #a855f7, #8b5cf6, #ec4899)' :
+                                     activeServiceIndex === 2 ? 'linear-gradient(135deg, #10b981, #059669, #06b6d4)' :
+                                     'linear-gradient(135deg, #fb923c, #ef4444, #ec4899)',
+                          WebkitBackgroundClip: 'text',
+                          backgroundClip: 'text',
+                          color: 'transparent',
+                          WebkitTextFillColor: 'transparent'
+                        }}
+                      >
+                        {currentService.title.toUpperCase()}
+                      </span>
+                    </div>
+                    <span className="block text-white/95 text-3xl sm:text-4xl lg:text-6xl font-light mt-6 leading-tight">
+                      {t.transform}
+                    </span>
+                  </h1>
+                </div>
+
+                {/* Enhanced Description */}
+                <div className={`space-y-8 max-w-2xl mx-auto lg:mx-0 ${isLoaded ? 'reveal-animation reveal-delay-2' : ''}`}>
+                  <p 
+                    key={`desc-${activeServiceIndex}`}
+                    className="text-xl lg:text-2xl text-gray-200 leading-relaxed service-morph font-medium"
+                  >
+                    {currentService.subtitle} {language === 'sw' ? 'ambazo' : 'that'} {language === 'en' ? "don't just impress—they" : "si tu kuonyesha—bali pia"} 
+                    <span className={`bg-gradient-to-r ${currentTheme.secondary} bg-clip-text text-transparent font-bold ml-2`}>
+                      {t.impact}
+                    </span>.
+                  </p>
+                  
+                  <div className="flex items-center justify-center lg:justify-start space-x-6 p-6 premium-glass rounded-2xl">
+                    <div className={`w-3 h-3 rounded-full bg-gradient-to-r ${currentTheme.primary} animate-pulse`}></div>
+                    <p className="text-lg text-gray-200 font-semibold">
+                      {currentService.description}
+                    </p>
+                    <Sparkles className={`w-5 h-5 text-${currentTheme.accent} animate-pulse`} />
+                  </div>
+                  
+                  <p className="text-lg text-gray-300 italic font-medium border-l-4 border-gradient-to-b from-transparent via-gray-500 to-transparent pl-6">
+                    {t.concept}
+                  </p>
+                </div>
+
+                {/* Enhanced Service Navigation */}
+                <div className={`flex justify-center lg:justify-start items-center space-x-8 ${isLoaded ? 'reveal-animation reveal-delay-3' : ''}`}>
+                  {t.services.map((service, index) => {
+                    const serviceTheme = themes[service.theme as keyof typeof themes];
+                    return (
+                      <button
+                        key={index}
+                        onClick={() => setActiveServiceIndex(index)}
+                        className={`interactive-hover relative group ${
+                          index === activeServiceIndex 
+                            ? 'scale-150' 
+                            : 'opacity-50 hover:opacity-100 hover:scale-125'
+                        }`}
+                        title={service.title}
+                      >
+                        <div className={`w-5 h-5 rounded-full transition-all duration-700 ${
+                          index === activeServiceIndex 
+                            ? `bg-gradient-to-r ${serviceTheme.primary} ${serviceTheme.shadow} shadow-xl` 
+                            : 'bg-gray-600 group-hover:bg-gray-400'
+                        }`}>
+                          {index === activeServiceIndex && (
+                            <>
+                              <div className={`absolute inset-0 rounded-full bg-gradient-to-r ${serviceTheme.primary} animate-ping opacity-75`}></div>
+                              <div className={`absolute -inset-2 rounded-full bg-gradient-to-r ${serviceTheme.primary} opacity-20 animate-pulse`}></div>
+                            </>
+                          )}
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* Enhanced Call-to-Action Buttons */}
+                <div className={`flex flex-col sm:flex-row gap-6 justify-center lg:justify-start ${isLoaded ? 'reveal-animation reveal-delay-4' : ''}`}>
+                  <button 
+                    className={`magnetic-button group relative overflow-hidden bg-gradient-to-r ${currentTheme.primary} text-white px-10 py-5 lg:px-12 lg:py-6 rounded-2xl font-bold text-xl dynamic-glow`}
+                  >
+                    <span className="relative z-10 flex items-center justify-center">
+                      {t.cta}
+                      <Rocket className="w-6 h-6 ml-4 group-hover:translate-x-3 group-hover:rotate-12 transition-transform duration-400" />
+                    </span>
+                    <div className={`absolute inset-0 bg-gradient-to-r ${currentTheme.secondary} opacity-0 group-hover:opacity-100 transition-opacity duration-400`}></div>
+                  </button>
+                  
+                  <button className="magnetic-button group premium-glass text-white px-10 py-5 lg:px-12 lg:py-6 rounded-2xl font-bold text-xl border border-white/30 hover:border-white/50 relative overflow-hidden">
+                    <div className="holographic absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400"></div>
+                    <span className="relative flex items-center justify-center">
+                      <Play className="w-6 h-6 mr-4 group-hover:scale-125 transition-transform duration-300" />
+                      {t.portfolio}
+                    </span>
+                  </button>
+                </div>
+
+                {/* Enhanced Stats Display */}
+                <div className={`flex flex-wrap justify-center lg:justify-start items-center gap-12 pt-12 ${isLoaded ? 'reveal-animation reveal-delay-4' : ''}`}>
+                  <div className="text-center lg:text-left group interactive-hover premium-glass px-6 py-4 rounded-2xl">
+                    <div className={`text-4xl lg:text-5xl font-black text-${currentTheme.accent} stats-glow mb-2`}>
+                      100+
+                    </div>
+                    <div className="text-sm text-gray-300 uppercase tracking-widest font-bold">
+                      {t.projects}
+                    </div>
+                  </div>
+                  
+                  <div className="w-px h-20 bg-gradient-to-b from-transparent via-gray-400 to-transparent"></div>
+                  
+                  <div className="text-center lg:text-left group interactive-hover premium-glass px-6 py-4 rounded-2xl">
+                    <div className="text-4xl lg:text-5xl font-black text-purple-400 stats-glow mb-2">
+                      5+
+                    </div>
+                    <div className="text-sm text-gray-300 uppercase tracking-widest font-bold">
+                      {t.years}
+                    </div>
+                  </div>
+                  
+                  <div className="w-px h-20 bg-gradient-to-b from-transparent via-gray-400 to-transparent"></div>
+                  
+                  <div className="text-center lg:text-left group interactive-hover premium-glass px-6 py-4 rounded-2xl">
+                    <div className="text-4xl lg:text-5xl font-black text-pink-400 stats-glow mb-2">
+                      50+
+                    </div>
+                    <div className="text-sm text-gray-300 uppercase tracking-widest font-bold">
+                      {t.clients}
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
 
-          {/* Stats Row - Mobile Only */}
-          <div className="lg:hidden flex flex-wrap justify-center items-center gap-6 text-gray-300 mt-12">
-            <div className="text-center">
-              <div className="text-2xl font-bold text-cyan-400 mb-1">10+</div>
-              <div className="text-xs uppercase tracking-wider">{t.projects}</div>
-            </div>
-            <div className="w-px h-8 bg-gray-600"></div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-purple-400 mb-1">3+</div>
-              <div className="text-xs uppercase tracking-wider">{t.years}</div>
-            </div>
-            <div className="w-px h-8 bg-gray-600"></div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-pink-400 mb-1">7+</div>
-              <div className="text-xs uppercase tracking-wider">{t.clients}</div>
+              {/* Right Column - Enhanced Visual Showcase */}
+              <div className="hidden lg:block mt-16 lg:mt-0">
+                <div className="relative">
+                  {/* Main Service Card */}
+                  <div 
+                    key={`showcase-${activeServiceIndex}`}
+                    className={`gradient-border premium-glass rounded-3xl p-8 service-morph ${currentTheme.shadow} relative overflow-hidden`}
+                  >
+                    {/* Holographic overlay */}
+                    <div className="holographic absolute inset-0 opacity-30"></div>
+                    
+                    <div className="relative space-y-8">
+                      {/* Enhanced Card Header */}
+                      <div className="flex items-center justify-between">
+                        <div className={`p-4 rounded-2xl bg-gradient-to-r ${currentTheme.primary} relative overflow-hidden`}>
+                          <div className="text-white icon-orbit relative z-10">
+                            {currentService.icon}
+                          </div>
+                          <div className="absolute inset-0 bg-white/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        </div>
+                        <div className={`px-6 py-3 premium-glass rounded-full border border-${currentTheme.accent}/40 relative overflow-hidden`}>
+                          <div className="holographic absolute inset-0"></div>
+                          <span className={`relative text-${currentTheme.accent} text-sm font-bold tracking-wider`}>
+                            FEATURED
+                          </span>
+                        </div>
+                      </div>
+                      
+                      {/* Enhanced Service Image */}
+                      <div className="relative rounded-3xl overflow-hidden group">
+                        <div 
+                          className="h-80 transition-transform duration-1000 group-hover:scale-110"
+                          style={{
+                            backgroundImage: `url(${currentService.image})`,
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center'
+                          }}
+                        >
+                          <div className={`absolute inset-0 bg-gradient-to-br ${currentTheme.primary} opacity-20 transition-opacity duration-700 group-hover:opacity-30`}></div>
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                        </div>
+                        
+                        {/* Floating Tech Indicators */}
+                        <div className="absolute top-6 left-6">
+                          <div className="premium-glass px-4 py-2 rounded-xl border border-white/20">
+                            <div className="flex items-center space-x-2">
+                              <div className={`w-2 h-2 rounded-full bg-${currentTheme.accent} animate-pulse`}></div>
+                              <span className="text-white text-xs font-bold">LIVE</span>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div className="absolute bottom-6 right-6">
+                          <div className={`w-16 h-16 rounded-full bg-gradient-to-r ${currentTheme.primary} flex items-center justify-center opacity-80 group-hover:opacity-100 transition-opacity dynamic-glow`}>
+                            <ArrowRight className="w-8 h-8 text-white group-hover:translate-x-1 transition-transform" />
+                          </div>
+                        </div>
+                      </div>
+                      
+                      {/* Enhanced Service Details */}
+                      <div className="space-y-6">
+                        <div>
+                          <h3 className="text-3xl font-black text-white mb-3 leading-tight">
+                            {currentService.title}
+                          </h3>
+                          <p className="text-gray-300 text-lg leading-relaxed">
+                            {currentService.subtitle}
+                          </p>
+                        </div>
+                        
+                        {/* Tech Stack Pills */}
+                        <div className="flex flex-wrap gap-3">
+                          {currentService.description.split(' • ').map((tech, index) => (
+                            <div key={index} className="premium-glass px-4 py-2 rounded-xl border border-white/20 relative overflow-hidden">
+                              <div className="holographic absolute inset-0 opacity-30"></div>
+                              <span className="relative text-white text-sm font-semibold">{tech}</span>
+                            </div>
+                          ))}
+                        </div>
+                        
+                        {/* Progress Indicator */}
+                        <div className="space-y-3">
+                          <div className="flex justify-between items-center">
+                            <span className="text-gray-400 text-sm font-medium">Development Progress</span>
+                            <span className={`text-${currentTheme.accent} text-sm font-bold`}>Ready</span>
+                          </div>
+                          <div className="w-full bg-gray-700 rounded-full h-2 overflow-hidden">
+                            <div className={`h-full bg-gradient-to-r ${currentTheme.primary} rounded-full transition-all duration-1000 dynamic-glow`} style={{ width: '100%' }}></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Enhanced Floating Elements */}
+                  <div className={`absolute -top-6 -right-6 w-24 h-24 bg-gradient-to-r ${currentTheme.primary} rounded-full opacity-20 animate-pulse`}></div>
+                  <div className={`absolute -bottom-8 -left-8 w-40 h-40 bg-gradient-to-r ${currentTheme.secondary} rounded-full opacity-10 floating-orb`}></div>
+                  
+                  {/* Accent Particles */}
+                  <div className="absolute top-1/4 -right-2 w-2 h-2 bg-white rounded-full animate-ping"></div>
+                  <div className="absolute bottom-1/3 -left-2 w-3 h-3 bg-yellow-400 rounded-full animate-pulse"></div>
+                  <div className="absolute top-1/2 right-1/4 w-1 h-1 bg-pink-400 rounded-full animate-ping" style={{ animationDelay: '1s' }}></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Language Toggle for Demo */}
-        <button
-          onClick={() => setLanguage(language === 'en' ? 'sw' : 'en')}
-          className="fixed top-4 right-4 glass-effect text-white px-4 py-2 rounded-lg text-sm z-20"
-        >
-          {language === 'en' ? 'SW' : 'EN'}
-        </button>
+       
+
+        {/* Enhanced Scroll Indicator */}
+        <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 animate-bounce">
+          <div className="premium-glass w-8 h-12 rounded-full flex items-end justify-center pb-3 border border-white/20 relative overflow-hidden">
+            <div className="holographic absolute inset-0 opacity-30"></div>
+            <div className={`relative w-2 h-4 bg-gradient-to-t ${currentTheme.primary} rounded-full animate-pulse`}></div>
+          </div>
+        </div>
+
+        {/* Ambient Light Effects */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className={`absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-${currentTheme.accent} to-transparent opacity-30`}></div>
+          <div className={`absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-${currentTheme.accent} to-transparent opacity-30`}></div>
+        </div>
       </section>
     </>
   );

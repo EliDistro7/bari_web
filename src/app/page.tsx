@@ -109,12 +109,13 @@ const Portfolio = () => {
   const roi = calculateROI();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-gray-50">
       {/* Navigation */}
   
 
       {/* Hero Section */}
-     <HeroSection />
+      <HeroSection />
+    
       {/* Interactive Project Showcase */}
       <ProjectShowcase />
    
@@ -131,11 +132,10 @@ const Portfolio = () => {
 
       {/* Consultation CTA */}
     
-
+    
        <Map />
 
-      {/* Footer */}
-     <Footer />
+  
     </div>
   );
 };

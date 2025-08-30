@@ -210,7 +210,7 @@ const MapEmbed: React.FC = () => {
           box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
         }
       `}</style>
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900"></div>
+
       <div id='location' className="w-full mx-0 p-0">
         {/* Header Section */}
         <div className="glass-container overflow-hidden relative">
