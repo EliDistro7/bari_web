@@ -73,7 +73,7 @@ const HeroSection = () => {
       clients: "Wateja Wenye Furaha",
       services: [
         {
-          title: "Programu za Mtandao",
+          title: "Web Apps",
           subtitle: "Suluhisho la kisasa la mtandao",
           icon: <Globe className="w-6 h-6" />,
           theme: "cyan",
@@ -82,7 +82,7 @@ const HeroSection = () => {
           alt: "Kiolesura cha programu ya kisasa ya mtandao"
         },
         {
-          title: "Programu za Simu", 
+          title: "Mobile Apps", 
           subtitle: "Uzoefu wa programu za simu za kisasa",
           icon: <Smartphone className="w-6 h-6" />,
           theme: "purple",
@@ -91,7 +91,7 @@ const HeroSection = () => {
           alt: "Mazingira ya kutengeneza programu za simu"
         },
         {
-          title: "Tovuti za Kimsingi",
+          title: "Websites",
           subtitle: "Tovuti za haraka, zilizoboreshwa kwa SEO", 
           icon: <Monitor className="w-6 h-6" />,
           theme: "emerald",
@@ -100,7 +100,7 @@ const HeroSection = () => {
           alt: "Muundo mzuri wa tovuti"
         },
         {
-          title: "Mifumo ya Nyuma",
+          title: "Backend Systems",
           subtitle: "Miundo imara ya upande wa seva",
           icon: <Server className="w-6 h-6" />,
           theme: "orange",
@@ -399,7 +399,7 @@ const HeroSection = () => {
         }
       `}</style>
       
-      <section className="hero-container relative overflow-hidden min-h-screen">
+      <section className="hero-container relative overflow-hidden py-16">
         {/* Enhanced Animated Background Orbs */}
         <div className="floating-orb orb-1"></div>
         <div className="floating-orb orb-2"></div>
