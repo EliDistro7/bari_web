@@ -63,9 +63,9 @@ const HeroSection = () => {
       role: "Mtaalamu wa Programu",
       tagline: "NATENGENEZA",
       subtitle: "Uzoefu wa Kidijitali",
-      transform: "unaohamasisha biashara",
+      transform: "kwa ajili ya biashara",
       impact: "kuleta athari halisi",
-      concept: "Kutoka wazo hadi utekelezaji, kimeundwa kwa ubora.",
+      concept: "Kutoka wazo hadi utekelezaji, zinazoundwa kwa ubora.",
       cta: "Anza Mradi Wako",
       portfolio: "Ona Kazi Zangu",
       projects: "Miradi",
@@ -399,7 +399,7 @@ const HeroSection = () => {
         }
       `}</style>
       
-      <section className="hero-container relative overflow-hidden py-16">
+      <section className="hero-container relative overflow-hidden py-24">
         {/* Enhanced Animated Background Orbs */}
         <div className="floating-orb orb-1"></div>
         <div className="floating-orb orb-2"></div>
@@ -443,7 +443,7 @@ const HeroSection = () => {
 
                 {/* Enhanced Hero Title */}
                 <div className={`space-y-6 ${isLoaded ? 'reveal-animation reveal-delay-1' : ''}`}>
-                  <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-9xl font-black tracking-tight">
+                  <h1 className="text-5xl sm:text-4xl lg:text-5xl xl:text-7xl font-black tracking-tight">
                     <span className="block text-shimmer mb-3 leading-none">
                       {t.tagline}
                     </span>
