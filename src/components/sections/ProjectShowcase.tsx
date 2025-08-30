@@ -4,6 +4,11 @@ import { useLanguage } from '@/context/language';
 
 const ProjectsShowcase = () => {
   const { language } = useLanguage();
+   const openWhatsApp = () => {
+    const message = "Hi! I'm interested in learning more about your development services. Could you please provide more information?";
+    const url = `https://wa.me/255765762688?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
+  };
   const [activeCategory, setActiveCategory] = useState('all');
 
   const translations = {
@@ -55,7 +60,7 @@ const ProjectsShowcase = () => {
       demo: "Onyesho",
       progress: "Maendeleo",
       visitLive: "Tembelea Tovuti",
-      viewDemo: "Ona Onyesho",
+      viewDemo: "Ona Demo",
       haveProject: "Una mradi mzuri? Hebu",
       buildSomething: "tuunde kitu cha ajabu",
       together: "pamoja.",
@@ -566,7 +571,7 @@ const ProjectsShowcase = () => {
               {t.haveProject}
               <span className="text-transparent bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text font-black"> {t.buildSomething}</span> {t.together}
             </p>
-            <button className="group relative bg-gradient-to-r from-cyan-500 via-purple-600 to-pink-600 text-white px-8 sm:px-12 py-4 sm:py-6 rounded-2xl font-black text-lg sm:text-xl overflow-hidden transition-all duration-300 hover:scale-105 pulse-glow-bold shadow-2xl">
+            <button onClick={openWhatsApp} className="group relative bg-gradient-to-r from-cyan-500 via-purple-600 to-pink-600 text-white px-8 sm:px-12 py-4 sm:py-6 rounded-2xl font-black text-lg sm:text-xl overflow-hidden transition-all duration-300 hover:scale-105 pulse-glow-bold shadow-2xl">
               <span className="relative z-10 flex items-center">
                 {t.startProject}
                 <Rocket className="w-5 h-5 sm:w-6 sm:h-6 ml-3 sm:ml-4 group-hover:translate-x-2 group-hover:rotate-12 transition-transform duration-300" />
