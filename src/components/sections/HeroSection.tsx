@@ -95,7 +95,7 @@ const HeroSection = () => {
           subtitle: "Tovuti za haraka, zilizoboreshwa kwa SEO", 
           icon: <Monitor className="w-6 h-6" />,
           theme: "emerald",
-          description: "JAMstack • Gatsby • Hugo",
+          description: "NextJs • ReactJs • WordPress",
           image: "https://images.unsplash.com/photo-1547658719-da2b51169166?w=800&h=600&fit=crop&crop=center&auto=format",
           alt: "Muundo mzuri wa tovuti"
         },
