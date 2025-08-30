@@ -61,7 +61,7 @@ const HeroSection = () => {
     },
     sw: {
       role: "Mtaalamu wa Programu",
-      tagline: "NINATENGENEZA",
+      tagline: "NATENGENEZA",
       subtitle: "Uzoefu wa Kidijitali",
       transform: "unaohamasisha biashara",
       impact: "kuleta athari halisi",
@@ -439,21 +439,7 @@ const HeroSection = () => {
               <div className="text-center lg:text-left space-y-8 lg:space-y-12">
                 
                 {/* Enhanced Professional Badge */}
-                <div className={`inline-block ${isLoaded ? 'reveal-animation' : ''}`}>
-                  <div className="hero-badge px-8 py-4 rounded-full relative overflow-hidden">
-                    <div className="holographic absolute inset-0"></div>
-                    <div className="relative flex items-center space-x-4">
-                      <div className="icon-orbit text-cyan-300 relative">
-                        {currentService.icon}
-                        <div className={`absolute inset-0 bg-gradient-to-r ${currentTheme.primary} rounded-full opacity-20 pulse-ring`}></div>
-                      </div>
-                      <span className="text-white font-bold tracking-wide text-lg">
-                        {t.role}
-                      </span>
-                      <Star className="w-5 h-5 text-yellow-400 animate-pulse" />
-                    </div>
-                  </div>
-                </div>
+          
 
                 {/* Enhanced Hero Title */}
                 <div className={`space-y-6 ${isLoaded ? 'reveal-animation reveal-delay-1' : ''}`}>
@@ -567,7 +553,7 @@ const HeroSection = () => {
                 <div className={`flex flex-wrap justify-center lg:justify-start items-center gap-12 pt-12 ${isLoaded ? 'reveal-animation reveal-delay-4' : ''}`}>
                   <div className="text-center lg:text-left group interactive-hover premium-glass px-6 py-4 rounded-2xl">
                     <div className={`text-4xl lg:text-5xl font-black text-${currentTheme.accent} stats-glow mb-2`}>
-                      100+
+                      10+
                     </div>
                     <div className="text-sm text-gray-300 uppercase tracking-widest font-bold">
                       {t.projects}
@@ -589,7 +575,7 @@ const HeroSection = () => {
                   
                   <div className="text-center lg:text-left group interactive-hover premium-glass px-6 py-4 rounded-2xl">
                     <div className="text-4xl lg:text-5xl font-black text-pink-400 stats-glow mb-2">
-                      50+
+                      7+
                     </div>
                     <div className="text-sm text-gray-300 uppercase tracking-widest font-bold">
                       {t.clients}
