@@ -38,7 +38,7 @@ const PartnersBanner = () => {
       industries: "Viwanda",
       retention: "Kuhifadhi",
       support: "Msaada",
-      startPartnership: "Anza Ushirikiano Wako"
+      startPartnership: "Anza Project yako"
     }
   };
 
