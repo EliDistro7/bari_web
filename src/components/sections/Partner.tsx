@@ -4,6 +4,12 @@ import { useLanguage } from '@/context/language';
 const PartnersBanner = () => {
   const {language} = useLanguage();
 
+   const openWhatsApp = () => {
+    const message = "Hi! I'm interested in learning more about your development services. Could you please provide more information?";
+    const url = `https://wa.me/255765762688?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
+  };
+
   type Language = 'en' | 'sw';
   type Translation = {
     trustedPartners: string;
@@ -289,7 +295,7 @@ const PartnersBanner = () => {
         </div>
 
         {/* CTA */}
-        <div className="text-center">
+        <div className="text-center" onClick={openWhatsApp}>
           <a 
             href="https://wa.me/255765762688?text=Hi%2C%20I%27m%20interested%20in%20starting%20a%20partnership%20with%20your%20team%21"
             target="_blank"
