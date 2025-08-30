@@ -6,6 +6,12 @@ const HeroSection = () => {
   const {language} = useLanguage();
   const [isLoaded, setIsLoaded] = useState(false);
 
+   const openWhatsApp = () => {
+    const message = "Hi! I'm interested in learning more about your development services. Could you please provide more information?";
+    const url = `https://wa.me/255765762688?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
+  };
+
   // Enhanced translation object
   const content = {
     en: {
@@ -532,6 +538,7 @@ const HeroSection = () => {
                 <div className={`flex flex-col sm:flex-row gap-6 justify-center lg:justify-start ${isLoaded ? 'reveal-animation reveal-delay-4' : ''}`}>
                   <button 
                     className={`magnetic-button group relative overflow-hidden bg-gradient-to-r ${currentTheme.primary} text-white px-10 py-5 lg:px-12 lg:py-6 rounded-2xl font-bold text-xl dynamic-glow`}
+                    onClick={openWhatsApp}
                   >
                     <span className="relative z-10 flex items-center justify-center">
                       {t.cta}
@@ -542,10 +549,10 @@ const HeroSection = () => {
                   
                   <button className="magnetic-button group premium-glass text-white px-10 py-5 lg:px-12 lg:py-6 rounded-2xl font-bold text-xl border border-white/30 hover:border-white/50 relative overflow-hidden">
                     <div className="holographic absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400"></div>
-                    <span className="relative flex items-center justify-center">
+                    <a href='#projects' className="relative flex items-center justify-center">
                       <Play className="w-6 h-6 mr-4 group-hover:scale-125 transition-transform duration-300" />
                       {t.portfolio}
-                    </span>
+                    </a>
                   </button>
                 </div>
 
