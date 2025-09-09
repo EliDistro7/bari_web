@@ -15,9 +15,11 @@ import {
   Book
 } from 'lucide-react';
 
+import { useLanguage } from '@/context/language';
+
 const ChurchSystemPDFGenerator = () => {
   type Language = 'en' | 'sw';
-  const [language, setLanguage] = useState<Language>('en');
+  const {language} = useLanguage()
   const [generating, setGenerating] = useState(false);
 
   const translations: Record<Language, {
@@ -61,7 +63,7 @@ const ChurchSystemPDFGenerator = () => {
     }
   };
 
-  const t = translations[language] || translations.en;
+  const t = translations[language as Language] || translations.en;
 
   // PDF Content Data
   const pdfContent = {
@@ -540,15 +542,7 @@ const generateHTMLPDF = (content: PDFContent, fileName: string): void => {
         <div className="max-w-7xl mx-auto px-6 py-20 relative z-10">
           {/* Header */}
           <div className="text-center mb-16">
-            <div className="flex justify-end mb-8">
-              <button
-                onClick={() => setLanguage(language === 'en' ? 'sw' : 'en')}
-                className="glass-card px-4 py-2 rounded-lg text-sm font-medium text-gray-300 hover:text-white"
-              >
-                <Globe className="w-4 h-4 mr-2 inline" />
-                {language === 'en' ? 'SW' : 'EN'}
-              </button>
-            </div>
+          
             
             <h1 className="text-4xl md:text-6xl font-black gradient-text mb-6">
               {t.title}

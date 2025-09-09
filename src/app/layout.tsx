@@ -72,9 +72,9 @@ export default function RootLayout({
           {/* Dynamic Theme Color Manager */}
           <ThemeColorManager />
           
-          <Header />
+        
           {children}
-          <Footer />
+ 
         </LanguageProvider>
       </body>
     </html>

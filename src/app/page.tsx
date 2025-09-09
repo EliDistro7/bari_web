@@ -111,7 +111,7 @@ const Portfolio = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-gray-50">
       {/* Navigation */}
-  
+  <Header />
 
       {/* Hero Section */}
       <HeroSection />
@@ -135,7 +135,7 @@ const Portfolio = () => {
     
        <Map />
 
-  
+      <Footer />
     </div>
   );
 };

@@ -232,7 +232,7 @@ const PartnersBanner = () => {
           </div>
           
           <h2 className="text-5xl md:text-7xl font-black text-white mb-8 bg-gradient-to-r from-white via-cyan-200 to-white bg-clip-text text-transparent">
-            Our Partners
+            My Partners
           </h2>
           
           <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed font-medium">

@@ -291,7 +291,7 @@ const Header = () => {
               <a href="#partners" className="nav-link text-gray-300 hover:text-white font-medium">
                 {t.partners}
               </a>
-              <a href="/resources" className="nav-link text-gray-300 hover:text-white font-medium">
+              <a href="/resources/kkkt-yombo/docs" className="nav-link text-gray-300 hover:text-white font-medium">
                 {t.resources}
               </a>
             </div>
@@ -378,7 +378,7 @@ const Header = () => {
                   </div>
                 </a>
                 <a 
-                  href="/resources" 
+                  href="/resources/kkkt-yombo/docs" 
                   className="mobile-menu-item block px-6 py-3 text-gray-300 hover:text-white font-medium"
                   onClick={() => setIsMenuOpen(false)}>
                   <div className="flex items-center">

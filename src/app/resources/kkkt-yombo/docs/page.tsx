@@ -15,11 +15,14 @@ import {
   Globe,
   ChevronDown,
   ExternalLink,
-  CheckCircle
+  CheckCircle,
+  ArrowLeft
 } from 'lucide-react';
 
 import { useLanguage } from '@/context/language';
 import ChurchSystemPDFGenerator from '@/components/features/ChurchPDF';
+import PasswordProtection from '@/components/PasswordProtection';
+import { useRouter } from 'next/navigation';
 
 type Resource = {
   title: string;
@@ -43,14 +46,18 @@ type Translation = {
   downloadPdf: string;
   viewDemo: string;
   comingSoon: string;
+  backToHome: string;
   systemFeatures: string[];
   resources: Resource[];
+  protectionTitle: string;
+  protectionDescription: string;
 };
 
 type Language = 'en' | 'sw';
 
-const ResourcesPage = () => {
+const ResourcesPageContent = () => {
   const {language} = useLanguage();
+  const router = useRouter();
   const [expandedSection, setExpandedSection] = useState<string | null>(null);
 
   const translations: Record<Language, Translation> = {
@@ -67,6 +74,9 @@ const ResourcesPage = () => {
       downloadPdf: "Download PDF Guide",
       viewDemo: "View Live Demo",
       comingSoon: "Coming Soon",
+      backToHome: "Back to Home",
+      protectionTitle: "Confidential Church Documentation",
+      protectionDescription: "This documentation contains sensitive church management information and is restricted to authorized personnel only.",
       systemFeatures: [
         "Member Management & Directory",
         "Event Planning & Scheduling",
@@ -125,6 +135,9 @@ const ResourcesPage = () => {
       downloadPdf: "Pakua Mwongozo PDF",
       viewDemo: "Ona Onyesho la Moja kwa Moja",
       comingSoon: "Inakuja Hivi Karibuni",
+      backToHome: "Rudi Nyumbani",
+      protectionTitle: "Nyaraka za Siri za Kanisa",
+      protectionDescription: "Nyaraka hizi zina taarifa nyeti za usimamizi wa kanisa na zimewekewa vikwazo kwa wafanyakazi walioidhinishwa tu.",
       systemFeatures: [
         "Usimamizi wa Wanachama na Saraka",
         "Kupanga Matukio na Ratiba",
@@ -174,20 +187,67 @@ const ResourcesPage = () => {
 
   const t = translations[language as Language] || translations.en;
 
-const toggleSection = (section: string): void => {
+  const toggleSection = (section: string): void => {
     setExpandedSection(expandedSection === section ? null : section);
-};
+  };
 
-  const handleDownload = (resourceTitle:string) => {
+  const handleDownload = (resourceTitle: string) => {
     // In a real implementation, this would trigger the actual file download
     alert(`Downloading: ${resourceTitle}`);
   };
 
+  const handleBackToHome = () => {
+    router.push('/');
+  };
+
   return (
-    <>
-     <ChurchSystemPDFGenerator />
-    </>
+    <div className="min-h-screen "
+    style={{background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%)'}}>
+      {/* Back Button */}
+      <div className="p-4">
+        <button
+          onClick={handleBackToHome}
+          className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-600 hover:text-primary transition-all duration-300 group glass-effect rounded-lg"
+        >
+          <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform duration-200" />
+          {t.backToHome}
+        </button>
+      </div>
+
+      <div className="container mx-auto px-4 pb-12">
+        <ChurchSystemPDFGenerator />
+      </div>
+    </div>
   );
 };
 
-export default ResourcesPage;
+const ProtectedResourcesPage = () => {
+  const { language } = useLanguage();
+
+  const translations = {
+    en: {
+      title: "Confidential Church Documentation",
+      description: "This documentation contains sensitive church management information and is restricted to authorized personnel only."
+    },
+    sw: {
+      title: "Nyaraka za Siri za Kanisa", 
+      description: "Nyaraka hizi zina taarifa nyeti za usimamizi wa kanisa na zimewekewa vikwazo kwa wafanyakazi walioidhinishwa tu."
+    }
+  };
+
+  const t = translations[language as keyof typeof translations] || translations.en;
+
+  return (
+    <PasswordProtection
+      title={t.title}
+      description={t.description}
+      sessionKey="church-docs-access"
+      maxAttempts={3}
+      lockoutDuration={15}
+    >
+      <ResourcesPageContent />
+    </PasswordProtection>
+  );
+};
+
+export default ProtectedResourcesPage;
