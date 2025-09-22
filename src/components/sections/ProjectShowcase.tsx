@@ -129,6 +129,19 @@ const ProjectsShowcase = () => {
       status: language === 'en' ? "Automobile Batteries" : "betri za magari",
       icon: Wrench
     },
+      {
+      id: 8,
+      title: "Kechita Foods",
+      description: t.lubricantsDesc,
+         category: "progress",
+         progress: 80,
+      type: "web",
+      tech: ["React", "WooCommerce", "PHP", "Stripe", "Inventory"],
+      image: "/images/projects/kechita.jpg",
+      liveUrl: "https://commerce-eta-eight.vercel.app/",
+      status: language === 'en' ? "Automobile Batteries" : "betri za magari",
+      icon: Wrench
+    },
     {
       id: 5,
       title: "FourFreyn Farm Implements",

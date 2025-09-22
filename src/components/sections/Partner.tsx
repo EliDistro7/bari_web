@@ -128,19 +128,12 @@ const PartnersBanner = () => {
         industry: "Teknolojia",
         color: "from-purple-500 to-violet-600"
       },
-      { 
-        id: 4, 
-        name: "LubeJunction", 
-        logo: "LJ",
-        logoImage: "/images/partners/lube.jpg",
-        industry: "Magari",
-        color: "from-orange-500 to-red-600"
-      },
+  
       { 
         id: 5, 
-        name: "Raha Energise", 
+        name: "Chui Batteries", 
         logo: "RE",
-        logoImage: "/images/partners/raha-energise-logo.png",
+        logoImage: "/images/projects/chui.jpeg",
         industry: "Viwanda",
         color: "from-yellow-500 to-amber-600"
       },
@@ -156,7 +149,7 @@ const PartnersBanner = () => {
         id: 7, 
         name: "Fourfreyn Company", 
         logo: "FF",
-        logoImage: "/images/partners/fourfreyn-logo.png",
+        logoImage: "/images/partners/fourfreyn.jpg",
         industry: "Kilimo",
         color: "from-green-500 to-emerald-600"
       },
