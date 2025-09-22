@@ -117,10 +117,21 @@ const ProjectsShowcase = () => {
       status: language === 'en' ? "Growing digital marketing agency" : "Wakala wa uuzaji wa kidijitali unaoongezeka",
       icon: TrendingUp
     },
-
+    {
+      id: 4,
+      title: "Chui Batteries",
+      description: t.lubricantsDesc,
+      category: "completed",
+      type: "web",
+      tech: ["React", "WooCommerce", "PHP", "Stripe", "Inventory"],
+      image: "/images/projects/chui.jpeg",
+      liveUrl: "https://chui-battery-tanzania.com",
+      status: language === 'en' ? "Automobile Batteries" : "betri za magari",
+      icon: Wrench
+    },
     {
       id: 5,
-      title: "Four Frey Farm Implements",
+      title: "FourFreyn Farm Implements",
       description: t.farmImplementsDesc,
       category: "completed",
       type: "web",
