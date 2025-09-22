@@ -61,10 +61,10 @@ const ProjectsShowcase = () => {
       progress: "Maendeleo",
       visitLive: "Tembelea Tovuti",
       viewDemo: "Ona Demo",
-      haveProject: "Una mradi mzuri? Hebu",
+      haveProject: "Una project? Hebu",
       buildSomething: "tuunde kitu",
       together: "pamoja.",
-      startProject: "Anza Mradi Wako",
+      startProject: "Anza project yako",
       // Project descriptions
       churchSystemDesc: "Mfumo kamili wa usimamizi wa kanisa wenye ufuatiliaji wa waumini, ratiba za matukio, usimamizi wa michango, na lugha za Kiswahili.",
       mentalHealthDesc: "Tovuti tuli inayohamasisha uongozi wa afya ya akili na uzazi kwa vijana wa Tanzania kupitia blogu za elimu na rasilimali.",

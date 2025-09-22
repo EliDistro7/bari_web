@@ -806,7 +806,7 @@ Kwa zaidi ya watumiaji wa simu mahiri bilioni 6.8 ulimwenguni na watu wakitumia 
 **Huduma za Kitaalamu:**
 • Viunga vya wateja na kushiriki hati
 • Kuhifadhi huduma na kupanga ratiba
-• Masasisho ya wakati halisi ya mradi
+• Masasisho ya wakati halisi ya project
 • Usimamizi wa wafanyakazi wa simu
 
 **Huduma za Kifedha:**
@@ -889,7 +889,7 @@ Biashara nyingi hutumia zana 10-15 tofauti za programu: mifumo ya CRM, programu 
 **Muunganisho wa Utendaji:**
 • ERP ↔ Usimamizi wa Ghala: Utimilifu ulio safi wa agizo
 • HR ↔ Mishahara: Usawazishaji wa kiotomatiki wa data ya mfanyakazi
-• Usimamizi wa Mradi ↔ Ufuatiliaji wa Wakati: Ankara ya urahisi
+• Usimamizi wa project ↔ Ufuatiliaji wa Wakati: Ankara ya urahisi
 • Msaada wa Wateja ↔ CRM: Historia kamili ya mteja
 
 **Muunganisho wa Kifedha:**
@@ -1122,7 +1122,7 @@ Ufunguo ni kuanza na uchambuzi wa athari kubwa, wa ushindi wa haraka na kukuza u
     sectionDescriptionEnd: "kuleta matokeo bora mtandaoni",
     ctaDescription: "Tayari kubadilisha biashara yako na",
     ctaDescriptionHighlight: "teknolojia ya hali ya juu",
-    ctaButton: "Jadili Mradi Wako",
+    ctaButton: "Jadili project yako",
     learnMore: "Jifunze Zaidi",
     premiumServices: "Huduma Bora",
     whoNeedsTitle: "Nani Anahitaji Huduma Hii?",

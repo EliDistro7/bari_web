@@ -72,7 +72,7 @@ const HeroSection = () => {
       transform: "kwa ajili ya biashara",
       impact: "kuleta athari halisi",
       concept: "Kutoka wazo hadi utekelezaji, zinazoundwa kwa ubora.",
-      cta: "Anza Mradi Wako",
+      cta: "Anza Project yako",
       portfolio: "Ona Kazi Zangu",
       projects: "Miradi",
       years: "Miaka",
