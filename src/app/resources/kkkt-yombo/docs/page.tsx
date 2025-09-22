@@ -126,7 +126,7 @@ const ResourcesPageContent = () => {
       title: "Rasilimali na Nyaraka",
       subtitle: "Miongozo kamili na nyaraka za mifumo ya usimamizi wa kanisa",
       churchSystem: "Mfumo wa Usimamizi wa Kanisa",
-      systemDescription: "Suluhisho kamili la kidijitali kwa utawala wa kisasa wa kanisa na usimamizi wa wanachama",
+      systemDescription: "Suluhu za kidijitali kwa ajili uendeshaji wa kisasa wa kanisa na usimamizi wa wanachama",
       features: "Vipengele Muhimu",
       documentation: "Nyaraka",
       downloads: "Pakua",

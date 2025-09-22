@@ -45,13 +45,13 @@ const ProjectsShowcase = () => {
     },
     sw: {
       portfolioShowcase: "Mfumo wa Kazi",
-      digitalMasterpieces: "KAZI ZA KIDIJITALI",
+      digitalMasterpieces: "KAZI ZANGU",
       digitalText: "KAZI ZA",
       masterpiecesText: "KIDIJITALI",
-      exploreText: "Chunguza mkusanyiko wangu wa",
+      exploreText: "Dodosa mkusanyiko wangu wa",
       innovativeSolutions: "suluhisho za ubunifu",
-      fromProduction: "- kutoka programu za uzalishaji hadi maonyesho ya majaribio",
-      allProjects: "Miradi Yote",
+      fromProduction: "- Tovuti, Mifumo ya Tehama na Programu Tumishi",
+      allProjects: "Project zote",
       completed: "Imekamilika",
       inProgress: "Inaendelea",
       showcases: "Maonyesho",
@@ -418,7 +418,7 @@ const ProjectsShowcase = () => {
             </div>
             
             <h2 className="text-4xl sm:text-6xl md:text-7xl font-black text-white mb-6 sm:mb-8 neon-text-bold leading-tight">
-              {t.digitalText}
+           
               <span className="block bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
                 {t.masterpiecesText}
               </span>
