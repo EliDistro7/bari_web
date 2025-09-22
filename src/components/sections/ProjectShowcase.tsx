@@ -62,7 +62,7 @@ const ProjectsShowcase = () => {
       visitLive: "Tembelea Tovuti",
       viewDemo: "Ona Demo",
       haveProject: "Una mradi mzuri? Hebu",
-      buildSomething: "tuunde kitu cha ajabu",
+      buildSomething: "tuunde kitu",
       together: "pamoja.",
       startProject: "Anza Mradi Wako",
       // Project descriptions
