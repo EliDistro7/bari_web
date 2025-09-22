@@ -117,18 +117,7 @@ const ProjectsShowcase = () => {
       status: language === 'en' ? "Growing digital marketing agency" : "Wakala wa uuzaji wa kidijitali unaoongezeka",
       icon: TrendingUp
     },
-    {
-      id: 4,
-      title: "Lube Junction E-Commerce",
-      description: t.lubricantsDesc,
-      category: "completed",
-      type: "web",
-      tech: ["React", "WooCommerce", "PHP", "Stripe", "Inventory"],
-      image: "/images/projects/lube.jpg",
-      liveUrl: "https://lubejunction.com",
-      status: language === 'en' ? "Automotive lubricants marketplace" : "Soko la mafuta ya magari",
-      icon: Wrench
-    },
+
     {
       id: 5,
       title: "Four Frey Farm Implements",
