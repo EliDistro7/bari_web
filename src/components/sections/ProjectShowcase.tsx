@@ -38,7 +38,7 @@ const ProjectsShowcase = () => {
       churchSystemDesc: "Complete church management system with member tracking, event scheduling, donation management, and multi-language support for Swahili congregations.",
       mentalHealthDesc: "Static website promoting mental health and reproductive health awareness with educational blogs and resources for young people in Tanzania.",
       marketingCompanyDesc: "Professional marketing company website showcasing digital marketing services, branding solutions, and client success stories.",
-      lubricantsDesc: "E-commerce platform for automotive lubricants with product catalog, online ordering, and dealer network management.",
+      lubricantsDesc: "Online platform for Kechita Restaurant with meals catalog, online ordering.",
       farmImplementsDesc: "Agricultural equipment marketplace connecting farmers with quality farm implements and machinery suppliers.",
       ubuntuAppDesc: "Modern marketing application for Ubuntu O House with client management, campaign tracking, and analytics dashboard.",
       accountingAppDesc: "Comprehensive accounting application for Masatu service providers with invoicing, expense tracking, and financial reporting."
@@ -69,7 +69,7 @@ const ProjectsShowcase = () => {
       churchSystemDesc: "Mfumo kamili wa usimamizi wa kanisa wenye ufuatiliaji wa waumini, ratiba za matukio, usimamizi wa michango, na lugha za Kiswahili.",
       mentalHealthDesc: "Tovuti tuli inayohamasisha uongozi wa afya ya akili na uzazi kwa vijana wa Tanzania kupitia blogu za elimu na rasilimali.",
       marketingCompanyDesc: "Tovuti ya mtaalamu ya kampuni ya uuzaji inayoonyesha huduma za uuzaji wa kidijitali, suluhisho za chapa, na hadithi za mafanikio ya wateja.",
-      lubricantsDesc: "Jukwaa la biashara mtandaoni la mafuta ya magari lenye katalogi ya bidhaa, uagizaji mtandaoni, na usimamizi wa mtandao wa wasambazaji.",
+      lubricantsDesc: "Jukwaa la kuweka order ya chakula kwa njia ya mtandao lenye katalogi ya vyakula, uagizaji mtandaoni, na usimamizi wa mtandao wa wasambazaji.",
       farmImplementsDesc: "Soko la vifaa vya kilimo linalowaunganisha wakulima na wasambazaji wa vifaa na mashine za kilimo zenye ubora.",
       ubuntuAppDesc: "Programu ya kisasa ya uuzaji ya Ubuntu O House yenye usimamizi wa wateja, ufuatiliaji wa kampeni, na dashibodi ya takwimu.",
       accountingAppDesc: "Programu kamili ya uhasibu kwa watoa huduma wa Masatu yenye bili, ufuatiliaji wa matumizi, na ripoti za kifedha."
