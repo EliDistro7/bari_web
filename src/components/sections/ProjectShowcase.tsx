@@ -36,8 +36,11 @@ const ProjectsShowcase = () => {
       startProject: "Start Your Project",
       // Project descriptions
       churchSystemDesc: "Complete church management system with member tracking, event scheduling, donation management, and multi-language support for Swahili congregations.",
-      mentalHealthDesc: "Static website promoting mental health and reproductive health awareness with educational blogs and resources for young people in Tanzania.",
+      pichazangu: 'Web app for sharing and discovering stunning images by photographers worldwide.',
+      mentalHealthDesc: "Static website with SANITY CMS promoting mental health and reproductive health awareness with educational blogs and resources for young people in Tanzania.",
       marketingCompanyDesc: "Professional marketing company website showcasing digital marketing services, branding solutions, and client success stories.",
+      chui: "Online platform for Chui Batteries with product catalog, online ordering, and distributor network management.",
+      elemi: 'A web profile for Elemi Electrical company company showcasing services, projects, and client testimonials.',
       lubricantsDesc: "Online platform for Kechita Restaurant with meals catalog, online ordering.",
       farmImplementsDesc: "Agricultural equipment marketplace connecting farmers with quality farm implements and machinery suppliers.",
       ubuntuAppDesc: "Modern marketing application for Ubuntu O House with client management, campaign tracking, and analytics dashboard.",
@@ -67,7 +70,10 @@ const ProjectsShowcase = () => {
       startProject: "Anza project yako",
       // Project descriptions
       churchSystemDesc: "Mfumo kamili wa usimamizi wa kanisa wenye ufuatiliaji wa waumini, ratiba za matukio, usimamizi wa michango, na lugha za Kiswahili.",
+      pichazangu: 'Programu ya wavuti ya ku-share na kutunza picha za kupendeza kutoka kwa wapiga picha duniani kote.',
       mentalHealthDesc: "Tovuti tuli inayohamasisha uongozi wa afya ya akili na uzazi kwa vijana wa Tanzania kupitia blogu za elimu na rasilimali.",
+      chui: "Jukwaa la mtandaoni la Chui Batteries lenye katalogi ya bidhaa, uagizaji mtandaoni, na usimamizi wa mtandao wa wasambazaji.",
+      elemi: 'Profaili ya wavuti ya kampuni ya umeme ya Elemi ikionyesha huduma, miradi, na maoni ya wateja.',
       marketingCompanyDesc: "Tovuti ya mtaalamu ya kampuni ya uuzaji inayoonyesha huduma za uuzaji wa kidijitali, suluhisho za chapa, na hadithi za mafanikio ya wateja.",
       lubricantsDesc: "Jukwaa la kuweka order ya chakula kwa njia ya mtandao lenye katalogi ya vyakula, uagizaji mtandaoni, na usimamizi wa mtandao wa wasambazaji.",
       farmImplementsDesc: "Soko la vifaa vya kilimo linalowaunganisha wakulima na wasambazaji wa vifaa na mashine za kilimo zenye ubora.",
@@ -93,6 +99,20 @@ const ProjectsShowcase = () => {
       status: language === 'en' ? "Serving 1000+ church members" : "Inahudumia waumini 1000+",
       icon: Heart
     },
+      {
+      id: 1,
+      title: "Online media storage",
+      description: t.pichazangu,
+      category: "completed",
+      type: "web",
+      tech: ["React", "Node.js", "MongoDB",],
+      image: "/images/projects/pichazangu.jpg",
+      liveUrl: "https://pichazangu.store",
+      githubUrl: "#",
+      status: language === 'en' ? "A solution for all photographers ":"Jawabu kwa wapiga picha wote",
+      icon: Heart
+    },
+
     {
       id: 2,
       title: "Amkakijana Mental Health Platform",
