@@ -12,12 +12,12 @@ type LanguageContextType = {
 }
 
 const LanguageContext = createContext<LanguageContextType>({
-  language: 'sw',
+  language: 'en',
   setLanguage: () => {}
 })
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguage] = useState<string>('sw')
+  const [language, setLanguage] = useState<string>('en')
 
   useEffect(() => {
     // Initialize language from cookie on client side
