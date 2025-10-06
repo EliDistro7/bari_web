@@ -9,7 +9,7 @@ import Cookies from 'js-cookie';
 type LanguageContextType = {
   language: string,
   setLanguage: (lang: string) => void
-}
+};
 
 const LanguageContext = createContext<LanguageContextType>({
   language: 'en',
