@@ -157,7 +157,7 @@ const ProjectsShowcase = () => {
       type: "web",
       tech: ["React", "Company", "NextJs"],
       image: "/images/projects/elemi3.jpg",
-      liveUrl: "https://https://elemi-electrical.vercel.app",
+      liveUrl: "https://elemi-electrical.vercel.app",
       status: language === 'en' ? "Electrical Solutions" : "Suluhisho za umeme",
       icon: Wrench
     },
@@ -170,7 +170,7 @@ const ProjectsShowcase = () => {
       type: "web",
       tech: ["React", "WooCommerce", "PHP", "Stripe", "Inventory"],
       image: "/images/projects/kechita.jpg",
-      liveUrl: "https://commerce-eta-eight.vercel.app/",
+      liveUrl: "https://commerce-eta-eight.vercel.app",
       status: language === 'en' ? "Automobile Batteries" : "betri za magari",
       icon: Wrench
     },
