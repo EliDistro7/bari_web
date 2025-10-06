@@ -155,7 +155,7 @@ const ProjectsShowcase = () => {
       description: t.elemi,
       category: "completed",
       type: "web",
-      tech: ["React", "WooCommerce", "PHP", "Inventory"],
+      tech: ["React", "Company", "NextJs"],
       image: "/images/projects/elemi3.jpg",
       liveUrl: "https://https://elemi-electrical.vercel.app",
       status: language === 'en' ? "Electrical Solutions" : "Suluhisho za umeme",
