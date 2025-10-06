@@ -143,10 +143,22 @@ const ProjectsShowcase = () => {
       description: t.lubricantsDesc,
       category: "completed",
       type: "web",
-      tech: ["React", "WooCommerce", "PHP", "Stripe", "Inventory"],
+      tech: ["React", "WooCommerce", "PHP", "Inventory"],
       image: "/images/projects/chui.jpeg",
       liveUrl: "https://chui-battery-tanzania.com",
       status: language === 'en' ? "Automobile Batteries" : "betri za magari",
+      icon: Wrench
+    },
+      {
+      id: 10,
+      title: "Elemi-Electrical",
+      description: t.elemi,
+      category: "completed",
+      type: "web",
+      tech: ["React", "WooCommerce", "PHP", "Inventory"],
+      image: "/images/projects/elemi3.jpg",
+      liveUrl: "https://https://elemi-electrical.vercel.app",
+      status: language === 'en' ? "Electrical Solutions" : "Suluhisho za umeme",
       icon: Wrench
     },
       {
