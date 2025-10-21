@@ -33,6 +33,7 @@ import ProjectShowcase from '@/components/sections/ProjectShowcase';
 import PartnersBanner from '@/components/sections/Partner';
 import PromoVideo from '@/components/sections/Promo2';
 import Map from '@/components/sections/Map';
+import AboutMe from '@/components/sections/AboutMe';
 
 const Portfolio = () => {
   const [activeProject, setActiveProject] = useState(0);
@@ -115,6 +116,7 @@ const Portfolio = () => {
 
       {/* Hero Section */}
       <HeroSection />
+      <AboutMe />
     
       {/* Interactive Project Showcase */}
       <ProjectShowcase />
