@@ -17,27 +17,27 @@ const HeroSection = () => {
   const t = content[language as keyof typeof content] || content.en;
   const currentService = t.services[activeServiceIndex];
 
-  // Minimalist theme configurations
+  // Light theme configurations
   const themes = {
     cyan: {
       primary: "from-cyan-500 to-blue-600",
-      accent: "cyan-400",
-      glow: "0 0 20px rgba(6, 182, 212, 0.3)"
+      accent: "cyan-600",
+      glow: "0 0 20px rgba(6, 182, 212, 0.2)"
     },
     purple: {
       primary: "from-purple-500 to-pink-600",
-      accent: "purple-400",
-      glow: "0 0 20px rgba(147, 51, 234, 0.3)"
+      accent: "purple-600",
+      glow: "0 0 20px rgba(147, 51, 234, 0.2)"
     },
     emerald: {
       primary: "from-emerald-500 to-teal-600",
-      accent: "emerald-400",
-      glow: "0 0 20px rgba(16, 185, 129, 0.3)"
+      accent: "emerald-600",
+      glow: "0 0 20px rgba(16, 185, 129, 0.2)"
     },
     orange: {
       primary: "from-orange-500 to-pink-600",
-      accent: "orange-400",
-      glow: "0 0 20px rgba(251, 146, 60, 0.3)"
+      accent: "orange-600",
+      glow: "0 0 20px rgba(251, 146, 60, 0.2)"
     }
   };
 
@@ -56,15 +56,16 @@ const HeroSection = () => {
     <>
       <style jsx>{`
         .hero-container {
-          background: linear-gradient(135deg, #020617 0%, #0a0a1a 50%, #020617 100%);
+          background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #f1f5f9 100%);
           min-height: 90vh;
           position: relative;
         }
         
         .minimal-glass {
-          background: rgba(255, 255, 255, 0.05);
+          background: rgba(255, 255, 255, 0.9);
           backdrop-filter: blur(10px);
-          border: 1px solid rgba(255, 255, 255, 0.1);
+          border: 1px solid rgba(0, 0, 0, 0.08);
+          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
         }
         
         .dynamic-glow {
@@ -106,7 +107,7 @@ const HeroSection = () => {
         }
         
         .text-gradient {
-          background: linear-gradient(135deg, #ffffff, #e5e7eb);
+          background: linear-gradient(135deg, #1f2937, #4b5563);
           background-clip: text;
           -webkit-background-clip: text;
           color: transparent;
@@ -123,8 +124,8 @@ const HeroSection = () => {
       
       <section className="hero-container relative overflow-hidden py-20 sm:py-20">
         {/* Subtle gradient overlay */}
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full filter blur-3xl"></div>
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-gradient-to-r from-blue-500/30 to-purple-500/30 rounded-full filter blur-3xl"></div>
         </div>
         
         {/* Content Wrapper */}
@@ -167,12 +168,12 @@ const HeroSection = () => {
                 <div className={`space-y-4 max-w-xl mx-auto lg:mx-0 ${isLoaded ? 'reveal-animation reveal-delay-2' : ''}`}>
                   <p 
                     key={`desc-${activeServiceIndex}`}
-                    className="text-lg lg:text-xl text-gray-300 leading-relaxed service-morph"
+                    className="text-lg lg:text-xl text-gray-700 leading-relaxed service-morph"
                   >
                     {currentService.subtitle}
                   </p>
                   
-                  <div className="flex items-center justify-center lg:justify-start space-x-3 text-gray-400 text-sm">
+                  <div className="flex items-center justify-center lg:justify-start space-x-3 text-gray-600 text-sm">
                     <Sparkles className={`w-4 h-4 text-${currentTheme.accent}`} />
                     <p>{currentService.description}</p>
                   </div>
@@ -196,7 +197,7 @@ const HeroSection = () => {
                         <div className={`w-3 h-3 rounded-full transition-all duration-500 ${
                           index === activeServiceIndex 
                             ? `bg-gradient-to-r ${serviceTheme.primary}` 
-                            : 'bg-gray-600'
+                            : 'bg-gray-400'
                         }`}></div>
                       </button>
                     );
@@ -215,7 +216,7 @@ const HeroSection = () => {
                     </span>
                   </button>
                   
-                  <button className="hover-lift group minimal-glass text-white px-8 py-3 rounded-lg font-semibold">
+                  <button className="hover-lift group minimal-glass text-gray-800 px-8 py-3 rounded-lg font-semibold border border-gray-200">
                     <a href='#projects' className="flex items-center justify-center">
                       <Play className="w-5 h-5 mr-2" />
                       {t.portfolio}
@@ -229,29 +230,29 @@ const HeroSection = () => {
                     <div className={`text-3xl font-bold text-${currentTheme.accent} mb-1`}>
                       10+
                     </div>
-                    <div className="text-xs text-gray-400 uppercase tracking-wider">
+                    <div className="text-xs text-gray-600 uppercase tracking-wider">
                       {t.projects}
                     </div>
                   </div>
                   
-                  <div className="w-px h-12 bg-gray-700"></div>
+                  <div className="w-px h-12 bg-gray-300"></div>
                   
                   <div className="text-center lg:text-left">
-                    <div className="text-3xl font-bold text-purple-400 mb-1">
+                    <div className="text-3xl font-bold text-purple-600 mb-1">
                       1.5+
                     </div>
-                    <div className="text-xs text-gray-400 uppercase tracking-wider">
+                    <div className="text-xs text-gray-600 uppercase tracking-wider">
                       {t.years}
                     </div>
                   </div>
                   
-                  <div className="w-px h-12 bg-gray-700"></div>
+                  <div className="w-px h-12 bg-gray-300"></div>
                   
                   <div className="text-center lg:text-left">
-                    <div className="text-3xl font-bold text-pink-400 mb-1">
+                    <div className="text-3xl font-bold text-pink-600 mb-1">
                       7+
                     </div>
-                    <div className="text-xs text-gray-400 uppercase tracking-wider">
+                    <div className="text-xs text-gray-600 uppercase tracking-wider">
                       {t.clients}
                     </div>
                   </div>
@@ -300,10 +301,10 @@ const HeroSection = () => {
                       
                       {/* Service Details */}
                       <div className="space-y-3">
-                        <h3 className="text-2xl font-bold text-white">
+                        <h3 className="text-2xl font-bold text-gray-900">
                           {currentService.title}
                         </h3>
-                        <p className="text-gray-400 text-sm">
+                        <p className="text-gray-600 text-sm">
                           {currentService.subtitle}
                         </p>
                         
@@ -313,7 +314,7 @@ const HeroSection = () => {
                             <span className="text-gray-500 text-xs">Status</span>
                             <span className={`text-${currentTheme.accent} text-xs font-semibold`}>Ready</span>
                           </div>
-                          <div className="w-full bg-gray-800 rounded-full h-1 overflow-hidden">
+                          <div className="w-full bg-gray-200 rounded-full h-1 overflow-hidden">
                             <div className={`h-full bg-gradient-to-r ${currentTheme.primary} rounded-full transition-all duration-1000`} style={{ width: '100%' }}></div>
                           </div>
                         </div>
