@@ -218,28 +218,40 @@ const ProjectsShowcase = () => {
   return (
     <>
       <style jsx>{`
-        .minimal-glass {
-          background: rgba(255, 255, 255, 0.05);
+        .card-glass {
+          background: rgba(255, 255, 255, 0.9);
           backdrop-filter: blur(10px);
-          border: 1px solid rgba(255, 255, 255, 0.1);
+          border: 1px solid rgba(0, 0, 0, 0.06);
+          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
         }
         
         .project-card {
           transition: all 0.3s ease;
+          background: white;
+          border: 1px solid rgba(0, 0, 0, 0.08);
         }
         
         .project-card:hover {
-          transform: translateY(-4px);
-          border-color: rgba(102, 126, 234, 0.3);
+          transform: translateY(-6px);
+          box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+          border-color: rgba(59, 130, 246, 0.3);
         }
         
         .category-btn {
           transition: all 0.3s ease;
+          background: white;
+          border: 1px solid rgba(0, 0, 0, 0.1);
         }
         
         .category-btn.active {
-          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-          border-color: rgba(102, 126, 234, 0.5);
+          background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+          border-color: rgba(59, 130, 246, 0.5);
+          color: white;
+        }
+        
+        .category-btn:hover:not(.active) {
+          border-color: rgba(59, 130, 246, 0.3);
+          background: rgba(59, 130, 246, 0.05);
         }
         
         .project-image {
@@ -247,55 +259,64 @@ const ProjectsShowcase = () => {
         }
         
         .project-card:hover .project-image {
-          transform: scale(1.05);
+          transform: scale(1.08);
         }
         
         .progress-bar {
-          background: linear-gradient(90deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+          background: linear-gradient(90deg, #06b6d4 0%, #8b5cf6 50%, #ec4899 100%);
+        }
+        
+        .badge-glass {
+          background: rgba(255, 255, 255, 0.95);
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(0, 0, 0, 0.1);
         }
       `}</style>
 
-      <section id='projects' className="relative py-20 bg-gradient-to-b from-[#020617] via-[#0a0a1a] to-[#020617] overflow-hidden">
+      <section id='projects' className="relative py-24 bg-gradient-to-b from-white via-gray-50 to-white overflow-hidden">
         {/* Subtle background effect */}
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-1/3 left-1/3 w-96 h-96 bg-gradient-to-r from-purple-500/20 to-blue-500/20 rounded-full filter blur-3xl"></div>
+        <div className="absolute inset-0 opacity-30">
+          <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-gradient-to-r from-purple-200 to-blue-200 rounded-full filter blur-3xl"></div>
+          <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-cyan-200 to-pink-200 rounded-full filter blur-3xl"></div>
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
           {/* Header */}
           <div className="text-center mb-16">
             <div className="inline-block mb-6">
-              <span className="minimal-glass px-6 py-2 rounded-full text-sm font-semibold text-cyan-400 uppercase tracking-wider">
+              <span className="badge-glass px-6 py-3 rounded-full text-sm font-bold text-cyan-600 uppercase tracking-wider">
                 {t.portfolioShowcase}
               </span>
             </div>
             
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4">
-              <span className="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+            <h2 className="text-5xl sm:text-6xl md:text-7xl font-black text-gray-900 mb-4">
+              <span className="bg-gradient-to-r from-cyan-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
                 {t.masterpiecesText}
               </span>
             </h2>
-            <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto font-medium">
               {t.exploreText}
             </p>
           </div>
 
           {/* Category Filters */}
-          <div className="flex flex-wrap justify-center gap-3 mb-12">
+          <div className="flex flex-wrap justify-center gap-4 mb-16">
             {categories.map((category) => {
               const IconComponent = category.icon;
               return (
                 <button
                   key={category.id}
                   onClick={() => setActiveCategory(category.id)}
-                  className={`category-btn minimal-glass px-6 py-3 rounded-lg font-semibold text-sm ${
-                    activeCategory === category.id ? 'active text-white' : 'text-gray-300'
+                  className={`category-btn px-6 py-3 rounded-xl font-bold text-sm ${
+                    activeCategory === category.id ? 'active text-white' : 'text-gray-700'
                   }`}
                 >
                   <div className="flex items-center space-x-2">
-                    <IconComponent className="w-4 h-4" />
+                    <IconComponent className="w-5 h-5" />
                     <span>{category.label}</span>
-                    <span className="px-2 py-0.5 rounded-full text-xs bg-white/15">
+                    <span className={`px-2.5 py-0.5 rounded-full text-xs font-bold ${
+                      activeCategory === category.id ? 'bg-white/20' : 'bg-gray-200'
+                    }`}>
                       {category.count}
                     </span>
                   </div>
@@ -305,62 +326,63 @@ const ProjectsShowcase = () => {
           </div>
 
           {/* Projects Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredProjects.map((project) => {
               const TypeIcon = getTypeIcon(project.type);
               const ProjectIcon = project.icon;
               return (
                 <div
                   key={project.id}
-                  className="project-card minimal-glass rounded-xl overflow-hidden"
+                  className="project-card rounded-2xl overflow-hidden"
                 >
                   {/* Project Image */}
                   <div className="relative overflow-hidden">
                     <img 
                       src={project.image} 
                       alt={project.title}
-                      className="project-image w-full h-48 object-cover"
+                      className="project-image w-full h-56 object-cover"
                       loading="lazy"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
                     
                     {/* Status Badge */}
-                    <div className="absolute top-3 right-3">
-                      <span className={`px-3 py-1 rounded-lg text-xs font-semibold backdrop-blur-lg ${
-                        project.category === 'completed' ? 'bg-green-500/80 text-white' :
-                        'bg-yellow-500/80 text-white'
+                    <div className="absolute top-4 right-4">
+                      <span className={`px-4 py-1.5 rounded-lg text-xs font-bold backdrop-blur-lg border ${
+                        project.category === 'completed' 
+                          ? 'bg-green-500/90 text-white border-green-400' 
+                          : 'bg-amber-500/90 text-white border-amber-400'
                       }`}>
                         {project.category === 'completed' ? t.live : t.wip}
                       </span>
                     </div>
                     
                     {/* Icon */}
-                    <div className="absolute top-3 left-3 minimal-glass p-2 rounded-lg">
-                      <ProjectIcon className="w-5 h-5 text-white" />
+                    <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-lg p-3 rounded-xl shadow-lg border border-gray-200">
+                      <ProjectIcon className="w-5 h-5 text-gray-900" />
                     </div>
                   </div>
 
                   <div className="p-6">
                     {/* Title */}
-                    <h3 className="text-xl font-bold text-white mb-2">
+                    <h3 className="text-xl font-black text-gray-900 mb-3">
                       {project.title}
                     </h3>
                     
                     {/* Description */}
-                    <p className="text-gray-400 text-sm mb-4 line-clamp-2">
+                    <p className="text-gray-600 text-sm mb-4 line-clamp-2 leading-relaxed">
                       {project.description}
                     </p>
 
                     {/* Progress Bar */}
                     {project.progress && (
-                      <div className="mb-4">
+                      <div className="mb-5">
                         <div className="flex justify-between items-center mb-2">
-                          <span className="text-xs text-gray-400">{t.progress}</span>
-                          <span className="text-xs font-semibold text-cyan-400">{project.progress}%</span>
+                          <span className="text-xs font-semibold text-gray-600">{t.progress}</span>
+                          <span className="text-xs font-bold text-cyan-600">{project.progress}%</span>
                         </div>
-                        <div className="w-full bg-gray-700 rounded-full h-1.5 overflow-hidden">
+                        <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
                           <div 
-                            className="progress-bar h-1.5 rounded-full transition-all duration-1000"
+                            className="progress-bar h-2 rounded-full transition-all duration-1000"
                             style={{width: `${project.progress}%`}}
                           ></div>
                         </div>
@@ -372,7 +394,7 @@ const ProjectsShowcase = () => {
                       {project.tech.slice(0, 3).map((tech, techIndex) => (
                         <span 
                           key={techIndex} 
-                          className="px-2 py-1 rounded-md text-xs font-medium text-gray-300 bg-white/10"
+                          className="px-3 py-1 rounded-lg text-xs font-semibold text-gray-700 bg-gray-100 border border-gray-200"
                         >
                           {tech}
                         </span>
@@ -380,7 +402,7 @@ const ProjectsShowcase = () => {
                     </div>
 
                     {/* Status */}
-                    <p className="text-sm text-cyan-400 font-semibold mb-4">{project.status}</p>
+                    <p className="text-sm text-purple-600 font-bold mb-5">{project.status}</p>
 
                     {/* Action Buttons */}
                     <div className="flex gap-2">
@@ -389,9 +411,9 @@ const ProjectsShowcase = () => {
                           href={project.liveUrl} 
                           target="_blank" 
                           rel="noopener noreferrer"
-                          className="flex-1 bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:from-cyan-600 hover:to-blue-700 transition-all flex items-center justify-center"
+                          className="flex-1 bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-4 py-3 rounded-xl text-sm font-bold hover:from-cyan-600 hover:to-blue-700 transition-all flex items-center justify-center shadow-lg hover:shadow-xl"
                         >
-                          <ExternalLink className="w-4 h-4 mr-1" />
+                          <ExternalLink className="w-4 h-4 mr-2" />
                           {t.visitLive}
                         </a>
                       )}
@@ -403,18 +425,24 @@ const ProjectsShowcase = () => {
           </div>
 
           {/* Bottom CTA */}
-          <div className="text-center mt-16">
-            <p className="text-gray-300 mb-6 text-lg">
-              {t.haveProject}
-              <span className="text-transparent bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text font-bold"> {t.buildSomething}</span>
-            </p>
-            <button 
-              onClick={openWhatsApp} 
-              className="bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:from-cyan-600 hover:to-purple-700 transition-all inline-flex items-center"
-            >
-              {t.startProject}
-              <Rocket className="w-5 h-5 ml-2" />
-            </button>
+          <div className="text-center mt-20">
+            <div className="card-glass rounded-3xl p-12 max-w-3xl mx-auto">
+              <p className="text-gray-700 mb-6 text-2xl font-semibold">
+                {t.haveProject}
+              </p>
+              <p className="text-3xl font-black mb-8">
+                <span className="bg-gradient-to-r from-cyan-600 to-purple-600 bg-clip-text text-transparent">
+                  {t.buildSomething}
+                </span>
+              </p>
+              <button 
+                onClick={openWhatsApp} 
+                className="bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 text-white px-10 py-4 rounded-xl font-bold text-lg hover:from-cyan-600 hover:via-purple-600 hover:to-pink-600 transition-all inline-flex items-center shadow-xl hover:shadow-2xl hover:scale-105"
+              >
+                {t.startProject}
+                <Rocket className="w-6 h-6 ml-3" />
+              </button>
+            </div>
           </div>
         </div>
       </section>

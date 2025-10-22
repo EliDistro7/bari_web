@@ -267,7 +267,7 @@ const Header = () => {
               <div className="relative profile-image">
                 <div className="profile-inner">
                   <img 
-                    src="/bari2.png" 
+                    src="/bari3.jpg" 
                     alt="Bari Kaneno"
                     className="profile-img"
                   />
