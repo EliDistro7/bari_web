@@ -122,7 +122,7 @@ const HeroSection = () => {
         }
       `}</style>
       
-      <section className="hero-container relative overflow-hidden py-20 sm:py-20">
+      <section className="hero-container relative overflow-hidden py-20 sm:py-20 pt-24">
         {/* Subtle gradient overlay */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-gradient-to-r from-blue-500/30 to-purple-500/30 rounded-full filter blur-3xl"></div>

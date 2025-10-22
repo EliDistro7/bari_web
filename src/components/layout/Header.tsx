@@ -49,10 +49,10 @@ const Header = () => {
     <>
       <style jsx>{`
         .glass-nav {
-          background: rgba(255, 255, 255, 0.9);
+          background: rgba(255, 255, 255, 0.95);
           backdrop-filter: blur(20px);
-          border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+          border-bottom: 2px solid rgba(0, 0, 0, 0.06);
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
         }
         
         .nav-link {
@@ -85,39 +85,43 @@ const Header = () => {
         }
         
         .profile-image {
-          width: 40px;
-          height: 40px;
+          width: 56px;
+          height: 56px;
           border-radius: 50%;
-          border: 2px solid transparent;
-          background: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899);
-          padding: 2px;
+          border: 3px solid transparent;
+          background: linear-gradient(135deg, #06b6d4, #8b5cf6, #ec4899, #f59e0b);
+          padding: 3px;
           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-          box-shadow: 0 4px 15px rgba(59, 130, 246, 0.2);
+          box-shadow: 0 6px 20px rgba(59, 130, 246, 0.3);
+          animation: subtleRotate 6s linear infinite;
+        }
+        
+        @keyframes subtleRotate {
+          0% { filter: hue-rotate(0deg); }
+          100% { filter: hue-rotate(360deg); }
         }
         
         .profile-image:hover {
-          transform: scale(1.1);
-          box-shadow: 0 6px 20px rgba(59, 130, 246, 0.3);
+          transform: scale(1.15);
+          box-shadow: 0 8px 30px rgba(59, 130, 246, 0.5);
         }
         
         .profile-inner {
           width: 100%;
           height: 100%;
           border-radius: 50%;
-          background: #f8fafc;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 16px;
-          font-weight: bold;
-          background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
+          background: white;
+          overflow: hidden;
+        }
+        
+        .profile-img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
         }
         
         .brand-name {
-          background: linear-gradient(135deg, #0ea5e9 0%, #8b5cf6 50%, #ec4899 100%);
+          background: linear-gradient(135deg, #06b6d4 0%, #8b5cf6 50%, #ec4899 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
@@ -225,23 +229,25 @@ const Header = () => {
         
         .verified-badge {
           position: absolute;
-          bottom: -2px;
-          right: -2px;
-          width: 16px;
-          height: 16px;
+          bottom: -3px;
+          right: -3px;
+          width: 20px;
+          height: 20px;
           background: linear-gradient(135deg, #10b981, #059669);
           border-radius: 50%;
-          border: 2px solid rgba(255, 255, 255, 0.9);
+          border: 3px solid white;
           display: flex;
           align-items: center;
           justify-content: center;
+          box-shadow: 0 2px 8px rgba(16, 185, 129, 0.4);
         }
         
         .verified-check {
-          width: 8px;
-          height: 8px;
+          width: 10px;
+          height: 10px;
           color: white;
-          font-size: 8px;
+          font-size: 10px;
+          font-weight: bold;
         }
       `}</style>
 
@@ -253,14 +259,18 @@ const Header = () => {
           <div className="absolute bottom-2 left-2/3 w-1.5 h-1.5 bg-pink-500 rounded-full pulse-dot" style={{animationDelay: '2s'}}></div>
         </div>
 
-        <div className="max-w-7xl mx-auto px-6 py-4 relative">
+        <div className="max-w-7xl mx-auto px-6 py-5 relative">
           <div className="flex justify-between items-center">
             {/* Logo with Profile */}
             <div className="flex items-center space-x-4">
               {/* Profile Image */}
               <div className="relative profile-image">
                 <div className="profile-inner">
-                  BK
+                  <img 
+                    src="/bari2.png" 
+                    alt="Bari Kaneno"
+                    className="profile-img"
+                  />
                 </div>
                 <div className="verified-badge">
                   <span className="verified-check">✓</span>
