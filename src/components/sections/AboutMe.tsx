@@ -177,7 +177,7 @@ export default function AboutMe() {
         }
       `}</style>
 
-      <section className="section-bg py-24 relative overflow-hidden">
+      <section className="section-bg py-10 relative overflow-hidden">
         {/* Subtle background elements */}
         <div className="absolute inset-0 opacity-30 pointer-events-none">
           <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-gradient-to-r from-purple-200 to-blue-200 rounded-full filter blur-3xl"></div>
@@ -212,7 +212,7 @@ export default function AboutMe() {
                 <div className="rotating-border"></div>
                 <div className="profile-wrapper">
                   <img 
-                    src="/bari.png" 
+                    src="/bk.jpeg" 
                     alt="Bari Kaneno - Software Developer"
                     className="profile-image"
                   />
@@ -285,59 +285,7 @@ export default function AboutMe() {
             </motion.div>
           </div>
 
-          {/* Services Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="card-elevated rounded-3xl p-8 md:p-12"
-          >
-            <div className="flex items-center justify-center mb-10">
-              <Target className="w-8 h-8 text-purple-600 mr-3" />
-              <h3 className="text-3xl md:text-4xl font-black text-gray-900">
-                {t.services}
-              </h3>
-            </div>
-
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-              {services.map(({ icon: Icon, label, gradient, bg }, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.5 + idx * 0.1 }}
-                  whileHover={{ scale: 1.05, y: -4 }}
-                  className={`${bg} rounded-2xl p-6 text-center border border-gray-100 cursor-pointer transition-all`}
-                >
-                  <div className={`w-16 h-16 mx-auto mb-4 rounded-xl bg-gradient-to-br ${gradient} flex items-center justify-center shadow-lg`}>
-                    <Icon className="w-8 h-8 text-white" />
-                  </div>
-                  <span className="text-sm font-bold text-gray-900 block">
-                    {label}
-                  </span>
-                </motion.div>
-              ))}
-            </div>
-
-            {/* CTA Section */}
-            <div className="text-center border-t border-gray-100 pt-10">
-              <p className="text-gray-600 text-lg mb-6 max-w-2xl mx-auto">
-                {t.connect}
-              </p>
-              
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={openWhatsApp}
-                className="inline-flex items-center bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 hover:from-cyan-600 hover:via-purple-600 hover:to-pink-600 text-white px-10 py-4 rounded-xl font-bold text-lg shadow-xl hover:shadow-2xl transition-all"
-              >
-                <HeartHandshake className="w-6 h-6 mr-3" />
-                {t.contactMe}
-              </motion.button>
-            </div>
-          </motion.div>
+      
         </div>
       </section>
     </>

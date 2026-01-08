@@ -1,19 +1,33 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Syne, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/context/language";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import ThemeColorManager from "@/components/features/ThemeColorManager";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// Modern sans-serif for body text - clean and highly readable
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+// Bold, geometric display font for headings - modern and distinctive
+const syne = Syne({
+  variable: "--font-syne",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
+});
+
+// Professional monospace for code
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -28,10 +42,9 @@ export const metadata: Metadata = {
     initialScale: 1,
   },
   other: {
-  
     "apple-mobile-web-app-status-bar-style": "black-translucent",
   },
-  manifest: "/manifest.json", // Add this for PWA support
+  manifest: "/manifest.json",
 };
 
 export default function RootLayout({
@@ -42,9 +55,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* Enhanced Windows-specific tile colors */}
-
-        
         {/* iOS Safari specific */}
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -52,8 +62,6 @@ export default function RootLayout({
         
         {/* Android Chrome specific */}
         <meta name="mobile-web-app-capable" content="yes" />
-        
-       
         
         {/* Favicon with theme colors */}
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -63,13 +71,13 @@ export default function RootLayout({
       </head>
    
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-slate-900`}
+        className={`${inter.variable} ${syne.variable} ${jetbrainsMono.variable} antialiased bg-slate-900`}
+        style={{ fontFamily: "var(--font-inter)" }}
       >
         <LanguageProvider>
           {/* Dynamic Theme Color Manager */}
           <ThemeColorManager />
           
-        
           {children}
  
         </LanguageProvider>

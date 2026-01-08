@@ -41,9 +41,9 @@ const ProjectsShowcase = () => {
       accountingAppDesc: "Comprehensive accounting application for Masatu service providers with invoicing, expense tracking, and financial reporting."
     },
     sw: {
-      portfolioShowcase: "Kazi Zangu",
-      masterpiecesText: "Kazi Muhimu",
-      exploreText: "Angalia mkusanyiko wangu wa suluhisho za kidijitali",
+  
+      masterpiecesText: "Baadhi ya Projects Nilizofanya",
+    
       allProjects: "Zote",
       completed: "Hai",
       inProgress: "Inaendelea",
@@ -273,7 +273,7 @@ const ProjectsShowcase = () => {
         }
       `}</style>
 
-      <section id='projects' className="relative py-24 bg-gradient-to-b from-white via-gray-50 to-white overflow-hidden">
+      <section id='projects' className="relative py-4 pt-0 bg-gradient-to-b from-white via-gray-50 to-white overflow-hidden">
         {/* Subtle background effect */}
         <div className="absolute inset-0 opacity-30">
           <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-gradient-to-r from-purple-200 to-blue-200 rounded-full filter blur-3xl"></div>
@@ -282,21 +282,15 @@ const ProjectsShowcase = () => {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
           {/* Header */}
-          <div className="text-center mb-16">
-            <div className="inline-block mb-6">
-              <span className="badge-glass px-6 py-3 rounded-full text-sm font-bold text-cyan-600 uppercase tracking-wider">
-                {t.portfolioShowcase}
-              </span>
-            </div>
+          <div className="text-center mb-8">
+       
             
             <h2 className="text-5xl sm:text-6xl md:text-7xl font-black text-gray-900 mb-4">
               <span className="bg-gradient-to-r from-cyan-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
                 {t.masterpiecesText}
               </span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto font-medium">
-              {t.exploreText}
-            </p>
+     
           </div>
 
           {/* Category Filters */}
