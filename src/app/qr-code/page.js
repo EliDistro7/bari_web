@@ -156,14 +156,34 @@ export default function QRCodeGenerator() {
     }
   };
 
-  const downloadQRCode = () => {
+// Replace your downloadQRCode function with this:
+
+const downloadQRCode = async () => {
+  try {
+    // Fetch the QR code image
+    const response = await fetch(qrCode);
+    const blob = await response.blob();
+    
+    // Create a blob URL
+    const blobUrl = window.URL.createObjectURL(blob);
+    
+    // Create a temporary anchor element
     const link = document.createElement('a');
-    link.href = qrCode;
+    link.href = blobUrl;
     link.download = `${businessName.replace(/\s+/g, '-').toLowerCase()}-qr-code.png`;
+    
+    // Trigger the download
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-  };
+    
+    // Clean up the blob URL
+    window.URL.revokeObjectURL(blobUrl);
+  } catch (error) {
+    console.error('Error downloading QR code:', error);
+    alert('Failed to download QR code. Please try again.');
+  }
+};
 
   const copyShortUrl = () => {
     navigator.clipboard.writeText(shortUrl);
