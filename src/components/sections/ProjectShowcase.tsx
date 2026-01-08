@@ -337,7 +337,7 @@ const ProjectsShowcase = () => {
                   }`}
                 >
                   <div className="flex items-center space-x-2">
-                    <IconComponent className="w-5 h-5" />
+                   
                     <span>{category.label}</span>
                     <span className={`px-2.5 py-0.5 rounded-full text-xs font-bold ${
                       activeCategory === category.id ? 'bg-white/20' : 'bg-gray-200'
@@ -381,10 +381,7 @@ const ProjectsShowcase = () => {
                       </span>
                     </div>
                     
-                    {/* Icon */}
-                    <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-lg p-3 rounded-xl shadow-lg border border-gray-200">
-                      <ProjectIcon className="w-5 h-5 text-gray-900" />
-                    </div>
+                 
                   </div>
 
                   <div className="p-6">
