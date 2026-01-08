@@ -25,7 +25,7 @@ export default function AboutMe() {
         projectsLabel: "Projects Delivered",
         experience: "1.5+",
         experienceLabel: "Years Experience",
-        clients: "7+",
+        clients: "10+",
         clientsLabel: "Happy Clients"
       },
       connect: "Ready to bring your ideas to life? Let's create something exceptional together.",
@@ -34,25 +34,25 @@ export default function AboutMe() {
     sw: {
       title: "Kuhusu Mimi",
       greeting: "Habari, mimi ni Bari Kaneno",
-      subtitle: "Msanidi Programu & Mbunifu wa Suluhisho za Kidijitali",
-      intro: `Mimi ni msanidi programu kutoka Dar es Salaam, Tanzania, ninayetengeneza tovuti na programu tumishi za kisasa zinazokua biashara na kushirikisha watumiaji.`,
-      details: `Ninaunda suluhisho za kidijitali zenye ubora wa hali ya juu kwa kutumia teknolojia za kisasa kama React, Next.js, Node.js, Laravel, na React Native. Ujuzi wangu unajumuisha mifumo ya usimamizi wa makanisa, majukwaa ya uuzaji, suluhisho za biashara mtandaoni, na programu za biashara kwa kampuni zipya na zilizoimarika.`,
-      philosophy: `"Programu bora ni mahali ambapo ubunifu unakutana na uhandisi — kutatua matatizo halisi huku ikitoa uzoefu wa kipekee kwa watumiaji."`,
+      subtitle: "Developer & Mbunifu Kidijitali",
+      intro: `Kutoka Dar es Salaam, Tanzania, ninatengeneza websites na Apps kwa ajili ya wafanyabiashara na professionals.`,
+      details: `Ninakupa digital solutions zenye ubora wa hali ya juu kwa kutumia teknolojia za kisasa. Ujuzi wangu unajumuisha mifumo ya usimamizi wa IT kwa ajili ya Taasisi mbali mbali, biahsara mtandaoni (E-Commerce) kwenye platform ya web na mobile apps .`,
+      philosophy: `"Nafanya kazi na mteja wangu — kutoka wazo mpaka software halisi, kugeuza changamoto kuwa fursa kwa kutumia Teknolojia"`,
       services: "Uwezo wa Msingi",
-      webDev: "Uundaji wa Tovuti",
-      mobileDev: "Programu za Simu",
+      webDev: "Uundaji wa Websites",
+      mobileDev: "Programu za Simu/ Mobile Apps",
       backend: "Backend & API",
-      launch: "Uwekaji & Msaada",
+      launch: "Msaada",
       stats: {
         projects: "10+",
-        projectsLabel: "Miradi Iliyokamilika",
+        projectsLabel: "Projects zilizokamilika",
         experience: "1.5+",
-        experienceLabel: "Miaka ya Uzoefu",
-        clients: "7+",
+        experienceLabel: "Uzoefu",
+        clients: "10+",
         clientsLabel: "Wateja Wenye Furaha"
       },
-      connect: "Uko tayari kuleta mawazo yako kwenye uhalisia? Tushirikiane kuunda kitu cha kipekee.",
-      contactMe: "Anza Mazungumzo"
+      connect: "Uko tayari kugeuza mawazo yako kuwa uhalisia? karibu tushirikiane kitu kilicho bora.",
+      contactMe: "Karibu"
     }
   };
 

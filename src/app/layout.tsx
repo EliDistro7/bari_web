@@ -28,8 +28,7 @@ export const metadata: Metadata = {
     initialScale: 1,
   },
   other: {
-    "msapplication-TileColor": "#06b6d4",
-    "msapplication-navbutton-color": "#06b6d4",
+  
     "apple-mobile-web-app-status-bar-style": "black-translucent",
   },
   manifest: "/manifest.json", // Add this for PWA support
@@ -44,8 +43,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         {/* Enhanced Windows-specific tile colors */}
-        <meta name="msapplication-TileColor" content="#06b6d4" />
-        <meta name="msapplication-navbutton-color" content="#06b6d4" />
+
         
         {/* iOS Safari specific */}
         <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -55,8 +53,7 @@ export default function RootLayout({
         {/* Android Chrome specific */}
         <meta name="mobile-web-app-capable" content="yes" />
         
-        {/* Initial theme color (will be updated dynamically) */}
-        <meta name="theme-color" content="#06b6d4" />
+       
         
         {/* Favicon with theme colors */}
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

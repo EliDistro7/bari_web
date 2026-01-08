@@ -4,7 +4,7 @@
   export const content = {
     en: {
       role: "Full-Stack Developer",
-      tagline: "I CREATE",
+      tagline: "I DEVELOP",
       subtitle: "Digital Experiences",
       transform: "that transform businesses",
       impact: "drive measurable impact",
@@ -54,12 +54,12 @@
       ]
     },
     sw: {
-      role: "Mtaalamu wa Programu",
+      role: "Software Developer",
       tagline: "NATENGENEZA",
       subtitle: "Uzoefu wa Kidijitali",
       transform: "kwa ajili ya biashara",
       impact: "kuleta athari halisi",
-      concept: "Kutoka wazo hadi utekelezaji, zinazoundwa kwa ubora.",
+      concept: "Kutoka wazo hadi utekelezaji",
       cta: "Anza Project yako",
       portfolio: "Ona Kazi Zangu",
       projects: "Miradi",
@@ -68,7 +68,7 @@
       services: [
         {
           title: "Web Apps",
-          subtitle: "Suluhisho la kisasa la mtandao",
+          subtitle: "Software za kisasa",
           icon: <Globe className="w-6 h-6" />,
           theme: "cyan",
           description: "React • Next.js • TypeScript",
@@ -77,7 +77,7 @@
         },
         {
           title: "Mobile Apps", 
-          subtitle: "Uzoefu wa programu za simu za kisasa",
+          subtitle: "Mobile apps za kisasa",
           icon: <Smartphone className="w-6 h-6" />,
           theme: "purple",
           description: "React Native • Flutter • Swift",
@@ -86,21 +86,21 @@
         },
         {
           title: "Websites",
-          subtitle: "Tovuti za haraka, zilizoboreshwa kwa SEO", 
+          subtitle: "Tovuti za haraka, ziliounganishwa na Search Engines", 
           icon: <Monitor className="w-6 h-6" />,
           theme: "emerald",
           description: "NextJs • ReactJs • WordPress",
           image: "https://images.unsplash.com/photo-1547658719-da2b51169166?w=800&h=600&fit=crop&crop=center&auto=format",
-          alt: "Muundo mzuri wa tovuti"
+          alt: "Muundo wa kuvutia tovuti"
         },
         {
           title: "Backend Systems",
-          subtitle: "Miundo imara ya upande wa seva",
+          subtitle: "Mifumo imara upande wa servers",
           icon: <Server className="w-6 h-6" />,
           theme: "orange",
           description: "Node.js • Python • PostgreSQL",
           image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=600&fit=crop&crop=center&auto=format",
-          alt: "Miundombinu ya seva na kituo cha data"
+          alt: "Miundombinu ya server na kanzidata"
         }
       ]
     }
