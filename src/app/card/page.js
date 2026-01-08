@@ -61,7 +61,7 @@ export default function BusinessCardLanding() {
 
   const handleVisitWebsite = () => {
     // Always redirect to YOUR website (not the client's)
-    const yourWebsite = 'https://yourdomain.com'; // Change this to your actual domain
+    const yourWebsite = 'https://bari-kaneno.pro'; // Change this to your actual domain
     window.location.href = yourWebsite;
   };
 
