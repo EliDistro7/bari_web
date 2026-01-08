@@ -135,7 +135,7 @@ const ProjectsShowcase = () => {
       category: "completed",
       type: "web",
       tech: ["React", "Next.js", "Tailwind"],
-      image: "/images/projects/amka.jpg",
+      image: "/images/projects/amka2.jpg",
       liveUrl: "https://amkakijana.org",
       status: language === 'en' ? "5000+ monthly visitors" : "Wageni 5000+ kwa mwezi",
       icon: Heart
