@@ -140,6 +140,18 @@ const ProjectsShowcase = () => {
       status: language === 'en' ? "5000+ monthly visitors" : "Wageni 5000+ kwa mwezi",
       icon: Heart
     },
+     {
+      id: 3,
+      title: "SasaNdioSasa Website",
+      description: t.mentalHealthDesc,
+      category: "completed",
+      type: "web",
+      tech: ["React", "Next.js", "Tailwind"],
+      image: "/images/projects/sasa2.jpg",
+      liveUrl: "https://sasandiosasa.co.tz",
+      status: language === 'en' ? "500+ monthly visitors" : "Wageni 500+ kwa mwezi",
+      icon: Heart
+    },
     {
       id: 4,
       title: "Future Holders Marketing",
