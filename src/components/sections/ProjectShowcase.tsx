@@ -340,7 +340,7 @@ const ProjectsShowcase = () => {
                     <img 
                       src={project.image} 
                       alt={project.title}
-                      className="project-image w-full h-56 object-cover"
+                      className="project-image w-full h-96 object-cover"
                       loading="lazy"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
