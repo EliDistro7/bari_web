@@ -36,6 +36,9 @@ const ProjectsShowcase = () => {
       chui: "Online platform for Chui Batteries with product catalog, online ordering, and distributor network management.",
       elemi: 'A web profile for Elemi Electrical company showcasing services, projects, and client testimonials.',
       lubricantsDesc: "Online platform for Kechita Restaurant with meals catalog, online ordering.",
+      ticketsSystemDesc: "Online platform for managing Events and selling tickets",
+      bookSellerDesc: "Online platform for Selling Books online",
+      sasandiosasa: 'Website ya utalii',
       farmImplementsDesc: "Agricultural equipment marketplace connecting farmers with quality farm implements and machinery suppliers.",
       ubuntuAppDesc: "Modern marketing application for Ubuntu O House with client management, campaign tracking, and analytics dashboard.",
       accountingAppDesc: "Comprehensive accounting application for Masatu service providers with invoicing, expense tracking, and financial reporting."
@@ -45,10 +48,10 @@ const ProjectsShowcase = () => {
       masterpiecesText: "Baadhi ya Projects Nilizofanya",
     
       allProjects: "Zote",
-      completed: "Hai",
+      completed: "Zilizoisha",
       inProgress: "Inaendelea",
       showcases: "Maonyesho",
-      live: "Hai",
+      live: "Live",
       wip: "Inaendelea",
       demo: "Onyesho",
       progress: "Maendeleo",
@@ -59,6 +62,9 @@ const ProjectsShowcase = () => {
       startProject: "Anza project yako",
       churchSystemDesc: "Mfumo kamili wa usimamizi wa kanisa wenye ufuatiliaji wa waumini, ratiba za matukio, usimamizi wa michango, na lugha za Kiswahili.",
       pichazangu: 'Programu ya wavuti ya ku-share na kutunza picha za kupendeza kutoka kwa wapiga picha duniani kote.',
+      ticketsSystemDesc: 'Platform ya kuuza tiketi online pamoja na usimamizi wa Events ',
+      bookSellerDesc: 'Platform ya kuuza vitabu online',
+      sasandiosasa: "Website ya utalii",
       mentalHealthDesc: "Tovuti tuli inayohamasisha uongozi wa afya ya akili na uzazi kwa vijana wa Tanzania kupitia blogu za elimu na rasilimali.",
       chui: "Jukwaa la mtandaoni la Chui Batteries lenye katalogi ya bidhaa, uagizaji mtandaoni, na usimamizi wa mtandao wa wasambazaji.",
       elemi: 'Profaili ya wavuti ya kampuni ya umeme ya Elemi ikionyesha huduma, miradi, na maoni ya wateja.',
@@ -73,6 +79,19 @@ const ProjectsShowcase = () => {
   const t = translations[language as keyof typeof translations];
 
   const projects = [
+      {
+      id: 11,
+      title: "Online Ticket Selling System",
+      description: t.ticketsSystemDesc,
+      category: "completed",
+      type: "web",
+      tech: ["Laravel", "Javascript", "MySql"],
+      image: "/images/projects/tiketi.jpeg",
+      liveUrl: "https://bari-tickets.onrender.com",
+      status: language === 'en' ? "New" : "Mpya",
+      icon: Heart
+    },
+      
     {
       id: 1,
       title: "KKK Tyombo Church System",
@@ -83,6 +102,18 @@ const ProjectsShowcase = () => {
       image: "/images/projects/yombo.jpg",
       liveUrl: "https://kkktyombo.org",
       status: language === 'en' ? "1000+ members" : "Waumini 1000+",
+      icon: Heart
+    },
+     {
+      id: 12,
+      title: "Online Book Seller",
+      description: t.ticketsSystemDesc,
+      category: "completed",
+      type: "web",
+      tech: ["Express", "React", "MySql"],
+      image: "/images/projects/mwai.jpeg",
+      liveUrl: "https://mwai-store.vercel.app",
+      status: language === 'en' ? "New" : "Mpya",
       icon: Heart
     },
     {
@@ -141,7 +172,7 @@ const ProjectsShowcase = () => {
       type: "web",
       tech: ["React", "Next.js"],
       image: "/images/projects/elemi3.jpg",
-      liveUrl: "https://elemi-electrical.vercel.app",
+      liveUrl: "https://elemielectrical.co.tz",
       status: language === 'en' ? "Electrical solutions" : "Suluhisho za umeme",
       icon: Wrench
     },
