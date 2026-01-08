@@ -535,7 +535,7 @@ const Footer = () => {
               {/* Copyright */}
               <div className="text-center md:text-right">
                 <div className="text-gray-400 text-sm">
-                  © 2025 <span className="brand-footer">Bari Kaneno</span>. {t.rights}.
+                  © 2026 <span className="brand-footer">Bari Kaneno</span>. {t.rights}.
                 </div>
                 <div className="text-xs text-gray-500 mt-1">
                   Made with <Heart className="inline w-3 h-3 text-red-500 heart-beat" /> using React & Tailwind CSS
