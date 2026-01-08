@@ -1,7 +1,10 @@
+'use client';
 import React, { useState, useEffect } from 'react';
-import { ExternalLink, Globe, ArrowRight, Sparkles, AlertCircle } from 'lucide-react';
+import { ExternalLink, ArrowRight, Sparkles, AlertCircle, Globe, Instagram, MessageCircle } from 'lucide-react';
+import { useParams } from 'next/navigation';
 
 export default function BusinessCardLanding() {
+  const params = useParams();
   const [businessData, setBusinessData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -9,23 +12,21 @@ export default function BusinessCardLanding() {
   const [autoRedirect, setAutoRedirect] = useState(true);
 
   useEffect(() => {
-    // Get the short ID from the URL path
-    // Expected format: /c/abc123 or /card/abc123
-    const pathParts = window.location.pathname.split('/');
-    const shortId = pathParts[pathParts.length - 1];
+    // Get the short ID from the URL params
+    const shortId = params?.id;
     
     if (shortId && shortId.length > 0) {
-      // Retrieve data from storage using the short ID
-      window.storage.get(`card:${shortId}`)
-        .then(result => {
-          if (result && result.value) {
-            const decoded = JSON.parse(result.value);
-            setBusinessData(decoded);
-            setLoading(false);
-          } else {
-            setError(true);
-            setLoading(false);
+      // Fetch data from API route
+      fetch(`/api/cards/${shortId}`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Card not found');
           }
+          return response.json();
+        })
+        .then(data => {
+          setBusinessData(data);
+          setLoading(false);
         })
         .catch(err => {
           console.error('Error retrieving data:', err);
@@ -33,21 +34,25 @@ export default function BusinessCardLanding() {
           setLoading(false);
         });
     } else {
-      // Demo data for preview (when no ID is provided)
+      // Demo data for preview
       setBusinessData({
         name: 'Demo Business',
         description: 'This is a demo of how your business card will look when scanned.',
-        url: 'https://example.com'
+        clientUrl: 'https://example.com',
+        instagram: 'https://instagram.com/demo',
+        whatsapp: '255712345678'
       });
       setLoading(false);
     }
-  }, []);
+  }, [params]);
 
   useEffect(() => {
     if (!businessData || !autoRedirect || error) return;
 
-    // Always redirect to YOUR website (not the client's)
-    const yourWebsite = 'https://bari-kaneno.pro'; // Change this to your actual domain
+    // Always redirect to YOUR website
+    const yourWebsite = typeof window !== 'undefined' 
+      ? window.location.origin 
+      : 'http://localhost:3000';
 
     if (countdown > 0) {
       const timer = setTimeout(() => setCountdown(countdown - 1), 1000);
@@ -58,8 +63,9 @@ export default function BusinessCardLanding() {
   }, [countdown, businessData, autoRedirect, error]);
 
   const handleVisitWebsite = () => {
-    // Always redirect to YOUR website (not the client's)
-    const yourWebsite = 'https://yourdomain.com'; // Change this to your actual domain
+    const yourWebsite = typeof window !== 'undefined' 
+      ? window.location.origin 
+      : 'http://localhost:3000';
     window.location.href = yourWebsite;
   };
 
@@ -105,7 +111,7 @@ export default function BusinessCardLanding() {
     <div className="min-h-screen bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center p-4">
       <div className="max-w-lg w-full">
         {/* Main Card */}
-        <div className="bg-white rounded-3xl shadow-2xl overflow-hidden transform transition-all hover:scale-105 duration-300">
+        <div className="bg-white rounded-3xl shadow-2xl overflow-hidden">
           {/* Header Decoration */}
           <div className="h-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"></div>
           
@@ -123,32 +129,77 @@ export default function BusinessCardLanding() {
             </h1>
 
             {/* Description */}
-            <p className="text-gray-600 text-center text-lg leading-relaxed mb-4">
+            <p className="text-gray-600 text-center text-lg leading-relaxed mb-6">
               {businessData.description}
             </p>
 
-            {/* Client's Website (if they have one) */}
-            {businessData.clientUrl && (
-              <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-8">
-                <p className="text-xs text-blue-700 mb-1">Website</p>
-                <a 
-                  href={businessData.clientUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-blue-600 hover:text-blue-800 underline break-all"
-                >
-                  {businessData.clientUrl}
-                </a>
+            {/* Contact Links */}
+            {(businessData.clientUrl || businessData.instagram || businessData.whatsapp) && (
+              <div className="space-y-3 mb-8">
+                <p className="text-sm font-medium text-gray-500 text-center mb-3">Connect with us:</p>
+                
+                {/* Website */}
+                {businessData.clientUrl && (
+                  <a
+                    href={businessData.clientUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-3 w-full bg-blue-50 hover:bg-blue-100 text-blue-700 py-3 px-4 rounded-lg transition-colors"
+                  >
+                    <Globe className="w-5 h-5" />
+                    <span className="font-medium">Visit Website</span>
+                    <ExternalLink className="w-4 h-4 ml-auto" />
+                  </a>
+                )}
+
+                {/* Instagram */}
+                {businessData.instagram && (
+                  <a
+                    href={businessData.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-3 w-full bg-gradient-to-r from-purple-50 to-pink-50 hover:from-purple-100 hover:to-pink-100 text-pink-700 py-3 px-4 rounded-lg transition-colors"
+                  >
+                    <Instagram className="w-5 h-5" />
+                    <span className="font-medium">Follow on Instagram</span>
+                    <ExternalLink className="w-4 h-4 ml-auto" />
+                  </a>
+                )}
+
+                {/* WhatsApp */}
+                {businessData.whatsapp && (
+                  <a
+                    href={`https://wa.me/${businessData.whatsapp}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-3 w-full bg-green-50 hover:bg-green-100 text-green-700 py-3 px-4 rounded-lg transition-colors"
+                  >
+                    <MessageCircle className="w-5 h-5" />
+                    <span className="font-medium">Chat on WhatsApp</span>
+                    <ExternalLink className="w-4 h-4 ml-auto" />
+                  </a>
+                )}
               </div>
             )}
 
-            {!businessData.clientUrl && (
-              <p className="text-sm text-gray-400 italic text-center mb-8">
-                Want a professional website? See below ↓
+            {/* CTA Message */}
+            {!businessData.clientUrl && !businessData.instagram && !businessData.whatsapp && (
+              <p className="text-sm text-gray-400 italic text-center mb-6">
+                Want a professional online presence? See below ↓
               </p>
             )}
 
-            {/* Visit Button - Goes to YOUR website */}
+            {/* Divider */}
+            <div className="relative my-8">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-gray-200"></div>
+              </div>
+              <div className="relative flex justify-center text-sm">
+                <span className="px-4 bg-white text-gray-500">Want your own card?</span>
+              </div>
+            </div>
+
+            {/* Get Your Card Button */}
             <button
               onClick={handleVisitWebsite}
               className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-4 px-8 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200 flex items-center justify-center group"
@@ -162,18 +213,18 @@ export default function BusinessCardLanding() {
             {autoRedirect && countdown > 0 && (
               <div className="mt-6 text-center">
                 <p className="text-sm text-gray-500 mb-2">
-                  Redirecting to Smart Business Card in <span className="font-bold text-indigo-600 text-lg">{countdown}</span> seconds...
+                  Auto-redirecting in <span className="font-bold text-indigo-600 text-lg">{countdown}</span> seconds
                 </p>
                 <button
                   onClick={cancelAutoRedirect}
                   className="text-xs text-gray-400 hover:text-gray-600 underline"
                 >
-                  Cancel auto-redirect
+                  Cancel
                 </button>
               </div>
             )}
 
-            {/* Footer info */}
+            {/* Footer */}
             <div className="mt-6 pt-6 border-t border-gray-100">
               <p className="text-xs text-center text-gray-500">
                 This card was created with Smart Business Card

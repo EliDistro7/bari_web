@@ -1,16 +1,20 @@
 'use client';
 import React, { useState } from 'react';
-import { Download, Link2, QrCode, Briefcase, FileText, ArrowRight } from 'lucide-react';
+import { Download, Link2, QrCode, Briefcase, FileText, ArrowRight, Copy, Check, Instagram, MessageCircle } from 'lucide-react';
 
 export default function QRCodeGenerator() {
   const [businessName, setBusinessName] = useState('');
   const [businessDescription, setBusinessDescription] = useState('');
   const [websiteUrl, setWebsiteUrl] = useState('');
+  const [instagramUrl, setInstagramUrl] = useState('');
+  const [whatsappNumber, setWhatsappNumber] = useState('');
   const [qrCode, setQrCode] = useState('');
+  const [shortUrl, setShortUrl] = useState('');
   const [previewData, setPreviewData] = useState(null);
   const [error, setError] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   const validateUrl = (input) => {
     if (!input.trim()) return null;
@@ -26,6 +30,30 @@ export default function QRCodeGenerator() {
     }
   };
 
+  const formatWhatsApp = (number) => {
+    // Remove all non-digits
+    const cleaned = number.replace(/\D/g, '');
+    // If it starts with 0, replace with 255 (Tanzania country code)
+    if (cleaned.startsWith('0')) {
+      return '255' + cleaned.substring(1);
+    }
+    // If it doesn't start with 255, add it
+    if (!cleaned.startsWith('255')) {
+      return '255' + cleaned;
+    }
+    return cleaned;
+  };
+
+  // Generate a short unique ID
+  const generateShortId = () => {
+    const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+    let id = '';
+    for (let i = 0; i < 8; i++) {
+      id += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return id;
+  };
+
   const generateQRCode = async () => {
     setError('');
     
@@ -39,15 +67,35 @@ export default function QRCodeGenerator() {
       return;
     }
 
-    if (!websiteUrl.trim()) {
-      setError('Please enter a website URL');
-      return;
+    // Validate optional URLs
+    let validatedWebsiteUrl = null;
+    if (websiteUrl.trim()) {
+      validatedWebsiteUrl = validateUrl(websiteUrl);
+      if (!validatedWebsiteUrl) {
+        setError('Please enter a valid website URL');
+        return;
+      }
     }
 
-    const validatedUrl = validateUrl(websiteUrl);
-    if (!validatedUrl) {
-      setError('Please enter a valid URL (e.g., example.com or https://example.com)');
-      return;
+    let validatedInstagramUrl = null;
+    if (instagramUrl.trim()) {
+      // Allow both full URLs and just usernames
+      if (instagramUrl.includes('instagram.com')) {
+        validatedInstagramUrl = validateUrl(instagramUrl);
+      } else {
+        // Just a username, create the full URL
+        const username = instagramUrl.replace('@', '');
+        validatedInstagramUrl = `https://instagram.com/${username}`;
+      }
+    }
+
+    let formattedWhatsApp = null;
+    if (whatsappNumber.trim()) {
+      formattedWhatsApp = formatWhatsApp(whatsappNumber);
+      if (formattedWhatsApp.length < 12) {
+        setError('Please enter a valid WhatsApp number');
+        return;
+      }
     }
 
     setIsGenerating(true);
@@ -57,20 +105,48 @@ export default function QRCodeGenerator() {
       const data = {
         name: businessName.trim(),
         description: businessDescription.trim(),
-        url: validatedUrl
+        clientUrl: validatedWebsiteUrl,
+        instagram: validatedInstagramUrl,
+        whatsapp: formattedWhatsApp
       };
 
-      // Encode the data as a URL parameter
-      const encodedData = encodeURIComponent(JSON.stringify(data));
+      // Generate a short unique ID
+      const shortId = generateShortId();
       
-      // Create a link to your landing page (you'll host this)
-      // For now, we'll use a data URL that could be replaced with your actual landing page
-      const landingPageUrl = `https://bari-kaneno.pro/card?data=${encodedData}`;
+      // Save to Vercel KV via API route
+      try {
+        const response = await fetch('/api/cards', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            id: shortId,
+            data: data
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to save card data');
+        }
+      } catch (storageError) {
+        console.error('Storage error:', storageError);
+        setError('Failed to save card data. Please try again.');
+        setIsGenerating(false);
+        return;
+      }
       
-      // Generate QR code for the landing page
-      const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=${encodeURIComponent(landingPageUrl)}`;
+      // Create clean short URL
+      const currentDomain = typeof window !== 'undefined' 
+        ? window.location.origin 
+        : 'http://localhost:3000';
+      const cleanUrl = `${currentDomain}/c/${shortId}`;
+      
+      // Generate QR code for the clean URL
+      const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=${encodeURIComponent(cleanUrl)}`;
       
       setQrCode(qrApiUrl);
+      setShortUrl(cleanUrl);
       setPreviewData(data);
       setShowPreview(true);
     } catch (err) {
@@ -89,10 +165,18 @@ export default function QRCodeGenerator() {
     document.body.removeChild(link);
   };
 
+  const copyShortUrl = () => {
+    navigator.clipboard.writeText(shortUrl);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   const resetForm = () => {
     setShowPreview(false);
     setQrCode('');
+    setShortUrl('');
     setPreviewData(null);
+    setCopied(false);
   };
 
   return (
@@ -109,7 +193,7 @@ export default function QRCodeGenerator() {
             Smart Business Card QR Generator
           </h1>
           <p className="text-gray-600">
-            Create a QR code with business intro before website redirect
+            Create a QR code with clean, professional URL
           </p>
         </div>
 
@@ -158,9 +242,9 @@ export default function QRCodeGenerator() {
             </div>
 
             {/* Website URL */}
-            <div className="mb-6">
+            <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Website URL *
+                Website URL (Optional)
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -170,10 +254,49 @@ export default function QRCodeGenerator() {
                   type="text"
                   value={websiteUrl}
                   onChange={(e) => setWebsiteUrl(e.target.value)}
-                  placeholder="example.com or https://example.com"
-                  className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition"
+                  placeholder="example.com"
+                  className="block w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition"
                 />
               </div>
+            </div>
+
+            {/* Instagram */}
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Instagram (Optional)
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <Instagram className="h-5 w-5 text-gray-400" />
+                </div>
+                <input
+                  type="text"
+                  value={instagramUrl}
+                  onChange={(e) => setInstagramUrl(e.target.value)}
+                  placeholder="@username or full Instagram URL"
+                  className="block w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition"
+                />
+              </div>
+            </div>
+
+            {/* WhatsApp */}
+            <div className="mb-6">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                WhatsApp Number (Optional)
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <MessageCircle className="h-5 w-5 text-gray-400" />
+                </div>
+                <input
+                  type="text"
+                  value={whatsappNumber}
+                  onChange={(e) => setWhatsappNumber(e.target.value)}
+                  placeholder="0712345678 or 255712345678"
+                  className="block w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition"
+                />
+              </div>
+              <p className="mt-1 text-xs text-gray-500">Format: 0712345678 (we'll auto-format it)</p>
             </div>
 
             {error && (
@@ -213,6 +336,23 @@ export default function QRCodeGenerator() {
                   </button>
                 </div>
 
+                {/* Clean URL Display */}
+                <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+                  <p className="text-xs font-medium text-green-800 mb-2">✓ Clean Short URL Generated</p>
+                  <div className="flex items-center gap-2">
+                    <code className="flex-1 text-sm text-green-900 font-mono bg-white px-3 py-2 rounded border border-green-300 truncate">
+                      {shortUrl}
+                    </code>
+                    <button
+                      onClick={copyShortUrl}
+                      className="p-2 bg-green-600 text-white rounded hover:bg-green-700 transition"
+                      title="Copy URL"
+                    >
+                      {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                    </button>
+                  </div>
+                </div>
+
                 {/* QR Code */}
                 <div className="text-center">
                   <div className="inline-block p-4 bg-white border-2 border-gray-200 rounded-xl">
@@ -239,13 +379,33 @@ export default function QRCodeGenerator() {
                   <div className="bg-gradient-to-br from-indigo-50 to-blue-50 rounded-lg p-6 space-y-4">
                     <h3 className="text-2xl font-bold text-gray-900">{previewData.name}</h3>
                     <p className="text-gray-700 leading-relaxed">{previewData.description}</p>
+                    
+                    {/* Contact Links Preview */}
+                    <div className="flex flex-wrap gap-2">
+                      {previewData.clientUrl && (
+                        <span className="inline-flex items-center text-xs bg-blue-100 text-blue-700 px-3 py-1 rounded-full">
+                          <Link2 className="w-3 h-3 mr-1" /> Website
+                        </span>
+                      )}
+                      {previewData.instagram && (
+                        <span className="inline-flex items-center text-xs bg-pink-100 text-pink-700 px-3 py-1 rounded-full">
+                          <Instagram className="w-3 h-3 mr-1" /> Instagram
+                        </span>
+                      )}
+                      {previewData.whatsapp && (
+                        <span className="inline-flex items-center text-xs bg-green-100 text-green-700 px-3 py-1 rounded-full">
+                          <MessageCircle className="w-3 h-3 mr-1" /> WhatsApp
+                        </span>
+                      )}
+                    </div>
+
                     <div className="pt-2">
                       <button className="inline-flex items-center px-6 py-3 bg-indigo-600 text-white rounded-lg font-medium text-sm">
-                        Visit Website
+                        Get Your Smart Business Card
                         <ArrowRight className="w-4 h-4 ml-2" />
                       </button>
                     </div>
-                    <p className="text-xs text-gray-500 pt-2">Redirects to: {previewData.url}</p>
+                    <p className="text-xs text-gray-500 pt-2">Redirects to: yourdomain.com (your sales page)</p>
                   </div>
                 </div>
               </div>
@@ -257,11 +417,11 @@ export default function QRCodeGenerator() {
         <div className="mt-8 bg-blue-50 border border-blue-200 rounded-xl p-6">
           <h3 className="font-semibold text-blue-900 mb-2">How it works:</h3>
           <ol className="text-sm text-blue-800 space-y-1 list-decimal list-inside">
-            <li>Enter your business name, description, and website URL</li>
-            <li>Generate the QR code</li>
-            <li>When someone scans the QR code, they first see your business introduction</li>
-            <li>They can then click to visit your full website</li>
-            <li>Perfect for business cards - provides context before the redirect!</li>
+            <li>Enter business details and optional social links</li>
+            <li>Generate a QR code with a clean, short URL</li>
+            <li>Data is saved securely in the cloud (Vercel KV)</li>
+            <li>When scanned, shows business intro with clickable links</li>
+            <li>Auto-redirects to your sales page in 5 seconds</li>
           </ol>
         </div>
       </div>
