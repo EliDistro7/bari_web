@@ -14,7 +14,8 @@ import {
   Sparkles,
   Globe,
   Send,
-  ExternalLink
+  ExternalLink,
+  Facebook
 } from 'lucide-react';
 import { useLanguage } from '@/context/language';
 
@@ -499,31 +500,18 @@ const Footer = () => {
               <div className="flex items-center space-x-4">
                 <span className="text-gray-400 text-sm font-medium mr-2">{t.followMe}:</span>
                 <a
-                  href="https://github.com/barikikaneno"
+                  href="https://web.facebook.com/bari.kaneno/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="social-icon github flex items-center justify-center"
                 >
-                  <Github className="w-5 h-5 text-gray-300" />
+                  <Facebook className="w-5 h-5 text-gray-300" />
                 </a>
+              
+              
                 <a
-                  href="https://linkedin.com/in/barikikaneno"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="social-icon linkedin flex items-center justify-center"
-                >
-                  <Linkedin className="w-5 h-5 text-gray-300" />
-                </a>
-                <a
-                  href="https://twitter.com/barikikaneno"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="social-icon twitter flex items-center justify-center"
-                >
-                  <Twitter className="w-5 h-5 text-gray-300" />
-                </a>
-                <a
-                  href="https://instagram.com/barikikaneno"
+                  href="https://instagram.com/barikaneno"
+                  
                   target="_blank"
                   rel="noopener noreferrer"
                   className="social-icon instagram flex items-center justify-center"
@@ -537,9 +525,7 @@ const Footer = () => {
                 <div className="text-gray-400 text-sm">
                   © 2026 <span className="brand-footer">Bari Kaneno</span>. {t.rights}.
                 </div>
-                <div className="text-xs text-gray-500 mt-1">
-                  Made with <Heart className="inline w-3 h-3 text-red-500 heart-beat" /> using React & Tailwind CSS
-                </div>
+               
               </div>
             </div>
           </div>
