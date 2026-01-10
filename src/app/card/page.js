@@ -59,11 +59,11 @@ export default function BusinessCardLanding() {
     }
   }, [countdown, businessData, autoRedirect, error]);
 
-  const handleVisitWebsite = () => {
-    // Always redirect to YOUR website (not the client's)
-    const yourWebsite = 'https://bari-kaneno.pro'; // Change this to your actual domain
-    window.location.href = yourWebsite;
-  };
+const handleVisitWebsite = () => {
+  const whatsappNumber = '255765762688'; // Your number without the + sign
+  const message = encodeURIComponent('Hello, naweza na mimi kupata Smart Business Card ?');
+  window.location.href = `https://wa.me/${whatsappNumber}?text=${message}`;
+};
 
   const cancelAutoRedirect = () => {
     setAutoRedirect(false);
