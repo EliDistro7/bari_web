@@ -1029,8 +1029,117 @@ const NAV = [
   { id:"packages",   icon:"⬡",  label:"Packages" },
   { id:"email",      icon:"◻",  label:"Email" },
   { id:"notifications", icon:"◉", label:"Notifications" },
+  { id:"agents", icon:"🤝", label:"Agents" },
   { id:"admins",     icon:"◈",  label:"Admin Team" },
 ];
+
+
+// ── AGENTS ────────────────────────────────────────────────────────────────────
+const Agents = ({ token, toast }) => {
+  const [agents, setAgents] = useState([]);
+  const [total, setTotal] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [selected, setSelected] = useState(null);
+  const [actionLoading, setActionLoading] = useState(false);
+
+  const load = () => {
+    setLoading(true);
+    api("/agents", token)
+      .then(d => { setAgents(d.agents || []); setTotal(d.total || 0); })
+      .catch(e => toast(e.message, "error"))
+      .finally(() => setLoading(false));
+  };
+  useEffect(() => { load(); }, []);
+
+  return (
+    <div>
+      <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", marginBottom:20 }}>
+        <div>
+          <h1 style={{ fontFamily:T.fontDisplay, fontSize:26, color:T.text, margin:"0 0 4px" }}>Agents</h1>
+          <p style={{ color:T.textSoft, fontSize:13, margin:0 }}>{total} registered agents</p>
+        </div>
+      </div>
+
+      <Card style={{ padding:0, overflow:"hidden" }}>
+        {loading ? <Spinner /> : agents.length === 0 ? <EmptyState icon="🤝" text="No agents found." /> : (
+          <table style={{ width:"100%", borderCollapse:"collapse", fontSize:13 }}>
+            <thead>
+              <tr style={{ background:T.bg, borderBottom:`1px solid ${T.border}` }}>
+                {["Name","Email","Referrals","Total Commission","Unpaid","Actions"].map(h => (
+                  <th key={h} style={{ padding:"10px 16px", textAlign:"left", fontSize:11, fontWeight:700,
+                    color:T.textSoft, textTransform:"uppercase", letterSpacing:"0.4px" }}>{h}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {agents.map((a, i) => (
+                <tr key={a._id||a.id} style={{ borderBottom:`1px solid ${T.borderSoft}`,
+                  background: i%2===0 ? T.surface : T.bg }}>
+                  <td style={{ padding:"11px 16px", color:T.text, fontWeight:600 }}>{a.name}</td>
+                  <td style={{ padding:"11px 16px", color:T.textMid }}>{a.email || "—"}</td>
+                  <td style={{ padding:"11px 16px", color:T.text }}>{a.totalReferrals ?? 0}</td>
+                  <td style={{ padding:"11px 16px", color:T.accent, fontWeight:700 }}>
+                    TZS {(a.totalCommissionEarned || 0).toLocaleString()}
+                  </td>
+                  <td style={{ padding:"11px 16px" }}>
+                    <span style={{ color: (a.unpaidCommission||0) > 0 ? T.warn : T.textSoft, fontWeight:600 }}>
+                      TZS {(a.unpaidCommission || 0).toLocaleString()}
+                    </span>
+                  </td>
+                  <td style={{ padding:"11px 16px" }}>
+                    <Btn size="sm" variant="secondary" onClick={() => setSelected(a)}>View</Btn>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </Card>
+
+      {selected && (
+        <Modal title={selected.name} onClose={() => setSelected(null)}>
+          {[
+            ["Email",             selected.email],
+            ["Phone",             selected.phone],
+            ["Total Referrals",   selected.totalReferrals],
+            ["Commission Rate",   selected.commissionRate ? `${(selected.commissionRate*100).toFixed(0)}%` : "30%"],
+            ["Total Earned",      `TZS ${(selected.totalCommissionEarned||0).toLocaleString()}`],
+            ["Unpaid",            `TZS ${(selected.unpaidCommission||0).toLocaleString()}`],
+            ["Joined",            selected.createdAt ? new Date(selected.createdAt).toLocaleString() : "—"],
+          ].map(([l,v]) => v != null && (
+            <div key={l} style={{ display:"flex", justifyContent:"space-between", padding:"9px 0",
+              borderBottom:`1px solid ${T.borderSoft}`, fontSize:13 }}>
+              <span style={{ color:T.textMid, fontWeight:600 }}>{l}</span>
+              <span style={{ color:T.text }}>{String(v)}</span>
+            </div>
+          ))}
+
+          {/* Subscriptions acquired by this agent */}
+          {selected.recentSubscriptions?.length > 0 && (
+            <div style={{ marginTop:16 }}>
+              <div style={{ fontSize:11, fontWeight:700, color:T.textMid, marginBottom:8,
+                textTransform:"uppercase", letterSpacing:"0.5px" }}>Recent Referrals</div>
+              {selected.recentSubscriptions.map((s, i) => (
+                <div key={i} style={{ display:"flex", justifyContent:"space-between",
+                  padding:"8px 0", borderBottom:`1px solid ${T.borderSoft}`, fontSize:12 }}>
+                  <span style={{ color:T.text }}>{s.userName || s.userId}</span>
+                  <span style={{ color:T.textMid }}>{s.packageName}</span>
+                  <span style={{ color:T.accent, fontWeight:600 }}>
+                    TZS {(s.commission||0).toLocaleString()}
+                  </span>
+                </div>
+              ))}
+            </div>
+          )}
+
+          <div style={{ marginTop:16, display:"flex", gap:8 }}>
+            <Btn variant="secondary" onClick={() => setSelected(null)}>Close</Btn>
+          </div>
+        </Modal>
+      )}
+    </div>
+  );
+};
 
 export default function AdminApp() {
  const [token, setToken] = useState(() => {
@@ -1115,6 +1224,7 @@ export default function AdminApp() {
         {section === "subscriptions" && <Subscriptions {...sectionProps} />}
         {section === "packages"      && <Packages    {...sectionProps} />}
         {section === "email"         && <EmailCenter {...sectionProps} />}
+        {section === "agents" && <Agents {...sectionProps} />}
         {section === "notifications" && <Notifications {...sectionProps} />}
         {section === "admins"        && <AdminsPanel {...sectionProps} currentAdminRole={admin?.role} />}
       </main>
