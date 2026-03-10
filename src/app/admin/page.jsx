@@ -1034,6 +1034,7 @@ const NAV = [
 
 export default function AdminApp() {
  const [token, setToken] = useState(() => {
+  if (typeof window === "undefined") return null;
   const t = sessionStorage.getItem("admin_token");
   return (t && t !== "null" && t !== "undefined") ? t : null;
 });
