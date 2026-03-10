@@ -1034,40 +1034,77 @@ const NAV = [
 ];
 
 
-// ── AGENTS ────────────────────────────────────────────────────────────────────
 const Agents = ({ token, toast }) => {
-  const [agents, setAgents] = useState([]);
-  const [total, setTotal] = useState(0);
-  const [loading, setLoading] = useState(true);
-  const [selected, setSelected] = useState(null);
+  const [agents, setAgents]         = useState([]);
+  const [total, setTotal]           = useState(0);
+  const [loading, setLoading]       = useState(true);
+  const [selected, setSelected]     = useState(null);
+  const [modal, setModal]           = useState(false);
   const [actionLoading, setActionLoading] = useState(false);
+  const [form, setForm] = useState({
+    name: '', email: '', phone: '', region: '', commissionRate: 0.30, notes: ''
+  });
 
   const load = () => {
     setLoading(true);
-    api("/agents", token)
+    api('/agents', token)
       .then(d => { setAgents(d.agents || []); setTotal(d.total || 0); })
-      .catch(e => toast(e.message, "error"))
+      .catch(e => toast(e.message, 'error'))
       .finally(() => setLoading(false));
   };
   useEffect(() => { load(); }, []);
 
+  const register = async () => {
+    if (!form.name || !form.email) return toast('Name and email required', 'error');
+    setActionLoading(true);
+    try {
+      await api('/agents', token, { method: 'POST', body: JSON.stringify(form) });
+      toast('Agent registered');
+      setModal(false);
+      setForm({ name: '', email: '', phone: '', region: '', commissionRate: 0.30, notes: '' });
+      load();
+    } catch(e) { toast(e.message, 'error'); }
+    finally { setActionLoading(false); }
+  };
+
+  const deactivate = async (id) => {
+    if (!confirm('Deactivate this agent?')) return;
+    setActionLoading(true);
+    try {
+      await api(`/agents/${id}`, token, { method: 'DELETE' });
+      toast('Agent deactivated'); load();
+    } catch(e) { toast(e.message, 'error'); }
+    finally { setActionLoading(false); }
+  };
+
   return (
     <div>
-      <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", marginBottom:20 }}>
+      <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-start', marginBottom:20 }}>
         <div>
-          <h1 style={{ fontFamily:T.fontDisplay, fontSize:26, color:T.text, margin:"0 0 4px" }}>Agents</h1>
+          <h1 style={{ fontFamily:T.fontDisplay, fontSize:26, color:T.text, margin:'0 0 4px' }}>Agents</h1>
           <p style={{ color:T.textSoft, fontSize:13, margin:0 }}>{total} registered agents</p>
         </div>
+        <Btn onClick={() => setModal(true)}>+ Register Agent</Btn>
       </div>
 
-      <Card style={{ padding:0, overflow:"hidden" }}>
-        {loading ? <Spinner /> : agents.length === 0 ? <EmptyState icon="🤝" text="No agents found." /> : (
-          <table style={{ width:"100%", borderCollapse:"collapse", fontSize:13 }}>
+      {/* ── Summary stats ── */}
+      <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(180px,1fr))', gap:14, marginBottom:24 }}>
+        <StatCard label="Total Agents"      value={total}          icon="🤝" />
+        <StatCard label="Active Agents"     value={agents.filter(a=>a.isActive).length} icon="✅" accent={T.successSoft} />
+        <StatCard label="Total Referrals"   value={agents.reduce((s,a)=>s+(a.totalReferrals||0),0)} icon="📋" />
+        <StatCard label="Total Commission"  value={`TZS ${agents.reduce((s,a)=>s+(a.totalCommissionEarned||0),0).toLocaleString()}`} icon="💰" accent={T.warnSoft} />
+      </div>
+
+      <Card style={{ padding:0, overflow:'hidden' }}>
+        {loading ? <Spinner /> : agents.length === 0
+          ? <EmptyState icon="🤝" text="No agents yet. Register your first agent above." />
+          : (
+          <table style={{ width:'100%', borderCollapse:'collapse', fontSize:13 }}>
             <thead>
               <tr style={{ background:T.bg, borderBottom:`1px solid ${T.border}` }}>
-                {["Name","Email","Referrals","Total Commission","Unpaid","Actions"].map(h => (
-                  <th key={h} style={{ padding:"10px 16px", textAlign:"left", fontSize:11, fontWeight:700,
-                    color:T.textSoft, textTransform:"uppercase", letterSpacing:"0.4px" }}>{h}</th>
+                {['Name','Email','Region','Rate','Referrals','Earned','Unpaid','Status','Actions'].map(h => (
+                  <th key={h} style={{ padding:'10px 16px', textAlign:'left', fontSize:11,
+                    fontWeight:700, color:T.textSoft, textTransform:'uppercase', letterSpacing:'0.4px' }}>{h}</th>
                 ))}
               </tr>
             </thead>
@@ -1075,19 +1112,37 @@ const Agents = ({ token, toast }) => {
               {agents.map((a, i) => (
                 <tr key={a._id||a.id} style={{ borderBottom:`1px solid ${T.borderSoft}`,
                   background: i%2===0 ? T.surface : T.bg }}>
-                  <td style={{ padding:"11px 16px", color:T.text, fontWeight:600 }}>{a.name}</td>
-                  <td style={{ padding:"11px 16px", color:T.textMid }}>{a.email || "—"}</td>
-                  <td style={{ padding:"11px 16px", color:T.text }}>{a.totalReferrals ?? 0}</td>
-                  <td style={{ padding:"11px 16px", color:T.accent, fontWeight:700 }}>
-                    TZS {(a.totalCommissionEarned || 0).toLocaleString()}
+                  <td style={{ padding:'11px 16px', color:T.text, fontWeight:600 }}>{a.name}</td>
+                  <td style={{ padding:'11px 16px', color:T.textMid }}>{a.email}</td>
+                  <td style={{ padding:'11px 16px', color:T.textMid }}>{a.region || '—'}</td>
+                  <td style={{ padding:'11px 16px', color:T.accent, fontWeight:600 }}>
+                    {((a.commissionRate||0.30)*100).toFixed(0)}%
                   </td>
-                  <td style={{ padding:"11px 16px" }}>
-                    <span style={{ color: (a.unpaidCommission||0) > 0 ? T.warn : T.textSoft, fontWeight:600 }}>
-                      TZS {(a.unpaidCommission || 0).toLocaleString()}
+                  <td style={{ padding:'11px 16px', color:T.text }}>{a.totalReferrals || 0}</td>
+                  <td style={{ padding:'11px 16px', color:T.accent, fontWeight:700 }}>
+                    TZS {(a.totalCommissionEarned||0).toLocaleString()}
+                  </td>
+                  <td style={{ padding:'11px 16px' }}>
+                    <span style={{ color:(a.unpaidCommission||0)>0?T.warn:T.textSoft, fontWeight:600 }}>
+                      TZS {(a.unpaidCommission||0).toLocaleString()}
                     </span>
                   </td>
-                  <td style={{ padding:"11px 16px" }}>
-                    <Btn size="sm" variant="secondary" onClick={() => setSelected(a)}>View</Btn>
+                  <td style={{ padding:'11px 16px' }}>
+                    {a.isActive
+                      ? <Badge label="Active"   color={T.success} bg={T.successSoft} />
+                      : <Badge label="Inactive" color={T.textSoft} bg={T.borderSoft} />}
+                  </td>
+                  <td style={{ padding:'11px 16px' }}>
+                    <div style={{ display:'flex', gap:6 }}>
+                      <Btn size="sm" variant="secondary" onClick={() => setSelected(a)}>View</Btn>
+                      {a.isActive && (
+                        <Btn size="sm" variant="danger"
+                          onClick={() => deactivate(a._id||a.id)}
+                          disabled={actionLoading}>
+                          Deactivate
+                        </Btn>
+                      )}
+                    </div>
                   </td>
                 </tr>
               ))}
@@ -1096,34 +1151,74 @@ const Agents = ({ token, toast }) => {
         )}
       </Card>
 
+      {/* ── Register modal ── */}
+      {modal && (
+        <Modal title="Register New Agent" onClose={() => setModal(false)}>
+          <Input label="Full Name *"    value={form.name}   onChange={v=>setForm(f=>({...f,name:v}))}   placeholder="Juma Mwangi" />
+          <Input label="Email *"        value={form.email}  onChange={v=>setForm(f=>({...f,email:v}))}  placeholder="juma@example.com" type="email" />
+          <Input label="Phone"          value={form.phone}  onChange={v=>setForm(f=>({...f,phone:v}))}  placeholder="+255 6xx xxx xxx" />
+          <Input label="Region"         value={form.region} onChange={v=>setForm(f=>({...f,region:v}))} placeholder="Dodoma, Arusha…" />
+          <div style={{ marginBottom:14 }}>
+            <div style={{ fontSize:11, fontWeight:700, color:T.textMid, marginBottom:5,
+              textTransform:'uppercase', letterSpacing:'0.5px' }}>Commission Rate</div>
+            <div style={{ display:'flex', gap:8 }}>
+              {[0.10, 0.20, 0.30, 0.40].map(r => (
+                <button key={r} onClick={() => setForm(f=>({...f,commissionRate:r}))}
+                  style={{ flex:1, padding:'8px 0', border:`1.5px solid ${form.commissionRate===r?T.accent:T.border}`,
+                    borderRadius:8, background:form.commissionRate===r?T.accentSoft:T.surface,
+                    cursor:'pointer', fontSize:13, fontWeight:700,
+                    color:form.commissionRate===r?T.accent:T.textMid, fontFamily:T.font }}>
+                  {(r*100).toFixed(0)}%
+                </button>
+              ))}
+            </div>
+          </div>
+          <div style={{ marginBottom:14 }}>
+            <div style={{ fontSize:11, fontWeight:700, color:T.textMid, marginBottom:5,
+              textTransform:'uppercase', letterSpacing:'0.5px' }}>Notes (optional)</div>
+            <textarea value={form.notes} onChange={e=>setForm(f=>({...f,notes:e.target.value}))} rows={2}
+              style={{ width:'100%', padding:'9px 13px', border:`1.5px solid ${T.border}`, borderRadius:8,
+                fontSize:13, fontFamily:T.font, color:T.text, background:T.bg,
+                outline:'none', resize:'vertical', boxSizing:'border-box' }} />
+          </div>
+          <div style={{ display:'flex', gap:8 }}>
+            <Btn onClick={register} disabled={actionLoading}>Register Agent</Btn>
+            <Btn variant="secondary" onClick={() => setModal(false)}>Cancel</Btn>
+          </div>
+        </Modal>
+      )}
+
+      {/* ── Detail modal ── */}
       {selected && (
         <Modal title={selected.name} onClose={() => setSelected(null)}>
           {[
-            ["Email",             selected.email],
-            ["Phone",             selected.phone],
-            ["Total Referrals",   selected.totalReferrals],
-            ["Commission Rate",   selected.commissionRate ? `${(selected.commissionRate*100).toFixed(0)}%` : "30%"],
-            ["Total Earned",      `TZS ${(selected.totalCommissionEarned||0).toLocaleString()}`],
-            ["Unpaid",            `TZS ${(selected.unpaidCommission||0).toLocaleString()}`],
-            ["Joined",            selected.createdAt ? new Date(selected.createdAt).toLocaleString() : "—"],
-          ].map(([l,v]) => v != null && (
-            <div key={l} style={{ display:"flex", justifyContent:"space-between", padding:"9px 0",
+            ['Email',           selected.email],
+            ['Phone',           selected.phone || '—'],
+            ['Region',          selected.region || '—'],
+            ['Commission Rate', `${((selected.commissionRate||0.30)*100).toFixed(0)}%`],
+            ['Total Referrals', selected.totalReferrals || 0],
+            ['Total Earned',    `TZS ${(selected.totalCommissionEarned||0).toLocaleString()}`],
+            ['Unpaid',          `TZS ${(selected.unpaidCommission||0).toLocaleString()}`],
+            ['Status',          selected.isActive ? 'Active' : 'Inactive'],
+            ['Registered',      selected.createdAt ? new Date(selected.createdAt).toLocaleString() : '—'],
+          ].map(([l,v]) => (
+            <div key={l} style={{ display:'flex', justifyContent:'space-between', padding:'9px 0',
               borderBottom:`1px solid ${T.borderSoft}`, fontSize:13 }}>
               <span style={{ color:T.textMid, fontWeight:600 }}>{l}</span>
               <span style={{ color:T.text }}>{String(v)}</span>
             </div>
           ))}
 
-          {/* Subscriptions acquired by this agent */}
           {selected.recentSubscriptions?.length > 0 && (
             <div style={{ marginTop:16 }}>
               <div style={{ fontSize:11, fontWeight:700, color:T.textMid, marginBottom:8,
-                textTransform:"uppercase", letterSpacing:"0.5px" }}>Recent Referrals</div>
+                textTransform:'uppercase', letterSpacing:'0.5px' }}>Recent Referrals</div>
               {selected.recentSubscriptions.map((s, i) => (
-                <div key={i} style={{ display:"flex", justifyContent:"space-between",
-                  padding:"8px 0", borderBottom:`1px solid ${T.borderSoft}`, fontSize:12 }}>
-                  <span style={{ color:T.text }}>{s.userName || s.userId}</span>
-                  <span style={{ color:T.textMid }}>{s.packageName}</span>
+                <div key={i} style={{ display:'flex', justifyContent:'space-between',
+                  padding:'8px 0', borderBottom:`1px solid ${T.borderSoft}`, fontSize:12 }}>
+                  <span style={{ color:T.text }}>{s.packageName}</span>
+                  <Badge label={s.status} color={s.status==='active'?T.success:T.textSoft}
+                    bg={s.status==='active'?T.successSoft:T.borderSoft} />
                   <span style={{ color:T.accent, fontWeight:600 }}>
                     TZS {(s.commission||0).toLocaleString()}
                   </span>
@@ -1132,7 +1227,14 @@ const Agents = ({ token, toast }) => {
             </div>
           )}
 
-          <div style={{ marginTop:16, display:"flex", gap:8 }}>
+          {selected.notes && (
+            <div style={{ marginTop:16, padding:'12px 14px', background:T.bg,
+              borderRadius:8, fontSize:13, color:T.textMid }}>
+              📝 {selected.notes}
+            </div>
+          )}
+
+          <div style={{ marginTop:16, display:'flex', gap:8 }}>
             <Btn variant="secondary" onClick={() => setSelected(null)}>Close</Btn>
           </div>
         </Modal>
