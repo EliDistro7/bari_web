@@ -69,7 +69,7 @@ export default function DownloadPage() {
 
           <div>
             <h1
-              className="text-5xl font-black tracking-tighter text-white leading-none"
+              className="text-3xl font-black tracking-tighter text-white leading-none"
               style={{ fontFamily: "'Syne', sans-serif" }}
             >
               MANEREJA
