@@ -38,38 +38,40 @@ export default function DownloadPage() {
   };
 
   return (
-    <main className="min-h-screen bg-[#0f1014] text-white font-sans overflow-x-hidden">
+    <main className="min-h-screen bg-[#F8F9FA] text-[#212529] font-sans overflow-x-hidden">
 
-      {/* ── noise overlay ── */}
+      {/* ── subtle dot grid ── */}
       <div
-        className="pointer-events-none fixed inset-0 z-0 opacity-[0.03]"
+        className="pointer-events-none fixed inset-0 z-0"
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-          backgroundRepeat: "repeat",
-          backgroundSize: "128px",
+          backgroundImage: `radial-gradient(circle, #84CC16 1px, transparent 1px)`,
+          backgroundSize: "32px 32px",
+          opacity: 0.06,
         }}
       />
 
       {/* ── lime glow blob ── */}
       <div
-        className="pointer-events-none fixed top-[-200px] left-1/2 -translate-x-1/2 w-[700px] h-[500px] rounded-full z-0 blur-[120px] opacity-20"
-        style={{ background: "radial-gradient(circle, #84CC16, transparent 70%)" }}
+        className="pointer-events-none fixed top-[-180px] left-1/2 -translate-x-1/2 w-[600px] h-[400px] rounded-full z-0 blur-[100px]"
+        style={{ background: "radial-gradient(circle, #84CC1640, transparent 70%)" }}
       />
 
-      <div className="relative z-10 max-w-2xl mx-auto px-6 py-20 flex flex-col items-center gap-16">
+      <div className="relative z-10 max-w-2xl mx-auto px-6 py-20 flex flex-col items-center gap-14">
 
         {/* ── HEADER ── */}
-        <header className="flex flex-col items-center gap-6 text-center">
-          {/* Logo */}
-          <img
-            src={LOGO_URL}
-            alt="Manereja logo"
-            className="w-16 h-16 rounded-2xl object-contain"
-          />
+        <header className="flex flex-col items-center gap-5 text-center">
+          <div className="relative">
+            <div className="absolute inset-0 rounded-2xl bg-[#84CC16] blur-xl opacity-25 scale-110" />
+            <img
+              src={LOGO_URL}
+              alt="Manereja logo"
+              className="relative w-20 h-20 rounded-2xl object-contain shadow-lg"
+            />
+          </div>
 
           <div>
             <h1
-              className="text-3xl font-black tracking-tighter text-white leading-none"
+              className="text-5xl font-black tracking-tighter text-[#212529] leading-none"
               style={{ fontFamily: "'Syne', sans-serif" }}
             >
               MANEREJA
@@ -79,9 +81,8 @@ export default function DownloadPage() {
             </p>
           </div>
 
-          {/* version badge */}
-          <div className="flex items-center gap-3">
-            <span className="px-3 py-1 rounded-full border border-[#84CC16]/30 bg-[#84CC16]/10 text-[#84CC16] text-xs font-bold tracking-wider">
+          <div className="flex items-center gap-3 flex-wrap justify-center">
+            <span className="px-3 py-1 rounded-full border border-[#84CC16] bg-[#84CC16]/10 text-[#65A30D] text-xs font-bold tracking-wider">
               {VERSION}
             </span>
             <span className="text-[#6C757D] text-xs">{RELEASE_DATE}</span>
@@ -98,10 +99,8 @@ export default function DownloadPage() {
             className="group relative w-full max-w-sm overflow-hidden rounded-2xl"
             style={{ textDecoration: "none" }}
           >
-            {/* glow ring */}
-            <div className="absolute -inset-0.5 rounded-2xl bg-gradient-to-r from-[#84CC16] to-[#65A30D] opacity-70 blur-sm group-hover:opacity-100 transition-opacity duration-300" />
-
-            <div className="relative flex items-center justify-center gap-3 bg-[#84CC16] hover:bg-[#78b814] active:bg-[#65A30D] transition-colors duration-150 rounded-2xl px-8 py-5">
+            <div className="absolute -inset-1 rounded-3xl bg-[#84CC16] opacity-20 blur-lg group-hover:opacity-40 transition-opacity duration-300" />
+            <div className="relative flex items-center justify-center gap-3 bg-[#84CC16] hover:bg-[#78b814] active:bg-[#65A30D] transition-colors duration-150 rounded-2xl px-8 py-5 shadow-lg shadow-[#84CC16]/30">
               {downloading ? (
                 <>
                   <svg className="animate-spin w-5 h-5 text-white" fill="none" viewBox="0 0 24 24">
@@ -136,16 +135,16 @@ export default function DownloadPage() {
         {/* ── FEATURES GRID ── */}
         <section className="w-full">
           <p className="text-[#6C757D] text-xs tracking-widest uppercase mb-5 text-center">
-            What's inside
+            What&apos;s inside
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             {features.map((f) => (
               <div
                 key={f.label}
-                className="flex items-center gap-3 rounded-xl border border-white/5 bg-white/[0.03] px-4 py-3 hover:border-[#84CC16]/20 hover:bg-[#84CC16]/5 transition-all duration-200"
+                className="flex items-center gap-3 rounded-xl border border-[#E0E0E0] bg-white px-4 py-3 hover:border-[#84CC16]/50 hover:bg-[#F7FEE7] hover:shadow-sm transition-all duration-200"
               >
                 <span className="text-xl">{f.icon}</span>
-                <span className="text-sm font-medium text-white/80">{f.label}</span>
+                <span className="text-sm font-medium text-[#212529]">{f.label}</span>
               </div>
             ))}
           </div>
@@ -156,39 +155,39 @@ export default function DownloadPage() {
           <p className="text-[#6C757D] text-xs tracking-widest uppercase mb-6 text-center">
             How to install
           </p>
-          <div className="flex flex-col gap-4">
-            {steps.map((s, i) => (
-              <div key={s.num} className="flex gap-5 items-start">
-                <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-[#84CC16]/10 border border-[#84CC16]/20 flex items-center justify-center">
-                  <span className="text-[#84CC16] text-xs font-black">{s.num}</span>
+          <div className="flex flex-col gap-3">
+            {steps.map((s) => (
+              <div
+                key={s.num}
+                className="flex gap-5 items-start bg-white rounded-xl border border-[#E0E0E0] px-5 py-4 hover:border-[#84CC16]/30 hover:shadow-sm transition-all duration-200"
+              >
+                <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-[#84CC16]/10 border border-[#84CC16]/30 flex items-center justify-center">
+                  <span className="text-[#65A30D] text-xs font-black">{s.num}</span>
                 </div>
                 <div className="pt-1">
-                  <p className="text-white font-bold text-sm">{s.title}</p>
+                  <p className="text-[#212529] font-bold text-sm">{s.title}</p>
                   <p className="text-[#6C757D] text-sm mt-0.5">{s.desc}</p>
                 </div>
-                {i < steps.length - 1 && (
-                  <div className="absolute" />
-                )}
               </div>
             ))}
           </div>
         </section>
 
         {/* ── DIVIDER ── */}
-        <div className="w-full h-px bg-white/5" />
+        <div className="w-full h-px bg-[#EEEEEE]" />
 
         {/* ── FOOTER ── */}
         <footer className="flex flex-col items-center gap-3 text-center">
           <div className="flex items-center gap-2">
             <img src={LOGO_URL} alt="Manereja" className="w-5 h-5 rounded object-contain" />
-            <span className="text-white font-bold text-sm tracking-tight">Manereja</span>
+            <span className="text-[#212529] font-bold text-sm tracking-tight">Manereja</span>
           </div>
           <div className="flex flex-wrap justify-center gap-x-4 gap-y-1 text-xs text-[#6C757D]">
-            <a href="mailto:manereja07@gmail.com" className="hover:text-[#84CC16] transition-colors">
+            <a href="mailto:manereja07@gmail.com" className="hover:text-[#65A30D] transition-colors">
               manereja07@gmail.com
             </a>
             <span>·</span>
-            <a href="https://wa.me/255617833806" className="hover:text-[#84CC16] transition-colors">
+            <a href="https://wa.me/255617833806" className="hover:text-[#65A30D] transition-colors">
               WhatsApp: 0617 833 806
             </a>
             <span>·</span>
@@ -199,7 +198,6 @@ export default function DownloadPage() {
 
       </div>
 
-      {/* Syne font */}
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&display=swap');
       `}</style>
