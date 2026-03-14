@@ -248,6 +248,21 @@ const Users = ({ token, toast }) => {
     finally { setActionLoading(false); }
   };
 
+
+  const deleteUser = async (id, email) => {
+  if (!confirm(`Permanently delete ${email}? This cannot be undone.`)) return;
+  setActionLoading(true);
+  try {
+    await api(`/users/${id}`, token, { method: "DELETE" });
+    toast("User deleted");
+    load();
+  } catch (e) {
+    toast(e.message, "error");
+  } finally {
+    setActionLoading(false);
+  }
+};
+
   const reactivate = async (id) => {
     setActionLoading(true);
     try {
@@ -303,15 +318,19 @@ const Users = ({ token, toast }) => {
                   <td style={{ padding:"11px 16px", color:T.textSoft }}>
                     {u.createdAt ? new Date(u.createdAt).toLocaleDateString() : "—"}
                   </td>
-                  <td style={{ padding:"11px 16px" }}>
-                    <div style={{ display:"flex", gap:6 }}>
-                      <Btn size="sm" variant="secondary" onClick={() => setSelected(u)}>View</Btn>
-                      <Btn size="sm" variant="ghost" onClick={() => setEmailModal(u)}>✉️</Btn>
-                      {u.metadata?.suspended
-                        ? <Btn size="sm" variant="ghost" onClick={() => reactivate(u._id||u.id)} disabled={actionLoading}>↩️</Btn>
-                        : <Btn size="sm" variant="danger" onClick={() => suspend(u._id||u.id)} disabled={actionLoading}>Ban</Btn>}
-                    </div>
-                  </td>
+               
+
+                  <td style={{ padding: "11px 16px" }}>
+  <div style={{ display: "flex", gap: 6 }}>
+    <Btn size="sm" variant="secondary" onClick={() => setSelected(u)}>View</Btn>
+    <Btn size="sm" variant="ghost" onClick={() => setEmailModal(u)}>✉️</Btn>
+    {u.metadata?.suspended
+      ? <Btn size="sm" variant="ghost" onClick={() => reactivate(u._id||u.id)} disabled={actionLoading}>↩️</Btn>
+      : <Btn size="sm" variant="danger" onClick={() => suspend(u._id||u.id)} disabled={actionLoading}>Ban</Btn>}
+    {/* ↓ NEW */}
+    <Btn size="sm" variant="danger" onClick={() => deleteUser(u._id||u.id, u.email)} disabled={actionLoading}>🗑️</Btn>
+  </div>
+</td>
                 </tr>
               ))}
             </tbody>
@@ -384,6 +403,17 @@ const Subscriptions = ({ token, toast }) => {
   const [grantForm, setGrantForm] = useState({ userId:"", packageId:"", durationMonths:1, isTrial:false, notes:"" });
   const [actionLoading, setActionLoading] = useState(false);
 
+  const [unsubModal, setUnsubModal] = useState(null); // null | subscription object
+const [unsubForm, setUnsubForm]   = useState({ reason: "non_payment", notify: true, note: "" });
+
+const UNSUB_REASONS = [
+  { value: "non_payment",     label: "Non-payment" },
+  { value: "fraud",           label: "Fraud / Abuse" },
+  { value: "request",         label: "User Request" },
+  { value: "expired_trial",   label: "Trial Expired, No Upgrade" },
+  { value: "other",           label: "Other" },
+]
+
   const load = useCallback(() => {
     setLoading(true);
     const params = new URLSearchParams({ limit:30, ...(status && { status }) });
@@ -398,6 +428,44 @@ const Subscriptions = ({ token, toast }) => {
   }, [status, token]);
 
   useEffect(() => { load(); }, [load]);
+
+
+  const confirmUnsub = async () => {
+  if (!unsubModal) return;
+  setActionLoading(true);
+  try {
+    // Cancel the subscription
+    await api(`/subscriptions/${unsubModal._id || unsubModal.id}/cancel`, token, {
+      method: "POST",
+      body: JSON.stringify({ reason: unsubForm.reason, note: unsubForm.note }),
+    });
+
+    // Optionally send a notification email to the user
+    if (unsubForm.notify && (unsubModal.userId?._id || unsubModal.userId)) {
+      const userId = unsubModal.userId?._id || unsubModal.userId;
+      const userName = unsubModal.userId?.name || "there";
+      const pkg = unsubModal.packageId?.displayName || "your plan";
+      await api("/email/send", token, {
+        method: "POST",
+        body: JSON.stringify({
+          userIds: [userId],
+          type: "warning",
+          subject: "Your Manereja subscription has been cancelled",
+          message: `Hi ${userName},\n\nYour subscription to ${pkg} has been cancelled by our team.\n\nReason: ${UNSUB_REASONS.find(r => r.value === unsubForm.reason)?.label || unsubForm.reason}${unsubForm.note ? `\n\nNote: ${unsubForm.note}` : ""}\n\nIf you believe this is a mistake or would like to resubscribe, please contact us at manereja07@gmail.com or WhatsApp 0617 833 806.\n\nThank you,\nThe Manereja Team`,
+        }),
+      }).catch(() => {}); // non-blocking — don't fail if email fails
+    }
+
+    toast(`Subscription cancelled${unsubForm.notify ? " & user notified" : ""}`);
+    setUnsubModal(null);
+    setUnsubForm({ reason: "non_payment", notify: true, note: "" });
+    load();
+  } catch (e) {
+    toast(e.message, "error");
+  } finally {
+    setActionLoading(false);
+  }
+};
 
   const cancel = async (id) => {
     if (!confirm("Cancel this subscription?")) return;
@@ -428,89 +496,179 @@ const Subscriptions = ({ token, toast }) => {
     finally { setActionLoading(false); }
   };
 
-  return (
-    <div>
-      <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", marginBottom:20 }}>
-        <div>
-          <h1 style={{ fontFamily:T.fontDisplay, fontSize:26, color:T.text, margin:"0 0 4px" }}>Subscriptions</h1>
-          <p style={{ color:T.textSoft, fontSize:13, margin:0 }}>{total} total subscriptions</p>
-        </div>
-        <Btn onClick={() => setGrantModal(true)}>+ Grant Subscription</Btn>
+return (
+  <div>
+    <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", marginBottom:20 }}>
+      <div>
+        <h1 style={{ fontFamily:T.fontDisplay, fontSize:26, color:T.text, margin:"0 0 4px" }}>Subscriptions</h1>
+        <p style={{ color:T.textSoft, fontSize:13, margin:0 }}>{total} total subscriptions</p>
       </div>
-
-      <div style={{ display:"flex", gap:8, marginBottom:16, flexWrap:"wrap" }}>
-        {["","active","trial","expired","cancelled"].map(s => (
-          <Btn key={s} size="sm" variant={status===s?"primary":"secondary"} onClick={() => setStatus(s)}>
-            {s || "All"}
-          </Btn>
-        ))}
-      </div>
-
-      <Card style={{ padding:0, overflow:"hidden" }}>
-        {loading ? <Spinner /> : subs.length === 0 ? <EmptyState icon="📦" text="No subscriptions found." /> : (
-          <table style={{ width:"100%", borderCollapse:"collapse", fontSize:13 }}>
-            <thead>
-              <tr style={{ background:T.bg, borderBottom:`1px solid ${T.border}` }}>
-                {["User","Package","Status","Start","Expiry","Actions"].map(h => (
-                  <th key={h} style={{ padding:"10px 16px", textAlign:"left", fontSize:11, fontWeight:700,
-                    color:T.textSoft, textTransform:"uppercase", letterSpacing:"0.4px" }}>{h}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {subs.map((s, i) => (
-                <tr key={s._id||s.id} style={{ borderBottom:`1px solid ${T.borderSoft}`,
-                  background: i%2===0 ? T.surface : T.bg }}>
-                  <td style={{ padding:"11px 16px", color:T.text, fontWeight:600 }}>
-                    {s.userId?.name || "—"}
-                    {s.userId?.email && <div style={{ fontSize:11, color:T.textSoft }}>{s.userId.email}</div>}
-                  </td>
-                  <td style={{ padding:"11px 16px", color:T.textMid }}>{s.packageId?.displayName || "—"}</td>
-                  <td style={{ padding:"11px 16px" }}>{statusBadge(s.status)}</td>
-                  <td style={{ padding:"11px 16px", color:T.textSoft }}>{s.startDate ? new Date(s.startDate).toLocaleDateString() : "—"}</td>
-                  <td style={{ padding:"11px 16px", color: new Date(s.expiryDate)<new Date() ? T.danger : T.textSoft }}>
-                    {s.expiryDate ? new Date(s.expiryDate).toLocaleDateString() : "—"}
-                  </td>
-                  <td style={{ padding:"11px 16px" }}>
-                    <div style={{ display:"flex", gap:6 }}>
-                      {(s.status==="active"||s.status==="trial") && (
-                        <>
-                          <Btn size="sm" variant="secondary" onClick={() => renew(s._id||s.id)} disabled={actionLoading}>↺ Renew</Btn>
-                          <Btn size="sm" variant="danger" onClick={() => cancel(s._id||s.id)} disabled={actionLoading}>Cancel</Btn>
-                        </>
-                      )}
-                      {s.status==="expired" && (
-                        <Btn size="sm" variant="secondary" onClick={() => renew(s._id||s.id)} disabled={actionLoading}>↺ Renew</Btn>
-                      )}
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        )}
-      </Card>
-
-      {grantModal && (
-        <Modal title="Grant Subscription" onClose={() => setGrantModal(false)}>
-          <Input label="User ID" value={grantForm.userId} onChange={v => setGrantForm(f=>({...f,userId:v}))} placeholder="MongoDB ObjectId of user" />
-          <Select label="Package" value={grantForm.packageId} onChange={v => setGrantForm(f=>({...f,packageId:v}))}
-            options={[{value:"",label:"Select package…"}, ...packages.map(p=>({value:p._id||p.id, label:p.displayName}))]} />
-          <Input label="Duration (months)" type="number" value={grantForm.durationMonths}
-            onChange={v => setGrantForm(f=>({...f,durationMonths:Number(v)}))} />
-          <Input label="Notes (optional)" value={grantForm.notes} onChange={v => setGrantForm(f=>({...f,notes:v}))} />
-          <label style={{ display:"flex", alignItems:"center", gap:8, fontSize:13, color:T.text, marginBottom:16, cursor:"pointer" }}>
-            <input type="checkbox" checked={grantForm.isTrial} onChange={e => setGrantForm(f=>({...f,isTrial:e.target.checked}))} />
-            Grant as Free Trial (7 days)
-          </label>
-          <div style={{ display:"flex", gap:8 }}>
-            <Btn onClick={grant} disabled={actionLoading}>Grant</Btn>
-            <Btn variant="secondary" onClick={() => setGrantModal(false)}>Cancel</Btn>
-          </div>
-        </Modal>
-      )}
+      <Btn onClick={() => setGrantModal(true)}>+ Grant Subscription</Btn>
     </div>
-  );
+
+    <div style={{ display:"flex", gap:8, marginBottom:16, flexWrap:"wrap" }}>
+      {["","active","trial","expired","cancelled"].map(s => (
+        <Btn key={s} size="sm" variant={status===s?"primary":"secondary"} onClick={() => setStatus(s)}>
+          {s || "All"}
+        </Btn>
+      ))}
+    </div>
+
+    <Card style={{ padding:0, overflow:"hidden" }}>
+      {loading ? <Spinner /> : subs.length === 0 ? <EmptyState icon="📦" text="No subscriptions found." /> : (
+        <table style={{ width:"100%", borderCollapse:"collapse", fontSize:13 }}>
+          <thead>
+            <tr style={{ background:T.bg, borderBottom:`1px solid ${T.border}` }}>
+              {["User","Package","Status","Start","Expiry","Actions"].map(h => (
+                <th key={h} style={{ padding:"10px 16px", textAlign:"left", fontSize:11, fontWeight:700,
+                  color:T.textSoft, textTransform:"uppercase", letterSpacing:"0.4px" }}>{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {subs.map((s, i) => (
+              <tr key={s._id||s.id} style={{ borderBottom:`1px solid ${T.borderSoft}`,
+                background: i%2===0 ? T.surface : T.bg }}>
+                <td style={{ padding:"11px 16px", color:T.text, fontWeight:600 }}>
+                  {s.userId?.name || "—"}
+                  {s.userId?.email && <div style={{ fontSize:11, color:T.textSoft }}>{s.userId.email}</div>}
+                </td>
+                <td style={{ padding:"11px 16px", color:T.textMid }}>{s.packageId?.displayName || "—"}</td>
+                <td style={{ padding:"11px 16px" }}>{statusBadge(s.status)}</td>
+                <td style={{ padding:"11px 16px", color:T.textSoft }}>
+                  {s.startDate ? new Date(s.startDate).toLocaleDateString() : "—"}
+                </td>
+                <td style={{ padding:"11px 16px", color: new Date(s.expiryDate)<new Date() ? T.danger : T.textSoft }}>
+                  {s.expiryDate ? new Date(s.expiryDate).toLocaleDateString() : "—"}
+                </td>
+                <td style={{ padding:"11px 16px" }}>
+                  <div style={{ display:"flex", gap:6 }}>
+                    {/* Renew — available for active, trial, and expired */}
+                    {(s.status==="active"||s.status==="trial"||s.status==="expired") && (
+                      <Btn size="sm" variant="secondary"
+                        onClick={() => renew(s._id||s.id)}
+                        disabled={actionLoading}>
+                        ↺ Renew
+                      </Btn>
+                    )}
+                    {/* Unsubscribe — only for active or trial */}
+                    {(s.status==="active"||s.status==="trial") && (
+                      <Btn size="sm" variant="danger"
+                        onClick={() => {
+                          setUnsubModal(s);
+                          setUnsubForm({ reason:"non_payment", notify:true, note:"" });
+                        }}
+                        disabled={actionLoading}>
+                        🚫 Unsub
+                      </Btn>
+                    )}
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+    </Card>
+
+    {/* ── Grant modal ── */}
+    {grantModal && (
+      <Modal title="Grant Subscription" onClose={() => setGrantModal(false)}>
+        <Input label="User ID" value={grantForm.userId} onChange={v => setGrantForm(f=>({...f,userId:v}))} placeholder="MongoDB ObjectId of user" />
+        <Select label="Package" value={grantForm.packageId} onChange={v => setGrantForm(f=>({...f,packageId:v}))}
+          options={[{value:"",label:"Select package…"}, ...packages.map(p=>({value:p._id||p.id, label:p.displayName}))]} />
+        <Input label="Duration (months)" type="number" value={grantForm.durationMonths}
+          onChange={v => setGrantForm(f=>({...f,durationMonths:Number(v)}))} />
+        <Input label="Notes (optional)" value={grantForm.notes} onChange={v => setGrantForm(f=>({...f,notes:v}))} />
+        <label style={{ display:"flex", alignItems:"center", gap:8, fontSize:13, color:T.text, marginBottom:16, cursor:"pointer" }}>
+          <input type="checkbox" checked={grantForm.isTrial} onChange={e => setGrantForm(f=>({...f,isTrial:e.target.checked}))} />
+          Grant as Free Trial (7 days)
+        </label>
+        <div style={{ display:"flex", gap:8 }}>
+          <Btn onClick={grant} disabled={actionLoading}>Grant</Btn>
+          <Btn variant="secondary" onClick={() => setGrantModal(false)}>Cancel</Btn>
+        </div>
+      </Modal>
+    )}
+
+    {/* ── Unsubscribe modal ── */}
+    {unsubModal && (
+      <Modal title={`Cancel — ${unsubModal.userId?.name || "User"}`} onClose={() => setUnsubModal(null)}>
+
+        {/* Summary strip */}
+        <div style={{ background:T.dangerSoft, border:`1px solid #E8C5BC`, borderRadius:10,
+          padding:"12px 16px", marginBottom:20 }}>
+          <div style={{ fontWeight:700, fontSize:14, color:T.danger, marginBottom:3 }}>
+            {unsubModal.packageId?.displayName || "Unknown Package"}
+          </div>
+          <div style={{ fontSize:12, color:T.textMid }}>
+            {unsubModal.userId?.email || "—"} · Expires {unsubModal.expiryDate ? new Date(unsubModal.expiryDate).toLocaleDateString() : "—"}
+          </div>
+        </div>
+
+        {/* Reason picker */}
+        <div style={{ marginBottom:16 }}>
+          <div style={{ fontSize:11, fontWeight:700, color:T.textMid, marginBottom:8,
+            textTransform:"uppercase", letterSpacing:"0.5px" }}>Reason</div>
+          <div style={{ display:"flex", flexDirection:"column", gap:6 }}>
+            {UNSUB_REASONS.map(r => (
+              <label key={r.value} onClick={() => setUnsubForm(f=>({...f,reason:r.value}))}
+                style={{ display:"flex", alignItems:"center", gap:10, cursor:"pointer",
+                  fontSize:13, color:T.text, padding:"9px 13px", borderRadius:8,
+                  background: unsubForm.reason===r.value ? T.dangerSoft : T.bg,
+                  border:`1px solid ${unsubForm.reason===r.value ? "#E8C5BC" : T.border}`,
+                  transition:"all 0.12s" }}>
+                <input type="radio" name="unsub_reason" readOnly
+                  checked={unsubForm.reason===r.value}
+                  style={{ accentColor:T.danger, width:14, height:14 }} />
+                {r.label}
+              </label>
+            ))}
+          </div>
+        </div>
+
+        {/* Internal note */}
+        <div style={{ marginBottom:16 }}>
+          <div style={{ fontSize:11, fontWeight:700, color:T.textMid, marginBottom:5,
+            textTransform:"uppercase", letterSpacing:"0.5px" }}>Internal Note (optional)</div>
+          <textarea value={unsubForm.note} rows={2}
+            onChange={e => setUnsubForm(f=>({...f,note:e.target.value}))}
+            placeholder="e.g. Payment bounced 14 Mar, 2 reminders sent…"
+            style={{ width:"100%", padding:"9px 13px", border:`1.5px solid ${T.border}`,
+              borderRadius:8, fontSize:13, fontFamily:T.font, color:T.text, background:T.bg,
+              outline:"none", resize:"vertical", boxSizing:"border-box" }} />
+        </div>
+
+        {/* Notify toggle */}
+        <label onClick={() => setUnsubForm(f=>({...f,notify:!f.notify}))}
+          style={{ display:"flex", alignItems:"center", gap:12, cursor:"pointer",
+            padding:"11px 14px", background:T.bg, borderRadius:9,
+            border:`1px solid ${T.border}`, marginBottom:20 }}>
+          <div style={{ width:18, height:18, borderRadius:4, flexShrink:0,
+            border:`1.5px solid ${unsubForm.notify?T.accent:T.border}`,
+            background:unsubForm.notify?T.accent:T.surface,
+            display:"flex", alignItems:"center", justifyContent:"center", transition:"all 0.15s" }}>
+            {unsubForm.notify && <span style={{ color:"#fff", fontSize:11, fontWeight:800 }}>✓</span>}
+          </div>
+          <div>
+            <div style={{ fontSize:13, fontWeight:600, color:T.text }}>Notify user by email</div>
+            <div style={{ fontSize:11, color:T.textSoft, marginTop:1 }}>
+              Sends a cancellation notice with the reason above
+            </div>
+          </div>
+        </label>
+
+        <div style={{ display:"flex", gap:8 }}>
+          <Btn variant="danger" onClick={confirmUnsub} disabled={actionLoading}>
+            {actionLoading ? "Cancelling…" : "Confirm Cancellation"}
+          </Btn>
+          <Btn variant="secondary" onClick={() => setUnsubModal(null)}>Back</Btn>
+        </div>
+      </Modal>
+    )}
+  </div>
+);
+
 };
 
 // ── PACKAGES ──────────────────────────────────────────────────────────────────
