@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 
-const APK_URL =
-  "https://drive.google.com/uc?export=download&id=1ZlOyzmSg3RmQLNUCDqyllf4WGKPwVzzF";
+const APK_URL = "https://drive.google.com/uc?export=download&id=1LdhHsyKWjaiMeCNpy17CrU_ebZXl01RU";
+  
 const LOGO_URL =
   "https://res.cloudinary.com/dh3bzuzyb/image/upload/v1772730584/manereja_hvqr57.png";
 const VERSION = "v1.0.0";
