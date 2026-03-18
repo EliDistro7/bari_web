@@ -2,12 +2,13 @@
 
 import { useState } from "react";
 
-const APK_URL = "https://drive.google.com/uc?export=download&id=1LdhHsyKWjaiMeCNpy17CrU_ebZXl01RU";
-  
+
+const APK_URL = "https://drive.google.com/uc?export=download&id=1zTI_orM3jmQtpiGGQ80HI_zRob393F8J";
+  //https://drive.google.com/file/d/1zTI_orM3jmQtpiGGQ80HI_zRob393F8J/view?usp=sharing
 const LOGO_URL =
   "https://res.cloudinary.com/dh3bzuzyb/image/upload/v1772730584/manereja_hvqr57.png";
 const VERSION = "v1.0.0";
-const APK_SIZE = "39.8 MB";
+const APK_SIZE = "40 MB";
 const RELEASE_DATE = "March 2026";
 
 const features = [
