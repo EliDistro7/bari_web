@@ -3,8 +3,9 @@
 import { useState } from "react";
 
 
-const APK_URL = "https://drive.google.com/uc?export=download&id=1zTI_orM3jmQtpiGGQ80HI_zRob393F8J";
+const APK_URL = "https://drive.google.com/uc?export=download&id=17A_8E03YEQkuO2iJmOU1iX24g5zSo6O-";
   //https://drive.google.com/file/d/1zTI_orM3jmQtpiGGQ80HI_zRob393F8J/view?usp=sharing
+  //https://drive.google.com/file/d/17A_8E03YEQkuO2iJmOU1iX24g5zSo6O-/view?usp=sharing
 const LOGO_URL =
   "https://res.cloudinary.com/dh3bzuzyb/image/upload/v1772730584/manereja_hvqr57.png";
 const VERSION = "v1.0.0";
