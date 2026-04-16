@@ -2,11 +2,14 @@
 
 import { useState } from "react";
 
-const APK_URL = "https://drive.google.com/uc?export=download&id=12XFr-NPTcrNJ3tSpjdhrBq9Z8NxAtr9g";
+const APK_URL = "https://drive.google.com/uc?export=download&id=1CH7fA0hQXRf994CyUEVBFS5rYZ57amf0";
 // https://drive.google.com/file/d/1mUA4oyM7EZLVPRJz9p53zPIo4YkcXJy4/view?usp=sharing
 // https://drive.google.com/file/d/1mQUVvGoMJwcJ5x3KJO-1GhBxjNyHMka1/view?usp=sharing
 //12XFr-NPTcrNJ3tSpjdhrBq9Z8NxAtr9g
 //https://drive.google.com/file/d//view?usp=sharing
+//1CH7fA0hQXRf994CyUEVBFS5rYZ57amf0
+//https://drive.google.com/file/d/1CH7fA0hQXRf994CyUEVBFS5rYZ57amf0/view?usp=sharing
+//
 const WINDOWS_URL = "https://drive.google.com/uc?export=download&id=1HqikwZyZVu1OD96RuQbHJ4f8bk9hIS59";
 
 const LOGO_URL =
