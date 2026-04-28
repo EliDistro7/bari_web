@@ -3,26 +3,32 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { ChevronDown, ChevronUp, MessageCircle, ArrowRight } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
 import { useLanguage } from '@/context/language';
 
 type Lang = 'en' | 'sw';
 
 // ─── Unsplash image URLs ──────────────────────────────────────────────────────
 const IMAGES = {
-  // Hero: person coding on laptop at a desk, moody light
   hero: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1600&q=85&auto=format&fit=crop',
-  // Phase 1 – Foundation: someone just starting, phone + laptop setup
   phase1: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&q=80&auto=format&fit=crop',
-  // Phase 2 – Building: multi-screen, building UI wireframes
   phase2: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&q=80&auto=format&fit=crop',
-  // Phase 3 – Connecting: pair programming / collaboration
   phase3: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&q=80&auto=format&fit=crop',
-  // Phase 4 – Ship: person holding phone with app on screen
   phase4: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&q=80&auto=format&fit=crop',
-  // What you'll build: clean phone mockup on desk
   build: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1200&q=80&auto=format&fit=crop',
-  // CTA background: dark workspace with monitor glow
   cta: 'https://images.unsplash.com/photo-1587620962725-abab7fe55159?w=1600&q=80&auto=format&fit=crop',
+};
+
+// ─── Types ────────────────────────────────────────────────────────────────────
+type Phase = {
+  num: string;
+  label: string;
+  weeks: string;
+  image: string;
+  imageAlt: string;
+  topics: string[];
+  milestone: string;
 };
 
 // ─── Content ─────────────────────────────────────────────────────────────────
@@ -120,7 +126,7 @@ const T = {
         ],
         milestone: 'Capstone demo and release APK on your phone',
       },
-    ],
+    ] satisfies Phase[],
     whatTitle: 'What you will build',
     whatItems: [
       'Note creation and editing — full-screen editor',
@@ -171,8 +177,7 @@ const T = {
       },
     ],
     ctaTitle: 'Ready to build your first Flutter app?',
-    ctaBody:
-      'Message Bari on WhatsApp to discuss the next cohort, pricing and schedule.',
+    ctaBody: 'Message Bari on WhatsApp to discuss the next cohort, pricing and schedule.',
     ctaBtn: 'Message on WhatsApp',
     footerBack: '← Back to bari.dev',
     footerText: '© 2026 Bari Kaneno · Dar es Salaam, Tanzania',
@@ -271,7 +276,7 @@ const T = {
         ],
         milestone: 'Demo ya project, na APK kwenye simu yako',
       },
-    ],
+    ] satisfies Phase[],
     whatTitle: 'Utakachojenga',
     whatItems: [
       'Uundaji na uhariri wa maelezo — kihariri cha skrini nzima',
@@ -382,23 +387,25 @@ function FaqRow({ q, a, index }: { q: string; a: string; index: number }) {
   );
 }
 
-// ─── Phase block — now with image ─────────────────────────────────────────────
-function PhaseBlock({ phase, index }: { phase: typeof T.en.phases[0]; index: number }) {
+// ─── Phase block ──────────────────────────────────────────────────────────────
+// Fix for line 616: replace `phase: typeof T.en.phases[0]` (which resolves to `any`
+// when the array uses `as const`) with the explicit Phase type defined above.
+function PhaseBlock({ phase, index }: { phase: Phase; index: number }) {
   return (
     <Fade delay={index * 0.07}>
       <Hairline />
       <div className="py-6">
         <SectionLabel>{phase.weeks}</SectionLabel>
 
-        {/* Image */}
+        {/* Fix for line 395/520: <img> → next/image <Image> */}
         <div className="relative w-full h-36 overflow-hidden rounded-lg mb-4 bg-gray-100">
-          <img
+          <Image
             src={phase.image}
             alt={phase.imageAlt}
-            className="w-full h-full object-cover"
-            loading="lazy"
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 50vw"
           />
-          {/* Phase number overlay */}
           <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-2.5 py-1 rounded-md">
             <span className="text-xs font-black text-gray-900 tabular-nums tracking-tight">
               {phase.num} — {phase.label}
@@ -487,7 +494,6 @@ export default function FlutterCoursePage() {
           border-color: #9ca3af;
           background: #ffffff;
         }
-        /* hero image fade-out to white at bottom */
         .hero-img-mask {
           -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
           mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
@@ -499,9 +505,10 @@ export default function FlutterCoursePage() {
         {/* ── NAV ── */}
         <nav className="course-nav fixed top-0 w-full z-50">
           <div className="max-w-3xl mx-auto px-5 h-14 flex items-center justify-between">
-            <a href="/" className="text-sm font-semibold text-gray-900 hover:text-gray-500 transition-colors">
+            {/* Fix for line 502: <a href="/"> → <Link href="/"> */}
+            <Link href="/" className="text-sm font-semibold text-gray-900 hover:text-gray-500 transition-colors">
               {t.navBack}
-            </a>
+            </Link>
             <div className="flex items-center gap-2">
               <button onClick={toggleLang} className="lang-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-gray-600 uppercase">
                 {lang === 'en' ? 'SW' : 'EN'}
@@ -513,21 +520,21 @@ export default function FlutterCoursePage() {
           </div>
         </nav>
 
-        {/* ── HERO — full-bleed image with text over it ── */}
+        {/* ── HERO ── */}
         <section className="relative pt-14 overflow-hidden">
-          {/* Image */}
           <div className="relative w-full h-[520px] sm:h-[600px]">
-            <img
+            {/* Fix: <img> → next/image <Image> with fill */}
+            <Image
               src={IMAGES.hero}
               alt="Developer coding"
-              className="w-full h-full object-cover hero-img-mask"
-         
+              fill
+              priority
+              className="object-cover hero-img-mask"
+              sizes="100vw"
             />
-            {/* dark gradient from bottom so text is readable */}
             <div className="absolute inset-0 bg-gradient-to-t from-white via-white/30 to-transparent" />
           </div>
 
-          {/* Text content — sits below image overlap */}
           <div className="relative -mt-32 sm:-mt-48 px-5 pb-16">
             <div className="max-w-3xl mx-auto">
               <Fade>
@@ -602,7 +609,7 @@ export default function FlutterCoursePage() {
 
         <Hairline />
 
-        {/* ── PHASES — now with images ── */}
+        {/* ── PHASES ── */}
         <section className="py-16 px-5">
           <div className="max-w-3xl mx-auto">
             <Fade>
@@ -612,8 +619,8 @@ export default function FlutterCoursePage() {
               </p>
             </Fade>
             <div className="grid sm:grid-cols-2 gap-x-12">
-              {t.phases.map((phase, i) => (
-                <PhaseBlock key={i} phase={phase as any} index={i} />
+              {(t.phases as Phase[]).map((phase, i) => (
+                <PhaseBlock key={i} phase={phase} index={i} />
               ))}
             </div>
             <Hairline />
@@ -622,7 +629,7 @@ export default function FlutterCoursePage() {
 
         <Hairline />
 
-        {/* ── WHAT YOU'LL BUILD — with side image ── */}
+        {/* ── WHAT YOU'LL BUILD ── */}
         <section className="py-16 px-5">
           <div className="max-w-3xl mx-auto">
             <Fade>
@@ -634,14 +641,15 @@ export default function FlutterCoursePage() {
               </p>
             </Fade>
 
-            {/* Image banner */}
+            {/* Fix: <img> → next/image <Image> with fill */}
             <Fade delay={0.05}>
               <div className="relative w-full h-48 rounded-xl overflow-hidden mb-8 bg-gray-100">
-                <img
+                <Image
                   src={IMAGES.build}
                   alt="Phone and laptop workspace"
-                  className="w-full h-full object-cover"
-                  loading="lazy"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 768px"
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-white/60 to-transparent" />
                 <div className="absolute inset-0 flex items-center px-8">
@@ -704,21 +712,20 @@ export default function FlutterCoursePage() {
 
         <Hairline />
 
-        {/* ── FINAL CTA — with real photo background ── */}
+        {/* ── FINAL CTA ── */}
         <section className="relative py-20 px-5 overflow-hidden">
-          {/* Background photo */}
           <div className="absolute inset-0">
-            <img
+            {/* Fix: <img> → next/image <Image> with fill */}
+            <Image
               src={IMAGES.cta}
               alt="Dark coding workspace"
-              className="w-full h-full object-cover"
-              loading="lazy"
+              fill
+              className="object-cover"
+              sizes="100vw"
             />
-            {/* Dark overlay — enough contrast for white text */}
             <div className="absolute inset-0 bg-gray-900/85" />
           </div>
 
-          {/* Content */}
           <div className="relative max-w-3xl mx-auto">
             <Fade>
               <h2 className="text-3xl sm:text-4xl font-black text-white mb-4 leading-tight max-w-xl">
@@ -742,9 +749,10 @@ export default function FlutterCoursePage() {
         {/* ── FOOTER ── */}
         <footer className="border-t border-gray-200 py-6 px-5 bg-white">
           <div className="max-w-3xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
-            <a href="/" className="text-sm text-gray-500 hover:text-gray-900 transition-colors">
+            {/* Fix: <a href="/"> → <Link href="/"> */}
+            <Link href="/" className="text-sm text-gray-500 hover:text-gray-900 transition-colors">
               {t.footerBack}
-            </a>
+            </Link>
             <p className="text-sm text-gray-400">{t.footerText}</p>
           </div>
         </footer>
