@@ -2,10 +2,12 @@
 
 import { useState } from "react";
 
-const APK_URL = "https://drive.google.com/uc?export=download&id=1qYyxnNZ9UThKj_gHxg7NK_KguWLG08YG";
+const APK_URL = "https://drive.google.com/uc?export=download&id=1SimoeI0UghTCl6skvr2PwjGnfhzHN_TO";
 // https://drive.google.com/file/d/1mUA4oyM7EZLVPRJz9p53zPIo4YkcXJy4/view?usp=sharing
 // https://drive.google.com/file/d/1mQUVvGoMJwcJ5x3KJO-1GhBxjNyHMka1/view?usp=sharing
 //12XFr-NPTcrNJ3tSpjdhrBq9Z8NxAtr9g
+
+//https://drive.google.com/file/d/1SimoeI0UghTCl6skvr2PwjGnfhzHN_TO/view?usp=sharing
 //https://drive.google.com/file/d//view?usp=sharing
 
 
